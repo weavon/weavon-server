@@ -7,10 +7,8 @@
 # Merge Criteria
 
 ### To Do
-- [ ] Test Code
-- [ ] Code Review
+- [ ] Check Acceptance Criteria
 - [ ] Apply Spotless
+- [ ] Testing
 
 ### Test Case
-
-# Reference
