@@ -7,7 +7,5 @@ import org.springframework.boot.test.context.SpringBootTest;
 class WeavonServerApplicationTests {
 
     @Test
-    void contextLoads() {
-    }
-
+    void contextLoads() {}
 }
