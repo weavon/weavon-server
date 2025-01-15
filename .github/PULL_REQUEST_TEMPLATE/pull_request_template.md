@@ -12,6 +12,7 @@
 ### To Do
 - [ ] Test Code
 - [ ] Code Review
+- [ ] Apply Spotless
 
 ### Test Case
 
