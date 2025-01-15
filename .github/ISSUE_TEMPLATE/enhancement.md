@@ -2,7 +2,7 @@
 name: Enhancement
 about: Enhancement of Application
 title: enhancement - CONTENT
-labels: ''
+labels: enhancement
 assignees: codesver
 
 ---
