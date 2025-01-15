@@ -1,13 +1,10 @@
 # Pull Request
 
----
 ### Issue Ticket
 
 ### Changes
 
 # Merge Criteria
-
----
 
 ### To Do
 - [ ] Test Code
@@ -16,5 +13,3 @@
 ### Test Case
 
 # Reference
-
----
