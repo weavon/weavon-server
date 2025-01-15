@@ -9,5 +9,4 @@ public class WeavonServerApplication {
     public static void main(String[] args) {
         SpringApplication.run(WeavonServerApplication.class, args);
     }
-
 }
