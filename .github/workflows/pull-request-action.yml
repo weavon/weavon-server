@@ -7,24 +7,6 @@ on:
     branches: [ "main", "develop" ]
 
 jobs:
-  continuous-integration:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-    steps:
-    - uses: actions/checkout@v4
-    - name: Set up JDK 21
-      uses: actions/setup-java@v4
-      with:
-        java-version: '21'
-        distribution: 'temurin'
-    - name: Setup Gradle
-      uses: gradle/actions/setup-gradle@v4.0.0
-    - name: Run Spotless Check
-      run: ./gradlew spotlessCheck
-    - name: Build with Gradle Wrapper
-      run: ./gradlew build
-
   cache:
     runs-on: ubuntu-latest
     steps:
@@ -36,3 +18,37 @@ jobs:
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
           restore-keys: |
             ${{ runner.os }}-gradle-
+
+  spotless-check:
+    needs: cache
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4.0.0
+      - name: Run Spotless Check
+        run: ./gradlew spotlessCheck
+
+  build:
+    needs: cache
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4.0.0
+      - name: Build with Gradle Wrapper
+        run: ./gradlew build
