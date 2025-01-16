@@ -9,9 +9,13 @@ assignees: codesver
 
 # User Story
 
-### Persona of issue : As a PERSONA
-### Task to do : I want TASK
-### Goal to achieve : So that ACHIEVEMENT
+### Story
+
+#### As a PERSONA
+#### I want TASK
+#### So that ACHIEVEMENT
+
+### Content
 
 # Acceptance Criteria
 
