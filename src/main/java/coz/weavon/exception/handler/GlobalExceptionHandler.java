@@ -1,9 +1,9 @@
-package coz.weavon.common.exception.handler;
+package coz.weavon.exception.handler;
 
-import coz.weavon.common.exception.model.BusinessException;
-import coz.weavon.common.exception.model.ClientException;
-import coz.weavon.common.io.model.ErrorResponse;
-import coz.weavon.common.io.model.RestResponse;
+import coz.weavon.exception.model.BusinessException;
+import coz.weavon.exception.model.ClientException;
+import coz.weavon.io.model.ErrorResponse;
+import coz.weavon.io.model.RestResponse;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
