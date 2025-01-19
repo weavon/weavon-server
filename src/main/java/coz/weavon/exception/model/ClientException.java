@@ -1,7 +1,11 @@
 package coz.weavon.exception.model;
 
-public class ClientException extends RuntimeException {
+public class ClientException extends RestException {
     public ClientException(String message) {
         super(message);
+    }
+
+    public ClientException(String message, String... labelCodes) {
+        super(message, labelCodes);
     }
 }
