@@ -1,6 +1,6 @@
-package coz.weavon.io.validator;
+package coz.weavon.common.io.validator;
 
-import coz.weavon.io.model.reqeuest.PageRequest;
+import coz.weavon.common.io.model.reqeuest.PageRequest;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 import java.util.Objects;

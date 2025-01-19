@@ -1,4 +1,4 @@
-package coz.weavon.io.validator;
+package coz.weavon.common.io.validator;
 
 import jakarta.validation.Constraint;
 import java.lang.annotation.ElementType;

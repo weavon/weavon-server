@@ -1,4 +1,4 @@
-package coz.weavon.message;
+package coz.weavon.common.message;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.MessageSource;
