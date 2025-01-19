@@ -12,11 +12,8 @@ public class RestResponse<T> {
     private ResponseType type;
     private T value;
 
-    public static <T> RestResponse<SuccessResponse<T>> ofSuccess(T value) {
-        return RestResponse.<SuccessResponse<T>>builder()
-                .type(ResponseType.SUCCESS)
-                .value(SuccessResponse.of(value))
-                .build();
+    public static <T> RestResponse<T> ofSuccess(T value) {
+        return RestResponse.<T>builder().type(ResponseType.SUCCESS).value(value).build();
     }
 
     public static RestResponse<ErrorResponse> ofBusinessError(String message) {
