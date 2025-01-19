@@ -10,8 +10,6 @@ public class ErrorResponse {
     private String message;
 
     public static ErrorResponse of(String message) {
-        return ErrorResponse.builder()
-                .message(message)
-                .build();
+        return ErrorResponse.builder().message(message).build();
     }
 }
