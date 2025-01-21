@@ -1,4 +1,4 @@
-package coz.weavon.provider;
+package coz.weavon.config.provider;
 
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;

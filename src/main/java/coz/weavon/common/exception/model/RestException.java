@@ -1,7 +1,7 @@
-package coz.weavon.exception.model;
+package coz.weavon.common.exception.model;
 
-import coz.weavon.message.Translator;
-import coz.weavon.provider.ApplicationContextProvider;
+import coz.weavon.common.message.Translator;
+import coz.weavon.config.provider.ApplicationContextProvider;
 
 public class RestException extends RuntimeException {
 

@@ -1,4 +1,4 @@
-package coz.weavon.exception.model;
+package coz.weavon.common.exception.model;
 
 public class ClientException extends RestException {
     public ClientException(String message) {

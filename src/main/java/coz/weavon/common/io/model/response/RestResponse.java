@@ -1,4 +1,4 @@
-package coz.weavon.io.model;
+package coz.weavon.common.io.model.response;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -12,7 +12,7 @@ public class RestResponse<T> {
     private ResponseType type;
     private T value;
 
-    public static <T> RestResponse<T> ofSuccess(T value) {
+    public static <T> RestResponse<T> of(T value) {
         return RestResponse.<T>builder().type(ResponseType.SUCCESS).value(value).build();
     }
 
