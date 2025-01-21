@@ -3,7 +3,7 @@ spring:
     name: weavon-server
 
   datasource:
-    url: jdbc:mysql://localhost:3306/coztion?serverTimezone=UTC&encoding=UTF-8
+    url: jdbc:mysql://localhost:3306/weavon?serverTimezone=UTC&encoding=UTF-8
     username: root
     password: 1q2w3e4r!
 
