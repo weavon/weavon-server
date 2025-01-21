@@ -1,0 +1,13 @@
+def generated = 'src/main/generated'
+
+sourceSets {
+    main.java.srcDirs += "$projectDir/build/generated"
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.generatedSourceOutputDirectory = file(generated)
+}
+
+clean {
+    delete file('src/main/generated')
+}
