@@ -2,6 +2,17 @@ spring:
   application:
     name: weavon-server
 
+  datasource:
+    url: jdbc:mysql://localhost:3306/coztion?serverTimezone=UTC&encoding=UTF-8
+    username: root
+    password: 1q2w3e4r!
+
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
   messages:
     basename: internationalize/label, internationalize/message
     encoding: UTF-8
