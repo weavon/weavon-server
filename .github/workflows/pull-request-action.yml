@@ -50,5 +50,9 @@ jobs:
           distribution: 'temurin'
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4.0.0
+      - name: Start MySQL Service
+        run: docker-compose up -d
+      - name: Wait for MySQL to be healthy
+        run: docker-compose exec mysql sh -c 'until mysqladmin ping --silent; do sleep 1; done'
       - name: Build with Gradle Wrapper
         run: ./gradlew build
