@@ -57,6 +57,6 @@ jobs:
       - name: Start MySQL Service
         run: docker-compose up -d
       - name: Wait for MySQL to be healthy
-        run: docker-compose exec mysql sh -c 'until mysqladmin ping --silent; do sleep 1; done'
+        run: docker-compose exec -T mysql sh -c 'until mysqladmin ping --silent; do sleep 1; done'
       - name: Build with Gradle Wrapper
         run: ./gradlew build
