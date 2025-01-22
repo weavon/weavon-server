@@ -1,4 +1,4 @@
-package coz.weavon.common.presentation.model.exception;
+package coz.weavon.common.application.model.exception;
 
 import coz.weavon.common.application.service.MessageTranslator;
 import coz.weavon.config.provider.ApplicationContextProvider;

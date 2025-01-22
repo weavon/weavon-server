@@ -1,4 +1,4 @@
-package coz.weavon.common.presentation.model.exception;
+package coz.weavon.common.application.model.exception;
 
 public class BusinessException extends RestException {
     public BusinessException(String message) {

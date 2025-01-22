@@ -1,7 +1,7 @@
 package coz.weavon.common.presentation.handler;
 
-import coz.weavon.common.presentation.model.exception.BusinessException;
-import coz.weavon.common.presentation.model.exception.ClientException;
+import coz.weavon.common.application.model.exception.BusinessException;
+import coz.weavon.common.application.model.exception.ClientException;
 import coz.weavon.common.presentation.model.response.ErrorResponse;
 import coz.weavon.common.presentation.model.response.RestResponse;
 import lombok.RequiredArgsConstructor;

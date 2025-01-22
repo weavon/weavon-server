@@ -1,6 +1,6 @@
 package coz.weavon.context.member.application.service;
 
-import coz.weavon.common.presentation.model.exception.BusinessException;
+import coz.weavon.common.application.model.exception.BusinessException;
 import coz.weavon.context.member.application.model.command.MemberSearchCommand;
 import coz.weavon.context.member.application.repository.MemberRepository;
 import coz.weavon.context.member.domain.model.Member;
