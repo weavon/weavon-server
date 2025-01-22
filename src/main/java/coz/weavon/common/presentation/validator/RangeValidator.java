@@ -11,9 +11,9 @@ import java.util.Objects;
 
 public class RangeValidator implements ConstraintValidator<ValidRange, Object> {
 
-    private static final String MSG_VLD_REQ_REQ = "message.validation.request.required";
-    private static final String MSG_VLD_REQ_RANGE_OMIT = "message.validation.request.rangeOmit";
-    private static final String MSG_VLD_REQ_INVALID_RANGE = "message.validation.request.invalidRange";
+    private static final String MSG_VLD_REQ_REQ = "message.validation.required";
+    private static final String MSG_VLD_REQ_RANGE_OMIT = "message.validation.rangeOmit";
+    private static final String MSG_VLD_REQ_INVALID_RANGE = "message.validation.invalid.range";
 
     private static final String LBL_DATE_START_DATE = "label.date.startDate";
     private static final String LBL_DATE_END_DATE = "label.date.endDate";

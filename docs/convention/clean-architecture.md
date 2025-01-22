@@ -17,23 +17,23 @@
       │  │  └─ result
       │  │     ├─ TeamResult.java
       │  │     └─ MemberResult.java
-      │  └─ service
-      │     ├─ TeamService.java
-      │     ├─ TeamRestService.java
-      │     ├─ MemberService.java
-      │     └─ MemberRestService.java
+      │  ├─ service
+      │  │  ├─ TeamService.java
+      │  │  ├─ TeamRestService.java
+      │  │  ├─ MemberService.java
+      │  │  └─ MemberRestService.java
+      │  └─ repository
+      │     ├─ TeamRepository.java
+      │     └─ MemberRepository.java  
       ├─ domain
       │  ├─ model
       │  │  ├─ Team.java
       │  │  ├─ Member.java
       │  │  └─ Members.java
-      │  ├─ service
-      │  │  ├─ MemberJoinTeamService.java
-      │  │  ├─ MemberLeaveTeamService.java
-      │  │  └─ TeamMergeService.java
-      │  └─ repository
-      │     ├─ TeamRepository.java
-      │     └─ MemberRepository.java  
+      │  └─ service
+      │     ├─ MemberJoinTeamService.java
+      │     ├─ MemberLeaveTeamService.java
+      │     └─ TeamMergeService.java
       ├─ infrastructure
       │  ├─ model
       │  │  ├─ TeamEntity.java
