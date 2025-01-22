@@ -1,7 +1,8 @@
-package coz.weavon.common.io.validator;
+package coz.weavon.common.presentation.validator;
 
-import coz.weavon.common.exception.model.ClientException;
-import coz.weavon.common.util.DateTimeUtils;
+import coz.weavon.common.application.util.DateTimeUtils;
+import coz.weavon.common.presentation.model.exception.ClientException;
+import coz.weavon.common.presentation.model.validation.ValidRange;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 import java.lang.reflect.Field;

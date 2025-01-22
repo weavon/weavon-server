@@ -1,7 +1,8 @@
-package coz.weavon.common.io.validator;
+package coz.weavon.common.presentation.validator;
 
-import coz.weavon.common.exception.model.ClientException;
-import coz.weavon.common.io.model.reqeuest.PageRequest;
+import coz.weavon.common.presentation.model.exception.ClientException;
+import coz.weavon.common.presentation.model.reqeuest.PageRequest;
+import coz.weavon.common.presentation.model.validation.ValidPagination;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 import java.util.Objects;

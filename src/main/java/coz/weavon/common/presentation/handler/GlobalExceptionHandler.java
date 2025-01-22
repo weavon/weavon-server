@@ -1,9 +1,9 @@
-package coz.weavon.common.exception.handler;
+package coz.weavon.common.presentation.handler;
 
-import coz.weavon.common.exception.model.BusinessException;
-import coz.weavon.common.exception.model.ClientException;
-import coz.weavon.common.io.model.response.ErrorResponse;
-import coz.weavon.common.io.model.response.RestResponse;
+import coz.weavon.common.presentation.model.exception.BusinessException;
+import coz.weavon.common.presentation.model.exception.ClientException;
+import coz.weavon.common.presentation.model.response.ErrorResponse;
+import coz.weavon.common.presentation.model.response.RestResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;

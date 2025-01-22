@@ -1,4 +1,4 @@
-package coz.weavon.common.util;
+package coz.weavon.common.application.util;
 
 import java.time.LocalDate;
 import java.util.Objects;

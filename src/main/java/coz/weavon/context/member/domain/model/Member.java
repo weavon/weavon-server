@@ -1,6 +1,6 @@
 package coz.weavon.context.member.domain.model;
 
-import coz.weavon.common.schema.Property;
+import coz.weavon.common.domain.model.Property;
 import lombok.Builder;
 import lombok.Data;
 

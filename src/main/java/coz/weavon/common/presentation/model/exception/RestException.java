@@ -1,6 +1,6 @@
-package coz.weavon.common.exception.model;
+package coz.weavon.common.presentation.model.exception;
 
-import coz.weavon.common.message.Translator;
+import coz.weavon.common.application.service.MessageTranslator;
 import coz.weavon.config.provider.ApplicationContextProvider;
 
 public class RestException extends RuntimeException {
@@ -14,14 +14,14 @@ public class RestException extends RuntimeException {
     }
 
     private static String translateMessageCode(String messageCode) {
-        return RestException.getTranslator().translate(messageCode);
+        return RestException.getMessageTranslator().translate(messageCode);
     }
 
     private static String translateMessageCode(String messageCode, String... labelCodes) {
-        return RestException.getTranslator().translate(messageCode, labelCodes);
+        return RestException.getMessageTranslator().translate(messageCode, labelCodes);
     }
 
-    private static Translator getTranslator() {
-        return ApplicationContextProvider.getBean(Translator.class);
+    private static MessageTranslator getMessageTranslator() {
+        return ApplicationContextProvider.getBean(MessageTranslator.class);
     }
 }

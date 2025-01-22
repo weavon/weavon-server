@@ -1,4 +1,4 @@
-package coz.weavon.common.message;
+package coz.weavon.common.application.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.MessageSource;
@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class Translator {
+public class MessageTranslator {
 
     private final MessageSource messageSource;
 

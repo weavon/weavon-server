@@ -1,4 +1,4 @@
-package coz.weavon.common.io.model.response;
+package coz.weavon.common.presentation.model.response;
 
 import lombok.Builder;
 import lombok.Getter;
