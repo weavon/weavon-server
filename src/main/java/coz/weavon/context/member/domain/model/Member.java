@@ -1,0 +1,22 @@
+package coz.weavon.context.member.domain.model;
+
+import coz.weavon.common.schema.Property;
+import lombok.Builder;
+import lombok.Data;
+
+@Data
+@Builder
+public class Member {
+
+    @Property(unique = true, nullable = false, updatable = false)
+    private Long memberId;
+
+    @Property(unique = true, nullable = false, updatable = false)
+    private String username;
+
+    @Property(unique = true, nullable = false)
+    private String nickname;
+
+    @Property(unique = true, nullable = false)
+    private String email;
+}
