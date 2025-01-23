@@ -13,7 +13,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 @RequiredArgsConstructor
-public class MemberRestRepository implements MemberRepository {
+class MemberRestRepository implements MemberRepository {
 
     private static final String MSG_VLD_INVLD_SEARCH_CONDITION = "message.validation.invalid.searchCondition";
 

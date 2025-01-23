@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class MemberRestService implements MemberService {
+class MemberRestService implements MemberService {
 
     private static final String MSG_VLD_INVLD_SINGLE_RESULT = "message.validation.invalid.singleResult";
 
