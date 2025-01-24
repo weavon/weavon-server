@@ -1,11 +1,14 @@
 package coz.weavon.common.application.model.exception;
 
 public class BusinessException extends RestException {
-    public BusinessException(String message) {
-        super(message);
+
+    private static final String BUSINESS_ERROR = "Business Error";
+
+    public BusinessException(String messageCode) {
+        super(BUSINESS_ERROR, messageCode);
     }
 
-    public BusinessException(String message, String... labelCodes) {
-        super(message, labelCodes);
+    public BusinessException(String messageCode, String... labelCodes) {
+        super(BUSINESS_ERROR, messageCode, labelCodes);
     }
 }

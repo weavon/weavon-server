@@ -1,27 +1,35 @@
 package coz.weavon.common.application.model.exception;
 
-import coz.weavon.common.application.service.MessageTranslator;
-import coz.weavon.config.provider.ApplicationContextProvider;
+import java.util.Collections;
+import java.util.List;
+import lombok.Getter;
+import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
 
+@Getter
 public class RestException extends RuntimeException {
 
-    public RestException(String messageCode) {
-        super(translateMessageCode(messageCode));
+    private final String messageCode;
+
+    private final List<String> labelCodes;
+
+    public RestException(String message, String messageCode) {
+        super(message);
+        this.messageCode = messageCode;
+        this.labelCodes = Collections.emptyList();
     }
 
-    public RestException(String message, String... labelCodes) {
-        super(translateMessageCode(message, labelCodes));
+    public RestException(String message, String messageCode, String... labelCodes) {
+        super(message);
+        this.messageCode = messageCode;
+        this.labelCodes = List.of(labelCodes);
     }
 
-    private static String translateMessageCode(String messageCode) {
-        return RestException.getMessageTranslator().translate(messageCode);
+    public boolean hasMessageCode() {
+        return StringUtils.hasText(messageCode);
     }
 
-    private static String translateMessageCode(String messageCode, String... labelCodes) {
-        return RestException.getMessageTranslator().translate(messageCode, labelCodes);
-    }
-
-    private static MessageTranslator getMessageTranslator() {
-        return ApplicationContextProvider.getBean(MessageTranslator.class);
+    public boolean hasLabelCodes() {
+        return !CollectionUtils.isEmpty(labelCodes);
     }
 }
