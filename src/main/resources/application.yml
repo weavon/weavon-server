@@ -8,13 +8,15 @@ spring:
     password: 1q2w3e4r!
 
   jpa:
+    hibernate:
+      ddl-auto: update
     show-sql: true
     properties:
       hibernate:
         format_sql: true
 
   messages:
-    basename: internationalize/label, internationalize/message
+    basename: internationalize/label_en, internationalize/label_kr, internationalize/message_en, internationalize/message_kr
     encoding: UTF-8
     fallback-to-system-locale: false
     always-use-message-format: true
