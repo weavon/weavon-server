@@ -2,7 +2,6 @@ package coz.weavon.context.member.infrastructure.repository;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import com.querydsl.jpa.impl.JPAQueryFactory;
 import coz.weavon.common.application.model.exception.BusinessException;
 import coz.weavon.context.member.application.model.command.MemberSearchCommand;
 import java.util.Collections;
@@ -10,26 +9,23 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 class MemberRestRepositoryTest {
 
     @Nested
     class MemberRestRepositoryMockTest {
 
-        @Mock
-        private JPAQueryFactory jpaQueryFactory;
-
-        @Mock
+        @InjectMocks
         private MemberQueryRepository memberQueryRepository;
 
         @InjectMocks
-        private MemberRestRepository memberRestRepository;
+        private MemberRestRepository memberRepository;
 
         @BeforeEach
         public void setUp() {
-            memberQueryRepository = new MemberQueryRepository(jpaQueryFactory);
-            memberRestRepository = new MemberRestRepository(memberQueryRepository);
+            MockitoAnnotations.openMocks(this);
+            memberRepository = new MemberRestRepository(memberQueryRepository);
         }
 
         @Test
@@ -38,7 +34,7 @@ class MemberRestRepositoryTest {
             MemberSearchCommand emptyCommand = MemberSearchCommand.builder().build();
 
             // then
-            assertThrows(BusinessException.class, () -> memberRestRepository.findMembersByCommand(emptyCommand));
+            assertThrows(BusinessException.class, () -> memberRepository.findMembersByCommand(emptyCommand));
         }
 
         @Test
@@ -49,8 +45,7 @@ class MemberRestRepositoryTest {
                     .build();
 
             // then
-            assertThrows(
-                    BusinessException.class, () -> memberRestRepository.findMembersByCommand(emptyMemberIdsCommand));
+            assertThrows(BusinessException.class, () -> memberRepository.findMembersByCommand(emptyMemberIdsCommand));
         }
 
         @Test
@@ -61,8 +56,7 @@ class MemberRestRepositoryTest {
                     .build();
 
             // then
-            assertThrows(
-                    BusinessException.class, () -> memberRestRepository.findMembersByCommand(emptyUsernamesCommand));
+            assertThrows(BusinessException.class, () -> memberRepository.findMembersByCommand(emptyUsernamesCommand));
         }
 
         @Test
@@ -72,8 +66,7 @@ class MemberRestRepositoryTest {
                     MemberSearchCommand.builder().nickname("").build();
 
             // then
-            assertThrows(
-                    BusinessException.class, () -> memberRestRepository.findMembersByCommand(blankUsernameCommand));
+            assertThrows(BusinessException.class, () -> memberRepository.findMembersByCommand(blankUsernameCommand));
         }
     }
 }
