@@ -25,7 +25,7 @@ public class MemberQueryRepository {
         QMemberEntity member = QMemberEntity.memberEntity;
 
         return query.selectFrom(member)
-                .where(member.memberId.in(condition.getMemberIds()))
+                .where(member.memberId.in(condition.getMemberIds()), member.username.like(condition.getUsername()))
                 .fetch();
     }
 }
