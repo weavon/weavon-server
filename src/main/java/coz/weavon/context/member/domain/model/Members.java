@@ -22,4 +22,8 @@ public class Members {
 
         return Optional.empty();
     }
+
+    public int getNumbersOfMembers() {
+        return members.size();
+    }
 }

@@ -5,33 +5,66 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import coz.weavon.common.application.model.exception.BusinessException;
 import coz.weavon.context.member.application.model.command.MemberSearchCommand;
+import java.util.Collections;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
+@ExtendWith(MockitoExtension.class)
 class MemberRestRepositoryTest {
 
-    @Mock
-    private JPAQueryFactory jpaQueryFactory;
+    @Nested
+    class MemberRestRepositoryMockTest {
 
-    @InjectMocks
-    private MemberQueryRepository memberQueryRepository;
+        @Mock
+        private JPAQueryFactory jpaQueryFactory;
 
-    @BeforeEach
-    public void setUp() {
-        memberQueryRepository = new MemberQueryRepository(jpaQueryFactory);
-    }
+        @Mock
+        private MemberQueryRepository memberQueryRepository;
 
-    @Test
-    public void findMembersByCommand_invalidConditionExceptionTest() {
-        // given
-        MemberRestRepository memberRestRepository = new MemberRestRepository(memberQueryRepository);
+        @InjectMocks
+        private MemberRestRepository memberRestRepository;
 
-        // when
-        MemberSearchCommand memberSearchCommand = MemberSearchCommand.builder().build();
+        @BeforeEach
+        public void setUp() {
+            memberQueryRepository = new MemberQueryRepository(jpaQueryFactory);
+            memberRestRepository = new MemberRestRepository(memberQueryRepository);
+        }
 
-        // then
-        assertThrows(BusinessException.class, () -> memberRestRepository.findMembersByCommand(memberSearchCommand));
+        @Test
+        public void findMembersByCommand_invalidConditionExceptionTest() {
+            // given
+            MemberSearchCommand emptyCommand = MemberSearchCommand.builder().build();
+
+            // then
+            assertThrows(BusinessException.class, () -> memberRestRepository.findMembersByCommand(emptyCommand));
+        }
+
+        @Test
+        public void findMembersByCommand_emptyMemberIds_invalidConditionExceptionTest() {
+            // given
+            MemberSearchCommand emptyMemberIdsCommand = MemberSearchCommand.builder()
+                    .memberIds(Collections.emptyList())
+                    .build();
+
+            // then
+            assertThrows(
+                    BusinessException.class, () -> memberRestRepository.findMembersByCommand(emptyMemberIdsCommand));
+        }
+
+        @Test
+        public void findMembersByCommand_blankUsername_invalidConditionExceptionTest() {
+            // given
+            MemberSearchCommand blankUsernameCommand =
+                    MemberSearchCommand.builder().username("").build();
+
+            // then
+            assertThrows(
+                    BusinessException.class, () -> memberRestRepository.findMembersByCommand(blankUsernameCommand));
+        }
     }
 }
