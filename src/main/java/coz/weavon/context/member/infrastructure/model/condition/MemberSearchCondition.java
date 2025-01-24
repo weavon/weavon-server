@@ -39,7 +39,7 @@ public class MemberSearchCondition extends RestCondition {
         if (super.isInvalidInCondition(memberIds)
                 && super.isInvalidInCondition(usernames)
                 && super.isInvalidLikeCondition(nickname)
-        && super.isInvalidEqualCondition(email)) {
+                && super.isInvalidEqualCondition(email)) {
             throw new BusinessException(MSG_VLD_INVLD_SEARCH_CONDITION);
         }
     }

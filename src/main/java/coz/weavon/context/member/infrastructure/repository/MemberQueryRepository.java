@@ -22,7 +22,11 @@ public class MemberQueryRepository {
         condition.validate();
 
         return query.selectFrom(member)
-                .where(condition.inMemberIds(), condition.inUsernames(), condition.likeNickname(), condition.equalEmail())
+                .where(
+                        condition.inMemberIds(),
+                        condition.inUsernames(),
+                        condition.likeNickname(),
+                        condition.equalEmail())
                 .fetch();
     }
 }
