@@ -17,15 +17,15 @@ public class MemberQueryRepository {
 
     private final JPAQueryFactory query;
 
+    private final QMemberEntity member = QMemberEntity.memberEntity;
+
     public List<MemberEntity> findAllByCondition(MemberSearchCondition condition) {
         if (condition.isInvalidCondition()) {
             throw new BusinessException(MSG_VLD_INVLD_SEARCH_CONDITION);
         }
 
-        QMemberEntity member = QMemberEntity.memberEntity;
-
         return query.selectFrom(member)
-                .where(member.memberId.in(condition.getMemberIds()), member.username.like(condition.getUsername()))
+                .where(condition.inMemberIds(), condition.likeUsername())
                 .fetch();
     }
 }
