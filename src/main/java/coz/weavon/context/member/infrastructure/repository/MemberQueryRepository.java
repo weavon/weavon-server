@@ -12,8 +12,6 @@ import org.springframework.stereotype.Repository;
 @RequiredArgsConstructor
 public class MemberQueryRepository {
 
-    private static final String MSG_VLD_INVLD_SEARCH_CONDITION = "message.validation.invalid.searchCondition";
-
     private final JPAQueryFactory query;
 
     private final QMemberEntity member = QMemberEntity.memberEntity;
