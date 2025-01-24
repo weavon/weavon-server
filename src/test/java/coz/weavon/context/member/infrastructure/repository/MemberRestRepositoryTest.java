@@ -54,10 +54,22 @@ class MemberRestRepositoryTest {
         }
 
         @Test
-        public void findMembersByCommand_blankUsername_invalidConditionExceptionTest() {
+        public void findMembersByCommand_emptyUsernames_invalidConditionExceptionTest() {
+            // given
+            MemberSearchCommand emptyUsernamesCommand = MemberSearchCommand.builder()
+                    .usernames(Collections.emptyList())
+                    .build();
+
+            // then
+            assertThrows(
+                    BusinessException.class, () -> memberRestRepository.findMembersByCommand(emptyUsernamesCommand));
+        }
+
+        @Test
+        public void findMembersByCommand_blankNickname_invalidConditionExceptionTest() {
             // given
             MemberSearchCommand blankUsernameCommand =
-                    MemberSearchCommand.builder().username("").build();
+                    MemberSearchCommand.builder().nickname("").build();
 
             // then
             assertThrows(
