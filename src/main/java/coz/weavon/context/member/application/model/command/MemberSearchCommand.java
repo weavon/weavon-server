@@ -11,7 +11,11 @@ public class MemberSearchCommand extends RestCommand {
 
     private List<Long> memberIds;
 
-    private String username;
+    private List<String> usernames;
+
+    private String nickname;
+
+    private String email;
 
     @Override
     public void validate() {}
