@@ -15,6 +15,12 @@ spring:
       hibernate:
         format_sql: true
 
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      database: 0
+
   messages:
     basename: internationalize/label_en, internationalize/label_kr, internationalize/message_en, internationalize/message_kr
     encoding: UTF-8
