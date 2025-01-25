@@ -1,10 +1,12 @@
 package coz.weavon.context.member.application.service;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 import coz.weavon.common.application.model.exception.BusinessException;
 import coz.weavon.context.member.application.model.command.MemberSearchCommand;
+import coz.weavon.context.member.application.model.condition.MemberSearchCondition;
 import coz.weavon.context.member.application.repository.MemberRepository;
 import coz.weavon.context.member.domain.model.Members;
 import java.util.Collections;
@@ -40,7 +42,8 @@ class MemberRestServiceTest {
             Members members = Members.of(Collections.emptyList());
 
             // when
-            when(memberRepository.findMembersByCommand(emptyCommand)).thenReturn(members);
+            when(memberRepository.findMembersByCondition(any(MemberSearchCondition.class)))
+                    .thenReturn(members);
 
             // then
             assertThrows(BusinessException.class, () -> memberService.searchMember(emptyCommand));

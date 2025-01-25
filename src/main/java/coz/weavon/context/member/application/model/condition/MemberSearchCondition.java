@@ -1,10 +1,10 @@
-package coz.weavon.context.member.infrastructure.model.condition;
+package coz.weavon.context.member.application.model.condition;
 
 import com.querydsl.core.types.dsl.BooleanExpression;
+import coz.weavon.common.application.model.condition.RestCondition;
 import coz.weavon.common.application.model.exception.BusinessException;
-import coz.weavon.common.infrastructure.model.RestCondition;
 import coz.weavon.context.member.application.model.command.MemberSearchCommand;
-import coz.weavon.context.member.infrastructure.model.entity.QMemberEntity;
+import coz.weavon.context.member.infrastructure.model.QMemberEntity;
 import java.util.List;
 import lombok.Builder;
 import lombok.Getter;

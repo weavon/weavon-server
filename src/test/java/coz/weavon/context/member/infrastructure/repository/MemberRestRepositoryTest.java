@@ -3,12 +3,13 @@ package coz.weavon.context.member.infrastructure.repository;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import coz.weavon.common.application.model.exception.BusinessException;
-import coz.weavon.context.member.application.model.command.MemberSearchCommand;
+import coz.weavon.context.member.application.model.condition.MemberSearchCondition;
 import java.util.Collections;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 class MemberRestRepositoryTest {
@@ -16,7 +17,7 @@ class MemberRestRepositoryTest {
     @Nested
     class MemberRestRepositoryMockTest {
 
-        @InjectMocks
+        @Mock
         private MemberQueryRepository memberQueryRepository;
 
         @InjectMocks
@@ -29,44 +30,48 @@ class MemberRestRepositoryTest {
         }
 
         @Test
-        public void findMembersByCommand_invalidConditionExceptionTest() {
+        public void findMembersByCondition_invalidConditionExceptionTest() {
             // given
-            MemberSearchCommand emptyCommand = MemberSearchCommand.builder().build();
+            MemberSearchCondition emptyCondition =
+                    MemberSearchCondition.builder().build();
 
             // then
-            assertThrows(BusinessException.class, () -> memberRepository.findMembersByCommand(emptyCommand));
+            assertThrows(BusinessException.class, () -> memberRepository.findMembersByCondition(emptyCondition));
         }
 
         @Test
-        public void findMembersByCommand_emptyMemberIds_invalidConditionExceptionTest() {
+        public void findMembersByCondition_emptyMemberIds_invalidConditionExceptionTest() {
             // given
-            MemberSearchCommand emptyMemberIdsCommand = MemberSearchCommand.builder()
+            MemberSearchCondition emptyMemberIdsCondition = MemberSearchCondition.builder()
                     .memberIds(Collections.emptyList())
                     .build();
 
             // then
-            assertThrows(BusinessException.class, () -> memberRepository.findMembersByCommand(emptyMemberIdsCommand));
+            assertThrows(
+                    BusinessException.class, () -> memberRepository.findMembersByCondition(emptyMemberIdsCondition));
         }
 
         @Test
-        public void findMembersByCommand_emptyUsernames_invalidConditionExceptionTest() {
+        public void findMembersByCondition_emptyUsernames_invalidConditionExceptionTest() {
             // given
-            MemberSearchCommand emptyUsernamesCommand = MemberSearchCommand.builder()
+            MemberSearchCondition emptyUsernamesCondition = MemberSearchCondition.builder()
                     .usernames(Collections.emptyList())
                     .build();
 
             // then
-            assertThrows(BusinessException.class, () -> memberRepository.findMembersByCommand(emptyUsernamesCommand));
+            assertThrows(
+                    BusinessException.class, () -> memberRepository.findMembersByCondition(emptyUsernamesCondition));
         }
 
         @Test
-        public void findMembersByCommand_blankNickname_invalidConditionExceptionTest() {
+        public void findMembersByCondition_blankNickname_invalidConditionExceptionTest() {
             // given
-            MemberSearchCommand blankUsernameCommand =
-                    MemberSearchCommand.builder().nickname("").build();
+            MemberSearchCondition blankUsernameCondition =
+                    MemberSearchCondition.builder().nickname("").build();
 
             // then
-            assertThrows(BusinessException.class, () -> memberRepository.findMembersByCommand(blankUsernameCommand));
+            assertThrows(
+                    BusinessException.class, () -> memberRepository.findMembersByCondition(blankUsernameCondition));
         }
     }
 }

@@ -1,4 +1,4 @@
-package coz.weavon.context.member.infrastructure.model.entity;
+package coz.weavon.context.member.infrastructure.model;
 
 import coz.weavon.context.member.domain.model.Member;
 import jakarta.persistence.Column;

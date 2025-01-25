@@ -2,6 +2,7 @@ package coz.weavon.context.member.application.service;
 
 import coz.weavon.common.application.model.exception.BusinessException;
 import coz.weavon.context.member.application.model.command.MemberSearchCommand;
+import coz.weavon.context.member.application.model.condition.MemberSearchCondition;
 import coz.weavon.context.member.application.repository.MemberRepository;
 import coz.weavon.context.member.domain.model.Member;
 import coz.weavon.context.member.domain.model.Members;
@@ -22,14 +23,14 @@ class MemberRestService implements MemberService {
     @Override
     public Members searchMembers(MemberSearchCommand command) {
         command.validate();
-        return repository.findMembersByCommand(command);
+        return repository.findMembersByCondition(MemberSearchCondition.fromCommand(command));
     }
 
     @Override
     public Member searchMember(MemberSearchCommand command) {
         command.validate();
 
-        Members members = repository.findMembersByCommand(command);
+        Members members = repository.findMembersByCondition(MemberSearchCondition.fromCommand(command));
         Optional<Member> member = members.getSingleMember();
         if (member.isPresent()) {
             return member.get();
