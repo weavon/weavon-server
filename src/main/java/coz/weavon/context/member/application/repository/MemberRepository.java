@@ -6,4 +6,6 @@ import coz.weavon.context.member.domain.model.Members;
 public interface MemberRepository {
 
     Members findMembersByCondition(MemberSearchCondition condition);
+
+    Members saveMembers(Members members);
 }

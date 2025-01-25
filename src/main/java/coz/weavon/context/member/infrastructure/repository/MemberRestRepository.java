@@ -24,4 +24,14 @@ class MemberRestRepository implements MemberRepository {
                 foundMemberEntities.stream().map(MemberEntity::toDomain).toList();
         return Members.of(foundMembers);
     }
+
+    @Override
+    public Members saveMembers(Members members) {
+        List<MemberEntity> newMemberEntities =
+                members.getMembers().stream().map(MemberEntity::fromDomain).toList();
+        List<MemberEntity> savedMembersEntities = jpaRepository.saveAll(newMemberEntities);
+        List<Member> savedMembers =
+                savedMembersEntities.stream().map(MemberEntity::toDomain).toList();
+        return Members.of(savedMembers);
+    }
 }
