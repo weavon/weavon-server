@@ -1,12 +1,16 @@
 package coz.weavon.context.member.infrastructure.model;
 
 import coz.weavon.context.member.domain.model.Member;
+import coz.weavon.context.member.domain.model.Members;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import java.util.List;
+import java.util.Objects;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,8 +25,8 @@ import lombok.NoArgsConstructor;
 public class MemberEntity {
 
     @Id
-    @Column(name = "MEMBER_ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "MEMBER_ID", unique = true, nullable = false, updatable = false)
     private Long memberId;
 
     @Column(name = "USERNAME", unique = true, nullable = false, updatable = false)
@@ -43,6 +47,10 @@ public class MemberEntity {
                 .build();
     }
 
+    public static List<MemberEntity> fromDomains(Members members) {
+        return members.getValue().stream().map(MemberEntity::fromDomain).toList();
+    }
+
     public Member toDomain() {
         return Member.builder()
                 .memberId(memberId)
@@ -50,5 +58,10 @@ public class MemberEntity {
                 .nickname(nickname)
                 .email(email)
                 .build();
+    }
+
+    public void update(MemberEntity member) {
+        this.nickname = Objects.requireNonNullElse(member.getNickname(), this.nickname);
+        this.email = Objects.requireNonNullElse(member.getEmail(), this.email);
     }
 }

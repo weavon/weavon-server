@@ -9,27 +9,31 @@ import lombok.Data;
 @Builder
 public class Members {
 
-    private final List<Member> members;
+    private List<Member> value;
 
     public static Members of(List<Member> members) {
-        return Members.builder().members(members).build();
+        return Members.builder().value(members).build();
     }
 
     public Optional<Member> getSingleMember() {
-        if (members.size() == 1) {
-            return members.stream().findFirst();
+        if (value.size() == 1) {
+            return value.stream().findFirst();
         }
 
         return Optional.empty();
     }
 
     public Optional<Member> getMemberByUsername(String username) {
-        return members.stream()
+        return value.stream()
                 .filter(member -> member.getUsername().equals(username))
                 .findFirst();
     }
 
+    public List<Long> getMemberIds() {
+        return value.stream().map(Member::getMemberId).toList();
+    }
+
     public int size() {
-        return members.size();
+        return value.size();
     }
 }
