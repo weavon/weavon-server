@@ -13,6 +13,7 @@ import coz.weavon.context.member.domain.model.Members;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Stream;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -53,8 +54,7 @@ class MemberRestRepositoryTest {
                     .build();
 
             // then
-            assertThrows(
-                    BusinessException.class, () -> memberRepository.findMembers(emptyMemberIdsCondition));
+            assertThrows(BusinessException.class, () -> memberRepository.findMembers(emptyMemberIdsCondition));
         }
 
         @Test
@@ -65,8 +65,7 @@ class MemberRestRepositoryTest {
                     .build();
 
             // then
-            assertThrows(
-                    BusinessException.class, () -> memberRepository.findMembers(emptyUsernamesCondition));
+            assertThrows(BusinessException.class, () -> memberRepository.findMembers(emptyUsernamesCondition));
         }
 
         @Test
@@ -76,8 +75,7 @@ class MemberRestRepositoryTest {
                     MemberSearchCondition.builder().nickname("").build();
 
             // then
-            assertThrows(
-                    BusinessException.class, () -> memberRepository.findMembers(blankUsernameCondition));
+            assertThrows(BusinessException.class, () -> memberRepository.findMembers(blankUsernameCondition));
         }
     }
 
@@ -90,12 +88,48 @@ class MemberRestRepositoryTest {
 
         @Test
         @Transactional
+        public void findMembers_inUsernames_successTest() {
+            // given
+            String[] usernames = {"coza", "cozb", "cozc", "cozd", "coze"};
+
+            List<Member> memberList = Stream.iterate(0, i -> i + 1)
+                    .limit(5)
+                    .map(i -> Member.builder()
+                            .username(usernames[i])
+                            .nickname(usernames[i])
+                            .email(usernames[i] + "@email.com")
+                            .build())
+                    .toList();
+
+            Members members = Members.of(memberList);
+            memberRepository.saveMembers(members);
+
+            // when
+            MemberSearchCondition condition = MemberSearchCondition.builder()
+                    .usernames(List.of("coza", "cozb"))
+                    .build();
+            Members foundMembers = memberRepository.findMembers(condition);
+
+            // then
+            assertEquals(2, foundMembers.size());
+
+            Optional<Member> foundCoza = foundMembers.getMemberByUsername("coza");
+            assertTrue(foundCoza.isPresent());
+            assertEquals("coza", foundCoza.get().getUsername());
+
+            Optional<Member> foundCozb = foundMembers.getMemberByUsername("cozb");
+            assertTrue(foundCozb.isPresent());
+            assertEquals("cozb", foundCozb.get().getUsername());
+        }
+
+        @Test
+        @Transactional
         public void saveMembers_successTest() {
             // given
             Member member = Member.builder()
                     .username("codesver")
                     .nickname("JaeWon")
-                    .email("codesver@gmail.com")
+                    .email("codesver@email.com")
                     .build();
 
             // when

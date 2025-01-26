@@ -42,8 +42,7 @@ class MemberRestServiceTest {
             Members members = Members.of(Collections.emptyList());
 
             // when
-            when(memberRepository.findMembers(any(MemberSearchCondition.class)))
-                    .thenReturn(members);
+            when(memberRepository.findMembers(any(MemberSearchCondition.class))).thenReturn(members);
 
             // then
             assertThrows(BusinessException.class, () -> memberService.searchMember(emptyCommand));
