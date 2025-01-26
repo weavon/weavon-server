@@ -1,15 +1,26 @@
 package coz.weavon.context.member.infrastructure.repository;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import coz.weavon.common.application.model.exception.BusinessException;
 import coz.weavon.context.member.application.model.condition.MemberSearchCondition;
+import coz.weavon.context.member.application.repository.MemberRepository;
+import coz.weavon.context.member.domain.model.Member;
+import coz.weavon.context.member.domain.model.Members;
 import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.MockitoAnnotations;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 class MemberRestRepositoryTest {
 
@@ -67,6 +78,35 @@ class MemberRestRepositoryTest {
             // then
             assertThrows(
                     BusinessException.class, () -> memberRepository.findMembersByCondition(blankUsernameCondition));
+        }
+    }
+
+    @Nested
+    @SpringBootTest
+    class MemberRestRepositorySpringBootTest {
+
+        @Autowired
+        private MemberRepository memberRepository;
+
+        @Test
+        @Transactional
+        public void saveMembers_successTest() {
+            // given
+            Member member = Member.builder()
+                    .username("codesver")
+                    .nickname("JaeWon")
+                    .email("codesver@gmail.com")
+                    .build();
+
+            // when
+            Members members = memberRepository.saveMembers(Members.of(List.of(member)));
+            Optional<Member> foundMember = members.getMemberByUsername(member.getUsername());
+
+            // then
+            assertTrue(foundMember.isPresent());
+            assertEquals(1, members.size());
+            assertEquals(member.getUsername(), foundMember.get().getUsername());
+            assertNotNull(foundMember.get().getMemberId());
         }
     }
 }

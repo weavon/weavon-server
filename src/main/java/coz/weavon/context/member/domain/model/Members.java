@@ -22,4 +22,14 @@ public class Members {
 
         return Optional.empty();
     }
+
+    public Optional<Member> getMemberByUsername(String username) {
+        return members.stream()
+                .filter(member -> member.getUsername().equals(username))
+                .findFirst();
+    }
+
+    public int size() {
+        return members.size();
+    }
 }
