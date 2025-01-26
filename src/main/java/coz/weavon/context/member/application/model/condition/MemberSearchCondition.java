@@ -65,7 +65,7 @@ public class MemberSearchCondition extends RestCondition {
             return null;
         }
 
-        return member.username.like(nickname);
+        return member.nickname.like("%" + nickname + "%");
     }
 
     public BooleanExpression equalEmail() {
