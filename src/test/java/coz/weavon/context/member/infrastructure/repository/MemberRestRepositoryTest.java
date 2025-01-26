@@ -141,5 +141,49 @@ class MemberRestRepositoryTest {
             assertEquals(member.getUsername(), foundMember.get().getUsername());
             assertNotNull(foundMember.get().getMemberId());
         }
+
+        @Test
+        @Transactional
+        public void updateMembers_successTest() {
+            // given
+            Members members = Members.of(List.of(member));
+            Members savedMembers = memberRepository.saveMembers(members);
+            Optional<Member> foundSavedMember = savedMembers.getMemberByUsername(member.getUsername());
+            assertTrue(foundSavedMember.isPresent());
+            Member savedMember = foundSavedMember.get();
+
+            // when
+            String newNickname = "codesver";
+            String newEmail = "codesver@gmail.com";
+            savedMember.setNickname(newNickname);
+            savedMember.setEmail(newEmail);
+            memberRepository.updateMembers(savedMembers);
+
+            MemberSearchCondition memberSearchCondition = MemberSearchCondition.builder()
+                    .memberIds(List.of(savedMember.getMemberId()))
+                    .build();
+            Members updatedMembers = memberRepository.findMembers(memberSearchCondition);
+            Optional<Member> foundUpdatedMember = updatedMembers.getMemberByUsername(savedMember.getUsername());
+
+            // then
+            assertTrue(foundUpdatedMember.isPresent());
+            assertEquals(newNickname, foundUpdatedMember.get().getNickname());
+            assertEquals(newEmail, foundUpdatedMember.get().getEmail());
+        }
+
+        @Test
+        public void deleteMembers_successTest() {
+            // given
+            Members savedMembers = memberRepository.saveMembers(Members.of(List.of(member)));
+
+            // when
+            memberRepository.deleteMembers(savedMembers.getMemberIds());
+            Members foundMembers = memberRepository.findMembers(MemberSearchCondition.builder()
+                    .memberIds(savedMembers.getMemberIds())
+                    .build());
+
+            // then
+            assertEquals(0, foundMembers.size());
+        }
     }
 }
