@@ -17,7 +17,7 @@ class MemberRestRepository implements MemberRepository {
     private final MemberJpaRepository jpaRepository;
 
     @Override
-    public Members findMembersByCondition(MemberSearchCondition condition) {
+    public Members findMembers(MemberSearchCondition condition) {
         condition.validate();
         List<MemberEntity> foundMemberEntities = queryRepository.findAllByCondition(condition);
         List<Member> foundMembers =

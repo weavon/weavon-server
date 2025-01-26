@@ -42,7 +42,7 @@ class MemberRestServiceTest {
             Members members = Members.of(Collections.emptyList());
 
             // when
-            when(memberRepository.findMembersByCondition(any(MemberSearchCondition.class)))
+            when(memberRepository.findMembers(any(MemberSearchCondition.class)))
                     .thenReturn(members);
 
             // then

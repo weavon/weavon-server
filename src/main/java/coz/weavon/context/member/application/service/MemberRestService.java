@@ -23,14 +23,14 @@ class MemberRestService implements MemberService {
     @Override
     public Members searchMembers(MemberSearchCommand command) {
         command.validate();
-        return repository.findMembersByCondition(MemberSearchCondition.fromCommand(command));
+        return repository.findMembers(MemberSearchCondition.fromCommand(command));
     }
 
     @Override
     public Member searchMember(MemberSearchCommand command) {
         command.validate();
 
-        Members members = repository.findMembersByCondition(MemberSearchCondition.fromCommand(command));
+        Members members = repository.findMembers(MemberSearchCondition.fromCommand(command));
         Optional<Member> member = members.getSingleMember();
         if (member.isPresent()) {
             return member.get();

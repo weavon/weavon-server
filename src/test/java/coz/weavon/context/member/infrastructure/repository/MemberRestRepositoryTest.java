@@ -36,17 +36,17 @@ class MemberRestRepositoryTest {
         }
 
         @Test
-        public void findMembersByCondition_invalidConditionExceptionTest() {
+        public void findMembers_invalidConditionExceptionTest() {
             // given
             MemberSearchCondition emptyCondition =
                     MemberSearchCondition.builder().build();
 
             // then
-            assertThrows(BusinessException.class, () -> memberRepository.findMembersByCondition(emptyCondition));
+            assertThrows(BusinessException.class, () -> memberRepository.findMembers(emptyCondition));
         }
 
         @Test
-        public void findMembersByCondition_emptyMemberIds_invalidConditionExceptionTest() {
+        public void findMembers_emptyMemberIds_invalidConditionExceptionTest() {
             // given
             MemberSearchCondition emptyMemberIdsCondition = MemberSearchCondition.builder()
                     .memberIds(Collections.emptyList())
@@ -54,11 +54,11 @@ class MemberRestRepositoryTest {
 
             // then
             assertThrows(
-                    BusinessException.class, () -> memberRepository.findMembersByCondition(emptyMemberIdsCondition));
+                    BusinessException.class, () -> memberRepository.findMembers(emptyMemberIdsCondition));
         }
 
         @Test
-        public void findMembersByCondition_emptyUsernames_invalidConditionExceptionTest() {
+        public void findMembers_emptyUsernames_invalidConditionExceptionTest() {
             // given
             MemberSearchCondition emptyUsernamesCondition = MemberSearchCondition.builder()
                     .usernames(Collections.emptyList())
@@ -66,18 +66,18 @@ class MemberRestRepositoryTest {
 
             // then
             assertThrows(
-                    BusinessException.class, () -> memberRepository.findMembersByCondition(emptyUsernamesCondition));
+                    BusinessException.class, () -> memberRepository.findMembers(emptyUsernamesCondition));
         }
 
         @Test
-        public void findMembersByCondition_blankNickname_invalidConditionExceptionTest() {
+        public void findMembers_blankNickname_invalidConditionExceptionTest() {
             // given
             MemberSearchCondition blankUsernameCondition =
                     MemberSearchCondition.builder().nickname("").build();
 
             // then
             assertThrows(
-                    BusinessException.class, () -> memberRepository.findMembersByCondition(blankUsernameCondition));
+                    BusinessException.class, () -> memberRepository.findMembers(blankUsernameCondition));
         }
     }
 
