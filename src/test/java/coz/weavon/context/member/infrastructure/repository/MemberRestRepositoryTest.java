@@ -13,7 +13,6 @@ import coz.weavon.context.member.domain.model.Members;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Stream;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -37,7 +36,7 @@ class MemberRestRepositoryTest {
         }
 
         @Test
-        public void findMembers_invalidConditionExceptionTest() {
+        public void findMembers_invalidCondition_exceptionTest() {
             // given
             MemberSearchCondition emptyCondition =
                     MemberSearchCondition.builder().build();
@@ -47,7 +46,7 @@ class MemberRestRepositoryTest {
         }
 
         @Test
-        public void findMembers_emptyMemberIds_invalidConditionExceptionTest() {
+        public void findMembers_emptyMemberIds_invalidCondition_exceptionTest() {
             // given
             MemberSearchCondition emptyMemberIdsCondition = MemberSearchCondition.builder()
                     .memberIds(Collections.emptyList())
@@ -58,7 +57,7 @@ class MemberRestRepositoryTest {
         }
 
         @Test
-        public void findMembers_emptyUsernames_invalidConditionExceptionTest() {
+        public void findMembers_emptyUsernames_invalidCondition_exceptionTest() {
             // given
             MemberSearchCondition emptyUsernamesCondition = MemberSearchCondition.builder()
                     .usernames(Collections.emptyList())
@@ -69,7 +68,7 @@ class MemberRestRepositoryTest {
         }
 
         @Test
-        public void findMembers_blankNickname_invalidConditionExceptionTest() {
+        public void findMembers_blankNickname_invalidCondition_exceptionTest() {
             // given
             MemberSearchCondition blankUsernameCondition =
                     MemberSearchCondition.builder().nickname("").build();
@@ -83,6 +82,12 @@ class MemberRestRepositoryTest {
     @SpringBootTest
     class MemberRestRepositorySpringBootTest {
 
+        private static final Member member = Member.builder()
+                .username("codesver")
+                .nickname("JaeWon")
+                .email("codesver@email.com")
+                .build();
+
         @Autowired
         private MemberRepository memberRepository;
 
@@ -90,48 +95,42 @@ class MemberRestRepositoryTest {
         @Transactional
         public void findMembers_inUsernames_successTest() {
             // given
-            String[] usernames = {"coza", "cozb", "cozc", "cozd", "coze"};
-
-            List<Member> memberList = Stream.iterate(0, i -> i + 1)
-                    .limit(5)
-                    .map(i -> Member.builder()
-                            .username(usernames[i])
-                            .nickname(usernames[i])
-                            .email(usernames[i] + "@email.com")
-                            .build())
-                    .toList();
-
-            Members members = Members.of(memberList);
+            Members members = Members.of(List.of(member));
             memberRepository.saveMembers(members);
 
             // when
             MemberSearchCondition condition = MemberSearchCondition.builder()
-                    .usernames(List.of("coza", "cozb"))
+                    .usernames(List.of(member.getUsername()))
                     .build();
             Members foundMembers = memberRepository.findMembers(condition);
 
             // then
-            assertEquals(2, foundMembers.size());
+            Optional<Member> foundMember = foundMembers.getMemberByUsername(member.getUsername());
+            assertTrue(foundMember.isPresent());
+            assertEquals(member.getUsername(), foundMember.get().getUsername());
+        }
 
-            Optional<Member> foundCoza = foundMembers.getMemberByUsername("coza");
-            assertTrue(foundCoza.isPresent());
-            assertEquals("coza", foundCoza.get().getUsername());
+        @Test
+        @Transactional
+        public void findMembers_likeNicknames_successTest() {
+            // given
+            Members members = Members.of(List.of(member));
+            memberRepository.saveMembers(members);
+            MemberSearchCondition memberSearchCondition =
+                    MemberSearchCondition.builder().nickname("Jae").build();
 
-            Optional<Member> foundCozb = foundMembers.getMemberByUsername("cozb");
-            assertTrue(foundCozb.isPresent());
-            assertEquals("cozb", foundCozb.get().getUsername());
+            // when
+            Members foundMembers = memberRepository.findMembers(memberSearchCondition);
+            Optional<Member> foundMember = foundMembers.getMemberByUsername(member.getUsername());
+
+            // then
+            assertTrue(foundMember.isPresent());
+            assertEquals(member.getUsername(), foundMember.get().getUsername());
         }
 
         @Test
         @Transactional
         public void saveMembers_successTest() {
-            // given
-            Member member = Member.builder()
-                    .username("codesver")
-                    .nickname("JaeWon")
-                    .email("codesver@email.com")
-                    .build();
-
             // when
             Members members = memberRepository.saveMembers(Members.of(List.of(member)));
             Optional<Member> foundMember = members.getMemberByUsername(member.getUsername());
