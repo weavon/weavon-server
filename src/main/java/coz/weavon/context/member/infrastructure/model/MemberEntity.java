@@ -31,7 +31,7 @@ public class MemberEntity {
     @Column(name = "USERNAME", unique = true, nullable = false, updatable = false)
     private String username;
 
-    @Column(name = "NICKNAME", unique = true, nullable = false)
+    @Column(name = "NICKNAME", nullable = false)
     private String nickname;
 
     @Column(name = "EMAIL", unique = true, nullable = false)

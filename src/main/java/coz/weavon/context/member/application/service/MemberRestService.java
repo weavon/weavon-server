@@ -1,6 +1,7 @@
 package coz.weavon.context.member.application.service;
 
 import coz.weavon.common.application.model.exception.BusinessException;
+import coz.weavon.context.member.application.model.command.MemberOperateCommand;
 import coz.weavon.context.member.application.model.command.MemberSearchCommand;
 import coz.weavon.context.member.application.model.condition.MemberSearchCondition;
 import coz.weavon.context.member.application.repository.MemberRepository;
@@ -23,6 +24,7 @@ class MemberRestService implements MemberService {
     @Override
     public Members searchMembers(MemberSearchCommand command) {
         command.validate();
+
         return repository.findMembers(MemberSearchCondition.fromCommand(command));
     }
 
@@ -37,5 +39,22 @@ class MemberRestService implements MemberService {
         }
 
         throw new BusinessException(MSG_VLD_INVLD_SINGLE_RESULT, LBL_MEMBER);
+    }
+
+    @Override
+    public void operateMembers(MemberOperateCommand command) {
+        command.validate();
+
+        if (command.hasMembersToDelete()) {
+            repository.deleteMembers(command.getDeleteTargetMemberIds());
+        }
+
+        if (command.hasMembersToUpdate()) {
+            repository.updateMembers(command.getUpdateTargetMembers());
+        }
+
+        if (command.hasMembersToCreate()) {
+            repository.saveMembers(command.getCreateTargetMembers());
+        }
     }
 }

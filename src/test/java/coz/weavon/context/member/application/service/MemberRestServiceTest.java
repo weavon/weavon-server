@@ -5,6 +5,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 import coz.weavon.common.application.model.exception.BusinessException;
+import coz.weavon.context.member.application.model.command.MemberOperateCommand;
 import coz.weavon.context.member.application.model.command.MemberSearchCommand;
 import coz.weavon.context.member.application.model.condition.MemberSearchCondition;
 import coz.weavon.context.member.application.repository.MemberRepository;
@@ -46,6 +47,16 @@ class MemberRestServiceTest {
 
             // then
             assertThrows(BusinessException.class, () -> memberService.searchMember(emptyCommand));
+        }
+
+        @Test
+        public void operateMembers_noOperateTargetsExist_exceptionTest() {
+            // given
+            MemberOperateCommand noTargetOperateCommand =
+                    MemberOperateCommand.builder().build();
+
+            // then
+            assertThrows(BusinessException.class, () -> memberService.operateMembers(noTargetOperateCommand));
         }
     }
 }

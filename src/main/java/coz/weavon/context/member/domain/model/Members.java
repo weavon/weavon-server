@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import lombok.Builder;
 import lombok.Data;
+import org.springframework.util.CollectionUtils;
 
 @Data
 @Builder
@@ -35,5 +36,9 @@ public class Members {
 
     public int size() {
         return value.size();
+    }
+
+    public boolean isEmpty() {
+        return CollectionUtils.isEmpty(value);
     }
 }
