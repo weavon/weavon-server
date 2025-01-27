@@ -19,9 +19,27 @@ public class MemberOperateCommand extends RestCommand {
 
     private List<Long> deleteTargetMemberIds;
 
+    public static MemberOperateCommand ofCreateTargets(Members createTargetMembers) {
+        return MemberOperateCommand.builder()
+                .createTargetMembers(createTargetMembers)
+                .build();
+    }
+
+    public static MemberOperateCommand ofUpdateTargets(Members updateTargetMembers) {
+        return MemberOperateCommand.builder()
+                .updateTargetMembers(updateTargetMembers)
+                .build();
+    }
+
+    public static MemberOperateCommand ofDeleteTargets(List<Long> deleteTargetMemberIds) {
+        return MemberOperateCommand.builder()
+                .deleteTargetMemberIds(deleteTargetMemberIds)
+                .build();
+    }
+
     @Override
     public void validate() {
-        if (!this.hasMembersToCreate() || !this.hasMembersToUpdate() || !this.hasMembersToDelete()) {
+        if (!(this.hasMembersToCreate() || this.hasMembersToUpdate() || this.hasMembersToDelete())) {
             throw new BusinessException("There are no members to operate.");
         }
     }

@@ -19,4 +19,12 @@ public class Member {
 
     @Property(unique = true, nullable = false)
     private String email;
+
+    public static Member of(String username, String nickname, String email) {
+        return Member.builder()
+                .username(username)
+                .nickname(nickname)
+                .email(email)
+                .build();
+    }
 }
