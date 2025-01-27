@@ -1,6 +1,5 @@
 package coz.weavon.context.member.application.service;
 
-import static org.assertj.core.api.BDDAssumptions.given;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -109,13 +108,15 @@ class MemberRestServiceTest {
             Members members = Members.of(List.of(Member.of("user1", "nickname1", "user1@email.com")));
             MemberOperateCommand createOperateCommand = MemberOperateCommand.ofCreateTargets(members);
             MemberOperateResult createOperateResult = memberService.operateMembers(createOperateCommand);
-            Optional<Member> foundCreatedUser1 = createOperateResult.getCreatedMembers().getMemberByUsername("user1");
+            Optional<Member> foundCreatedUser1 =
+                    createOperateResult.getCreatedMembers().getMemberByUsername("user1");
             assertTrue(foundCreatedUser1.isPresent());
             Member user1 = foundCreatedUser1.get();
 
             // when
             user1.setNickname("nickname1_updated");
-            MemberOperateCommand updateOperateCommand = MemberOperateCommand.ofUpdateTargets(Members.of(List.of(user1)));
+            MemberOperateCommand updateOperateCommand =
+                    MemberOperateCommand.ofUpdateTargets(Members.of(List.of(user1)));
             MemberOperateResult updateOperateResult = memberService.operateMembers(updateOperateCommand);
             Members updatedMembers = updateOperateResult.getUpdatedMembers();
             Optional<Member> foundUpdatedUser1 = updatedMembers.getMemberByUsername("user1");
@@ -134,10 +135,12 @@ class MemberRestServiceTest {
             MemberOperateResult createOperateResult = memberService.operateMembers(createOperateCommand);
 
             // when
-            MemberOperateCommand deleteOperateCommand = MemberOperateCommand.ofDeleteTargets(createOperateResult.getCreatedMembers().getMemberIds());
+            MemberOperateCommand deleteOperateCommand = MemberOperateCommand.ofDeleteTargets(
+                    createOperateResult.getCreatedMembers().getMemberIds());
             memberService.operateMembers(deleteOperateCommand);
 
-            MemberSearchCommand memberSearchCommand = MemberSearchCommand.builder().usernames(List.of("user1")).build();
+            MemberSearchCommand memberSearchCommand =
+                    MemberSearchCommand.builder().usernames(List.of("user1")).build();
 
             // then
             assertThrows(BusinessException.class, () -> memberService.searchMember(memberSearchCommand));
