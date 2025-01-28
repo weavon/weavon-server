@@ -1,4 +1,4 @@
-package coz.weavon.common.infrastructure.model;
+package coz.weavon.common.application.model.condition;
 
 import java.util.Collection;
 import java.util.Objects;

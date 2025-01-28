@@ -6,3 +6,7 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: 1q2w3e4r!
       MYSQL_DATABASE: weavon
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
