@@ -16,6 +16,10 @@ public class Members {
         return Members.builder().value(members).build();
     }
 
+    public static Members of(Member member) {
+        return Members.builder().value(List.of(member)).build();
+    }
+
     public Optional<Member> getSingleMember() {
         if (value.size() == 1) {
             return value.stream().findFirst();
@@ -28,6 +32,10 @@ public class Members {
         return value.stream()
                 .filter(member -> member.getUsername().equals(username))
                 .findFirst();
+    }
+
+    public Optional<Member> getMemberByEmail(String email) {
+        return value.stream().filter(member -> member.getEmail().equals(email)).findFirst();
     }
 
     public List<Long> getMemberIds() {

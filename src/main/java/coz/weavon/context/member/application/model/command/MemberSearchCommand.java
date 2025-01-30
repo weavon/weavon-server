@@ -17,6 +17,14 @@ public class MemberSearchCommand extends RestCommand {
 
     private String email;
 
+    public static MemberSearchCommand ofUsername(String username) {
+        return MemberSearchCommand.builder().usernames(List.of(username)).build();
+    }
+
+    public static MemberSearchCommand ofEmail(String email) {
+        return MemberSearchCommand.builder().email(email).build();
+    }
+
     @Override
     public void validate() {}
 }

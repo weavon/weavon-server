@@ -4,6 +4,8 @@ import coz.weavon.context.member.domain.model.Member;
 import coz.weavon.context.member.domain.model.Members;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -34,8 +36,12 @@ public class MemberEntity {
     @Column(name = "NICKNAME", nullable = false)
     private String nickname;
 
-    @Column(name = "EMAIL", unique = true, nullable = false)
+    @Column(name = "EMAIL", unique = true)
     private String email;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "ROLE", nullable = false)
+    private RoleColumn role;
 
     public static MemberEntity fromDomain(Member member) {
         return MemberEntity.builder()
@@ -43,6 +49,7 @@ public class MemberEntity {
                 .username(member.getUsername())
                 .nickname(member.getNickname())
                 .email(member.getEmail())
+                .role(RoleColumn.USER)
                 .build();
     }
 
@@ -56,11 +63,13 @@ public class MemberEntity {
                 .username(username)
                 .nickname(nickname)
                 .email(email)
+                .role(role.toDomain())
                 .build();
     }
 
     public void update(MemberEntity member) {
         this.nickname = Objects.requireNonNullElse(member.getNickname(), this.nickname);
         this.email = Objects.requireNonNullElse(member.getEmail(), this.email);
+        this.role = Objects.requireNonNullElse(member.getRole(), this.role);
     }
 }
