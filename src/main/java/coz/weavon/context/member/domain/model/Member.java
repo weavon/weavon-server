@@ -23,7 +23,7 @@ public class Member {
     @Property(nullable = false)
     private Role role;
 
-    public static Member of(String username, String nickname, String email) {
+    public static Member ofUser(String username, String nickname, String email) {
         return Member.builder()
                 .username(username)
                 .nickname(nickname)
