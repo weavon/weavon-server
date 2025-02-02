@@ -20,6 +20,7 @@ import org.mockito.InjectMocks;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
 
 class MemberRestRepositoryTest {
@@ -80,12 +81,13 @@ class MemberRestRepositoryTest {
 
     @Nested
     @SpringBootTest
+    @ActiveProfiles("test")
     class MemberRestRepositorySpringBootTest {
 
         private static final Member member = Member.builder()
-                .username("codesver")
-                .nickname("JaeWon")
-                .email("codesver@email.com")
+                .username("test")
+                .nickname("test")
+                .email("test@email.com")
                 .build();
 
         @Autowired
@@ -117,7 +119,7 @@ class MemberRestRepositoryTest {
             Members members = Members.of(List.of(member));
             memberRepository.saveMembers(members);
             MemberSearchCondition memberSearchCondition =
-                    MemberSearchCondition.builder().nickname("Jae").build();
+                    MemberSearchCondition.builder().nickname("te").build();
 
             // when
             Members foundMembers = memberRepository.findMembers(memberSearchCondition);
@@ -153,8 +155,8 @@ class MemberRestRepositoryTest {
             Member savedMember = foundSavedMember.get();
 
             // when
-            String newNickname = "codesver";
-            String newEmail = "codesver@gmail.com";
+            String newNickname = "test";
+            String newEmail = "test@email.com";
             savedMember.setNickname(newNickname);
             savedMember.setEmail(newEmail);
             memberRepository.updateMembers(savedMembers);

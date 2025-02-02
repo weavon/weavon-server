@@ -28,6 +28,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
 
 class MemberRestServiceTest {
@@ -73,6 +74,7 @@ class MemberRestServiceTest {
 
     @Nested
     @SpringBootTest
+    @ActiveProfiles("test")
     class MemberRestServiceSpringBootTest {
 
         @Autowired
