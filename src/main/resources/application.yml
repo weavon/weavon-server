@@ -62,4 +62,4 @@ auth:
     expiration-minutes: 60
   cookie:
     secure: false
-    max-age: 60 * 60
+    max-age: 3600

@@ -29,8 +29,8 @@ public class SecurityConfig {
                         .permitAll()
                         .anyRequest()
                         .authenticated())
-                .oauth2Login(oauth -> oauth.userInfoEndpoint(config -> config.userService(oAuthUserService)).successHandler(securitySuccessHandler))
-
+                .oauth2Login(oauth -> oauth.userInfoEndpoint(config -> config.userService(oAuthUserService))
+                        .successHandler(securitySuccessHandler))
                 .build();
     }
 }

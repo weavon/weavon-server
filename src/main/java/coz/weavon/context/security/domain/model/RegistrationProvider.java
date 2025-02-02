@@ -10,7 +10,8 @@ public enum RegistrationProvider {
     GOOGLE("google"),
     NAVER("naver");
 
-    private static final String MSG_AUTH_OAUTH_UNSUPPORTED_REGISTRATION_PROVIDER = "message.authentication.oauth.unsupportedRegistrationProvider";
+    private static final String MSG_AUTH_OAUTH_UNSUPPORTED_REGISTRATION_PROVIDER =
+            "message.authentication.oauth.unsupportedRegistrationProvider";
 
     private final String registrationId;
 

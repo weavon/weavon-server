@@ -1,14 +1,13 @@
 package coz.weavon.context.security.domain.model;
 
 import coz.weavon.common.domain.model.Property;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Map;
 import lombok.Builder;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.core.user.OAuth2User;
-
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Map;
 
 @Data
 @Builder
@@ -24,11 +23,7 @@ public class AuthUser implements OAuth2User {
     private String role;
 
     public static AuthUser of(String username, String email, String role) {
-        return AuthUser.builder()
-                .username(username)
-                .email(email)
-                .role(role)
-                .build();
+        return AuthUser.builder().username(username).email(email).role(role).build();
     }
 
     @Override

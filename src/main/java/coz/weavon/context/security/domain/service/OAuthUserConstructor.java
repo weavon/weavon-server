@@ -2,9 +2,8 @@ package coz.weavon.context.security.domain.service;
 
 import coz.weavon.context.security.domain.model.OAuthUser;
 import coz.weavon.context.security.domain.model.RegistrationProvider;
-import lombok.experimental.UtilityClass;
-
 import java.util.Map;
+import lombok.experimental.UtilityClass;
 
 @UtilityClass
 public class OAuthUserConstructor {
