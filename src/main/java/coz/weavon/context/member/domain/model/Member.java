@@ -31,4 +31,8 @@ public class Member {
                 .role(Role.USER)
                 .build();
     }
+
+    public String getRoleName() {
+        return role.name();
+    }
 }

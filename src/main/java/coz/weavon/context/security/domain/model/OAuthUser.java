@@ -1,0 +1,34 @@
+package coz.weavon.context.security.domain.model;
+
+import coz.weavon.common.domain.model.Property;
+import coz.weavon.context.security.domain.service.OAuthUserConstructService;
+import lombok.Builder;
+import lombok.Data;
+
+import java.util.Map;
+
+@Data
+@Builder
+public class OAuthUser {
+
+    @Property(nullable = false, updatable = false)
+    private RegistrationProvider registrationProvider;
+
+    @Property(nullable = false, updatable = false)
+    private String nickname;
+
+    @Property(unique = true, nullable = false, updatable = false)
+    private String email;
+
+    public static OAuthUser of(RegistrationProvider registrationClient, String nickname, String email) {
+        return OAuthUser.builder()
+                .registrationProvider(registrationClient)
+                .nickname(nickname)
+                .email(email)
+                .build();
+    }
+
+    public static OAuthUser ofAttributes(String registrationId, Map<String, Object> attributes) {
+        return OAuthUserConstructService.constructOAuthUser(registrationId, attributes);
+    }
+}
