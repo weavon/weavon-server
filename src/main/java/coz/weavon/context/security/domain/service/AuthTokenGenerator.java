@@ -18,7 +18,7 @@ public class AuthTokenGenerator {
     @Value("${auth.jwt.secret}")
     private String secret;
 
-    @Value("${auth.jwt.expirationMinutes}")
+    @Value("${auth.jwt.expiration-minutes}")
     private int expirationMinutes;
 
     public static SecretKey secretKey;

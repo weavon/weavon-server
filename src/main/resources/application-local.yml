@@ -59,4 +59,7 @@ spring:
 auth:
   jwt:
     secret: ${AUTH_JWT_SECRET}
-    expirationMinutes: 60
+    expiration-minutes: 60
+  cookie:
+    secure: false
+    max-age: 60 * 60
