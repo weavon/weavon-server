@@ -2,10 +2,9 @@ package coz.weavon.context.security.domain.model;
 
 import coz.weavon.common.domain.model.Property;
 import coz.weavon.context.security.domain.service.OAuthUserConstructor;
+import java.util.Map;
 import lombok.Builder;
 import lombok.Data;
-
-import java.util.Map;
 
 @Data
 @Builder
