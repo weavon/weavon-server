@@ -58,5 +58,5 @@ spring:
 
 auth:
   jwt:
-    key: ${AUTH_JWT_KEY}
+    secret: ${AUTH_JWT_SECRET}
     expirationMinutes: 60

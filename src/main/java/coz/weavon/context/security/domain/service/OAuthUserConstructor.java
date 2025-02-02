@@ -7,7 +7,7 @@ import lombok.experimental.UtilityClass;
 import java.util.Map;
 
 @UtilityClass
-public class OAuthUserConstructService {
+public class OAuthUserConstructor {
 
     public static OAuthUser constructOAuthUser(String registrationId, Map<String, Object> attributes) {
         final RegistrationProvider registrationProvider = RegistrationProvider.of(registrationId);

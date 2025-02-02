@@ -1,7 +1,7 @@
 package coz.weavon.context.security.domain.model;
 
 import coz.weavon.common.domain.model.Property;
-import coz.weavon.context.security.domain.service.OAuthUserConstructService;
+import coz.weavon.context.security.domain.service.OAuthUserConstructor;
 import lombok.Builder;
 import lombok.Data;
 
@@ -29,6 +29,6 @@ public class OAuthUser {
     }
 
     public static OAuthUser ofAttributes(String registrationId, Map<String, Object> attributes) {
-        return OAuthUserConstructService.constructOAuthUser(registrationId, attributes);
+        return OAuthUserConstructor.constructOAuthUser(registrationId, attributes);
     }
 }
