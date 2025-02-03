@@ -1,6 +1,6 @@
-package coz.weavon.context.security.domain.service;
+package coz.weavon.context.auth.domain.service;
 
-import coz.weavon.context.security.domain.model.AuthToken;
+import coz.weavon.context.auth.domain.model.AuthToken;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import jakarta.annotation.PostConstruct;

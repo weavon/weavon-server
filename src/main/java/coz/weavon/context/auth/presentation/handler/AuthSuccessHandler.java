@@ -1,9 +1,8 @@
-package coz.weavon.context.security.presentation.handler;
+package coz.weavon.context.auth.presentation.handler;
 
-import coz.weavon.context.security.application.service.AuthTokenService;
-import coz.weavon.context.security.domain.model.AuthToken;
-import coz.weavon.context.security.domain.model.AuthUser;
-import jakarta.servlet.ServletException;
+import coz.weavon.context.auth.application.service.AuthTokenService;
+import coz.weavon.context.auth.domain.model.AuthToken;
+import coz.weavon.context.auth.domain.model.AuthUser;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -16,7 +15,10 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class SecuritySuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
+public class AuthSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
+
+    @Value("${auth.redirection-url}")
+    private String redirectionUrl;
 
     @Value("${auth.cookie.secure}")
     private boolean cookieSecure;
@@ -29,12 +31,12 @@ public class SecuritySuccessHandler extends SimpleUrlAuthenticationSuccessHandle
     @Override
     public void onAuthenticationSuccess(
             HttpServletRequest request, HttpServletResponse response, Authentication authentication)
-            throws IOException, ServletException {
+            throws IOException {
         AuthUser authUser = (AuthUser) authentication.getPrincipal();
         AuthToken authToken = authTokenService.getAuthTokenByAuthUser(authUser);
-        Cookie cookie = this.generateAuthCookie(authToken);
-        response.addCookie(cookie);
-        response.sendRedirect("http://localhost:3000/");
+
+        response.addCookie(this.generateAuthCookie(authToken));
+        response.sendRedirect(redirectionUrl);
     }
 
     private Cookie generateAuthCookie(AuthToken authToken) {

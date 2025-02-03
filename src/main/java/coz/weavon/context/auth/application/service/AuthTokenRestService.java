@@ -1,7 +1,7 @@
-package coz.weavon.context.security.application.service;
+package coz.weavon.context.auth.application.service;
 
-import coz.weavon.context.security.domain.model.AuthToken;
-import coz.weavon.context.security.domain.model.AuthUser;
+import coz.weavon.context.auth.domain.model.AuthToken;
+import coz.weavon.context.auth.domain.model.AuthUser;
 import org.springframework.stereotype.Service;
 
 @Service

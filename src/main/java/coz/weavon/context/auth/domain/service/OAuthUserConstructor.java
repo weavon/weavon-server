@@ -1,7 +1,7 @@
-package coz.weavon.context.security.domain.service;
+package coz.weavon.context.auth.domain.service;
 
-import coz.weavon.context.security.domain.model.OAuthUser;
-import coz.weavon.context.security.domain.model.RegistrationProvider;
+import coz.weavon.context.auth.domain.model.OAuthUser;
+import coz.weavon.context.auth.domain.model.RegistrationProvider;
 import java.util.Map;
 import lombok.experimental.UtilityClass;
 
@@ -23,6 +23,7 @@ public class OAuthUserConstructor {
         return OAuthUser.of(RegistrationProvider.GOOGLE, name, email);
     }
 
+    @SuppressWarnings("unchecked")
     private static OAuthUser constructNaverOAuthUser(Map<String, Object> attributes) {
         Map<String, Object> naverAttributes = (Map<String, Object>) attributes.get("response");
         String name = (String) naverAttributes.get("name");

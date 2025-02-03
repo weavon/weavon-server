@@ -1,7 +1,7 @@
 package coz.weavon.config;
 
-import coz.weavon.context.security.application.service.OAuthUserService;
-import coz.weavon.context.security.presentation.handler.SecuritySuccessHandler;
+import coz.weavon.context.auth.application.service.OAuthUserService;
+import coz.weavon.context.auth.presentation.handler.AuthSuccessHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,7 +17,7 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 
     private final OAuthUserService oAuthUserService;
-    private final SecuritySuccessHandler securitySuccessHandler;
+    private final AuthSuccessHandler securitySuccessHandler;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {

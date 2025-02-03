@@ -63,3 +63,4 @@ auth:
   cookie:
     secure: false
     max-age: 3600
+  redirection-url: http://localhost:3000

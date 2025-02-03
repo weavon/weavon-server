@@ -1,7 +1,7 @@
-package coz.weavon.context.security.domain.model;
+package coz.weavon.context.auth.domain.model;
 
 import coz.weavon.common.domain.model.Property;
-import coz.weavon.context.security.domain.service.AuthTokenGenerator;
+import coz.weavon.context.auth.domain.service.AuthTokenGenerator;
 import lombok.Builder;
 import lombok.Data;
 

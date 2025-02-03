@@ -1,22 +1,22 @@
-package coz.weavon.context.security.infrastructure.adapter;
+package coz.weavon.context.auth.infrastructure.adapter;
 
 import coz.weavon.common.application.model.exception.BusinessException;
 import coz.weavon.common.infrastructure.model.Adapter;
+import coz.weavon.context.auth.application.adapter.AuthMemberAdapter;
+import coz.weavon.context.auth.domain.model.AuthUser;
+import coz.weavon.context.auth.domain.model.OAuthUser;
 import coz.weavon.context.member.application.model.command.MemberOperateCommand;
 import coz.weavon.context.member.application.model.command.MemberSearchCommand;
 import coz.weavon.context.member.application.model.result.MemberOperateResult;
 import coz.weavon.context.member.application.service.MemberService;
 import coz.weavon.context.member.domain.model.Member;
 import coz.weavon.context.member.domain.model.Members;
-import coz.weavon.context.security.application.adapter.SecurityMemberAdapter;
-import coz.weavon.context.security.domain.model.AuthUser;
-import coz.weavon.context.security.domain.model.OAuthUser;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 
 @Adapter
 @RequiredArgsConstructor
-class SecurityMemberRestAdapter implements SecurityMemberAdapter {
+class AuthMemberRestAdapter implements AuthMemberAdapter {
 
     private static final String MSG_AUTH_FAIL_SIGN_UP = "message.authentication.failed.signUp";
 

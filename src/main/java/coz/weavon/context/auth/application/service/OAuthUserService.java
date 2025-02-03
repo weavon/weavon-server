@@ -1,7 +1,7 @@
-package coz.weavon.context.security.application.service;
+package coz.weavon.context.auth.application.service;
 
-import coz.weavon.context.security.application.adapter.SecurityMemberAdapter;
-import coz.weavon.context.security.domain.model.OAuthUser;
+import coz.weavon.context.auth.application.adapter.AuthMemberAdapter;
+import coz.weavon.context.auth.domain.model.OAuthUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class OAuthUserService extends DefaultOAuth2UserService {
 
-    private final SecurityMemberAdapter memberAdapter;
+    private final AuthMemberAdapter memberAdapter;
 
     @Override
     @Transactional
