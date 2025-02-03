@@ -24,22 +24,14 @@ class AuthMemberRestAdapter implements AuthMemberAdapter {
 
     @Override
     public AuthUser findAuthUserAndSaveOAuthUserIfAbsent(OAuthUser oAuthUser) {
-        Optional<Member> optionalSearchedMember = this.searchOAuthUser(oAuthUser);
+        MemberSearchCommand searchCommand = MemberSearchCommand.ofEmail(oAuthUser.getEmail());
+        Members searchedMembers = memberService.searchMembers(searchCommand);
+        Optional<Member> optionalSearchedMember = searchedMembers.getMemberByEmail(oAuthUser.getEmail());
         if (optionalSearchedMember.isPresent()) {
             Member searchedMember = optionalSearchedMember.get();
             return AuthUser.of(searchedMember.getUsername(), searchedMember.getEmail(), searchedMember.getRoleName());
         }
 
-        return this.saveOAuthUser(oAuthUser);
-    }
-
-    private Optional<Member> searchOAuthUser(OAuthUser oAuthUser) {
-        MemberSearchCommand searchCommand = MemberSearchCommand.ofEmail(oAuthUser.getEmail());
-        Members searchedMembers = memberService.searchMembers(searchCommand);
-        return searchedMembers.getMemberByEmail(oAuthUser.getEmail());
-    }
-
-    private AuthUser saveOAuthUser(OAuthUser oAuthUser) {
         Member createTargetMember = Member.ofUser(oAuthUser.getEmail(), oAuthUser.getNickname(), oAuthUser.getEmail());
         MemberOperateCommand operateCommand = MemberOperateCommand.ofCreateTargets(Members.of(createTargetMember));
         MemberOperateResult operateResult = memberService.operateMembers(operateCommand);
