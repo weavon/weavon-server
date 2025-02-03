@@ -16,8 +16,8 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class AuthSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 
-    @Value("${auth.redirection-url}")
-    private String redirectionUrl;
+    @Value("${client.base-url}")
+    private String clientBaseUrl;
 
     @Value("${auth.cookie.secure}")
     private boolean cookieSecure;
@@ -33,7 +33,7 @@ public class AuthSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
         AuthToken authToken = authUser.toAuthToken();
 
         response.addCookie(this.generateAuthCookie(authToken));
-        response.sendRedirect(redirectionUrl);
+        response.sendRedirect(clientBaseUrl);
     }
 
     private Cookie generateAuthCookie(AuthToken authToken) {
