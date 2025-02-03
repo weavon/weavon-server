@@ -1,7 +1,8 @@
 package coz.weavon.context.auth.domain.model;
 
 import coz.weavon.common.domain.model.Property;
-import coz.weavon.context.auth.domain.service.AuthTokenGenerator;
+import coz.weavon.context.auth.domain.service.AuthTokenResolver;
+import java.util.Date;
 import lombok.Builder;
 import lombok.Data;
 
@@ -16,7 +17,12 @@ public class AuthToken {
         return AuthToken.builder().value(value).build();
     }
 
-    public static AuthToken ofAuthUser(AuthUser authUser) {
-        return AuthTokenGenerator.generateAuthToken(authUser.getUsername(), authUser.getRole());
+    public AuthUser toAuthUser() {
+        return AuthTokenResolver.resolveAuthUser(this);
+    }
+
+    public boolean isExpired() {
+        Date expiredDate = AuthTokenResolver.resolveExpiration(this);
+        return expiredDate.before(new Date());
     }
 }

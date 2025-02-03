@@ -1,6 +1,7 @@
 package coz.weavon.context.auth.domain.service;
 
 import coz.weavon.context.auth.domain.model.AuthToken;
+import coz.weavon.context.auth.domain.model.AuthUser;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import java.util.Date;
@@ -21,6 +22,13 @@ public class AuthTokenResolver {
                 .build()
                 .parseSignedClaims(authToken.getValue())
                 .getPayload();
+    }
+
+    public static AuthUser resolveAuthUser(AuthToken authToken) {
+        return AuthUser.builder()
+                .username(resolveUsername(authToken))
+                .role(resolveRole(authToken))
+                .build();
     }
 
     public static String resolveUsername(AuthToken authToken) {

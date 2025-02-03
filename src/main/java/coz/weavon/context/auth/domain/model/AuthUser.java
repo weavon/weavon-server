@@ -1,6 +1,7 @@
 package coz.weavon.context.auth.domain.model;
 
 import coz.weavon.common.domain.model.Property;
+import coz.weavon.context.auth.domain.service.AuthTokenGenerator;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Map;
@@ -16,14 +17,15 @@ public class AuthUser implements OAuth2User {
     @Property(unique = true, nullable = false, updatable = false)
     private String username;
 
-    @Property(unique = true)
-    private String email;
-
     @Property(nullable = false)
     private String role;
 
-    public static AuthUser of(String username, String email, String role) {
-        return AuthUser.builder().username(username).email(email).role(role).build();
+    public static AuthUser of(String username, String role) {
+        return AuthUser.builder().username(username).role(role).build();
+    }
+
+    public AuthToken toAuthToken() {
+        return AuthTokenGenerator.generateAuthToken(this.getUsername(), this.getRole());
     }
 
     @Override

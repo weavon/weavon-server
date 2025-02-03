@@ -1,6 +1,5 @@
 package coz.weavon.context.auth.presentation.handler;
 
-import coz.weavon.context.auth.application.service.AuthTokenService;
 import coz.weavon.context.auth.domain.model.AuthToken;
 import coz.weavon.context.auth.domain.model.AuthUser;
 import jakarta.servlet.http.Cookie;
@@ -26,14 +25,12 @@ public class AuthSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
     @Value("${auth.cookie.max-age}")
     private int cookieMaxAge;
 
-    private final AuthTokenService authTokenService;
-
     @Override
     public void onAuthenticationSuccess(
             HttpServletRequest request, HttpServletResponse response, Authentication authentication)
             throws IOException {
         AuthUser authUser = (AuthUser) authentication.getPrincipal();
-        AuthToken authToken = authTokenService.getAuthTokenByAuthUser(authUser);
+        AuthToken authToken = authUser.toAuthToken();
 
         response.addCookie(this.generateAuthCookie(authToken));
         response.sendRedirect(redirectionUrl);

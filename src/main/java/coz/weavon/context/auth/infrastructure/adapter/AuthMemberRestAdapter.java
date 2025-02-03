@@ -29,7 +29,7 @@ class AuthMemberRestAdapter implements AuthMemberAdapter {
         Optional<Member> optionalSearchedMember = searchedMembers.getMemberByEmail(oAuthUser.getEmail());
         if (optionalSearchedMember.isPresent()) {
             Member searchedMember = optionalSearchedMember.get();
-            return AuthUser.of(searchedMember.getUsername(), searchedMember.getEmail(), searchedMember.getRoleName());
+            return AuthUser.of(searchedMember.getUsername(), searchedMember.getRoleName());
         }
 
         Member createTargetMember = Member.ofUser(oAuthUser.getEmail(), oAuthUser.getNickname(), oAuthUser.getEmail());
@@ -39,6 +39,6 @@ class AuthMemberRestAdapter implements AuthMemberAdapter {
                 .getCreatedMembers()
                 .getMemberByEmail(oAuthUser.getEmail())
                 .orElseThrow(() -> new BusinessException(MSG_AUTH_FAIL_SIGN_UP));
-        return AuthUser.of(createdMember.getUsername(), createdMember.getEmail(), createdMember.getRoleName());
+        return AuthUser.of(createdMember.getUsername(), createdMember.getRoleName());
     }
 }

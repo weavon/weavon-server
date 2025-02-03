@@ -1,6 +1,7 @@
 package coz.weavon.config;
 
 import coz.weavon.context.auth.application.service.OAuthUserService;
+import coz.weavon.context.auth.presentation.filter.JwtAuthenticationFilter;
 import coz.weavon.context.auth.presentation.handler.AuthSuccessHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -10,6 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -18,6 +20,7 @@ public class SecurityConfig {
 
     private final OAuthUserService oAuthUserService;
     private final AuthSuccessHandler securitySuccessHandler;
+    private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -29,6 +32,7 @@ public class SecurityConfig {
                         .permitAll()
                         .anyRequest()
                         .authenticated())
+                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .oauth2Login(oauth -> oauth.userInfoEndpoint(config -> config.userService(oAuthUserService))
                         .successHandler(securitySuccessHandler))
                 .build();
