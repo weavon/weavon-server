@@ -4,6 +4,7 @@ import coz.weavon.context.auth.application.service.OAuthUserService;
 import coz.weavon.context.auth.presentation.filter.JwtAuthenticationFilter;
 import coz.weavon.context.auth.presentation.handler.AuthSuccessHandler;
 import jakarta.servlet.http.HttpServletRequest;
+import java.util.Collections;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -16,8 +17,6 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
-
-import java.util.Collections;
 
 @Configuration
 @EnableWebSecurity
