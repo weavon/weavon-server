@@ -17,6 +17,7 @@ import org.springframework.stereotype.Repository;
 class MemberRestRepository implements MemberRepository {
 
     private final MemberQueryRepository queryRepository;
+
     private final MemberJpaRepository jpaRepository;
 
     @Override

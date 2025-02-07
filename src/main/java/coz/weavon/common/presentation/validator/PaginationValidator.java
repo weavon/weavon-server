@@ -10,9 +10,11 @@ import java.util.Objects;
 public class PaginationValidator implements ConstraintValidator<ValidPagination, PageRequest> {
 
     private static final String MSG_VLD_REQ_REQ = "message.validation.required";
+
     private static final String MSG_VLD_REQ_MIN = "message.validation.min";
 
     private static final String LBL_PGN_PAGE_NO = "label.pagination.pageNo";
+
     private static final String LBL_PGN_PAGE_SIZE = "label.pagination.pageSize";
 
     private boolean required;

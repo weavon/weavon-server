@@ -6,6 +6,7 @@ import lombok.experimental.UtilityClass;
 
 @UtilityClass
 public class DateTimeUtils {
+
     public static boolean isValidDateRange(LocalDate startDate, LocalDate endDate) {
         if (Objects.isNull(startDate) || Objects.isNull(endDate)) {
             return false;

@@ -10,6 +10,7 @@ import lombok.Setter;
 public class RestResponse<T> {
 
     private ResponseType type;
+
     private T value;
 
     public static <T> RestResponse<T> of(T value) {

@@ -11,9 +11,11 @@ import org.springframework.util.ObjectUtils;
 public abstract class RestCommand {
 
     private static final String MSG_VLD_REQ = "message.validation.required";
+
     private static final String MSG_VLD_INVALID_RANGE = "message.validation.invalid.range";
 
     private static final String LBL_DATE_START_DATE = "label.date.startDate";
+
     private static final String LBL_DATE_END_DATE = "label.date.endDate";
 
     public abstract void validate();
