@@ -15,14 +15,14 @@ public class MemberSearchCommand extends RestCommand {
 
     private String nickname;
 
-    private String email;
+    private List<String> emails;
 
     public static MemberSearchCommand ofUsername(String username) {
         return MemberSearchCommand.builder().usernames(List.of(username)).build();
     }
 
     public static MemberSearchCommand ofEmail(String email) {
-        return MemberSearchCommand.builder().email(email).build();
+        return MemberSearchCommand.builder().emails(List.of(email)).build();
     }
 
     @Override

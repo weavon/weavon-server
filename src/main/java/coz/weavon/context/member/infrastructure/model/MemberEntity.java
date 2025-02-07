@@ -11,7 +11,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import java.util.List;
-import java.util.Objects;
+import java.util.Optional;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -33,6 +33,9 @@ public class MemberEntity {
     @Column(name = "USERNAME", unique = true, nullable = false, updatable = false)
     private String username;
 
+    @Column(name = "PASSWORD")
+    private String password;
+
     @Column(name = "NICKNAME", nullable = false)
     private String nickname;
 
@@ -47,6 +50,7 @@ public class MemberEntity {
         return MemberEntity.builder()
                 .memberId(member.getMemberId())
                 .username(member.getUsername())
+                .password(member.getPassword())
                 .nickname(member.getNickname())
                 .email(member.getEmail())
                 .role(RoleColumn.USER)
@@ -61,6 +65,7 @@ public class MemberEntity {
         return Member.builder()
                 .memberId(memberId)
                 .username(username)
+                .password(password)
                 .nickname(nickname)
                 .email(email)
                 .role(role.toDomain())
@@ -68,8 +73,9 @@ public class MemberEntity {
     }
 
     public void update(MemberEntity member) {
-        this.nickname = Objects.requireNonNullElse(member.getNickname(), this.nickname);
-        this.email = Objects.requireNonNullElse(member.getEmail(), this.email);
-        this.role = Objects.requireNonNullElse(member.getRole(), this.role);
+        password = Optional.ofNullable(member.getPassword()).orElse(password);
+        nickname = Optional.ofNullable(member.getNickname()).orElse(nickname);
+        email = Optional.ofNullable(member.getEmail()).orElse(email);
+        role = Optional.of(member.getRole()).orElse(role);
     }
 }

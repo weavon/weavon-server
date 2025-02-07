@@ -16,6 +16,13 @@ public class RestResponse<T> {
         return RestResponse.<T>builder().type(ResponseType.SUCCESS).value(value).build();
     }
 
+    public static RestResponse<ErrorResponse> ofAuthError(String message) {
+        return RestResponse.<ErrorResponse>builder()
+                .type(ResponseType.AUTH_ERROR)
+                .value(ErrorResponse.of(message))
+                .build();
+    }
+
     public static RestResponse<ErrorResponse> ofBusinessError(String message) {
         return RestResponse.<ErrorResponse>builder()
                 .type(ResponseType.BUSINESS_ERROR)

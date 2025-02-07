@@ -23,13 +23,23 @@ class AuthMemberRestAdapter implements AuthMemberAdapter {
     private final MemberService memberService;
 
     @Override
+    public Optional<AuthUser> findAuthUserByUsername(String username) {
+        MemberSearchCommand searchCommand = MemberSearchCommand.ofUsername(username);
+        Members foundMembers = memberService.searchMembers(searchCommand);
+        return foundMembers
+                .getMemberByUsername(username)
+                .map(member -> AuthUser.of(member.getUsername(), member.getPassword(), member.getRoleName()));
+    }
+
+    @Override
     public AuthUser findAuthUserAndSaveOAuthUserIfAbsent(OAuthUser oAuthUser) {
         MemberSearchCommand searchCommand = MemberSearchCommand.ofEmail(oAuthUser.getEmail());
         Members searchedMembers = memberService.searchMembers(searchCommand);
         Optional<Member> optionalSearchedMember = searchedMembers.getMemberByEmail(oAuthUser.getEmail());
         if (optionalSearchedMember.isPresent()) {
             Member searchedMember = optionalSearchedMember.get();
-            return AuthUser.of(searchedMember.getUsername(), searchedMember.getRoleName());
+            return AuthUser.of(
+                    searchedMember.getUsername(), searchedMember.getPassword(), searchedMember.getRoleName());
         }
 
         Member createTargetMember = Member.ofUser(oAuthUser.getEmail(), oAuthUser.getNickname(), oAuthUser.getEmail());
@@ -39,6 +49,6 @@ class AuthMemberRestAdapter implements AuthMemberAdapter {
                 .getCreatedMembers()
                 .getMemberByEmail(oAuthUser.getEmail())
                 .orElseThrow(() -> new BusinessException(MSG_AUTH_FAIL_SIGN_UP));
-        return AuthUser.of(createdMember.getUsername(), createdMember.getRoleName());
+        return AuthUser.of(createdMember.getUsername(), createdMember.getPassword(), createdMember.getRoleName());
     }
 }

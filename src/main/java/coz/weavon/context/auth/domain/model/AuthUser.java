@@ -5,37 +5,59 @@ import coz.weavon.context.auth.domain.service.AuthTokenGenerator;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Map;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 
-@Data
+@Setter
 @Builder
-public class AuthUser implements OAuth2User {
+@NoArgsConstructor
+@AllArgsConstructor
+public class AuthUser implements UserDetails, OAuth2User {
 
     @Property(unique = true, nullable = false, updatable = false)
     private String username;
 
+    @Property
+    private String password;
+
     @Property(nullable = false)
     private String role;
 
-    public static AuthUser of(String username, String role) {
-        return AuthUser.builder().username(username).role(role).build();
+    public static AuthUser of(String username, String password, String role) {
+        return AuthUser.builder()
+                .username(username)
+                .password(password)
+                .role(role)
+                .build();
     }
 
     public AuthToken toAuthToken() {
-        return AuthTokenGenerator.generateAuthToken(this.getUsername(), this.getRole());
+        return AuthTokenGenerator.generateAuthToken(username, password, role);
+    }
+
+    @Override
+    public String getUsername() {
+        return username;
+    }
+
+    @Override
+    public String getPassword() {
+        return password;
     }
 
     @Override
     public String getName() {
-        return this.username;
+        return username;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.singleton(() -> this.role);
+        return Collections.singleton(() -> role);
     }
 
     @Override

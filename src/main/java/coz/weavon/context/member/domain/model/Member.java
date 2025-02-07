@@ -14,6 +14,9 @@ public class Member {
     @Property(unique = true, nullable = false, updatable = false)
     private String username;
 
+    @Property
+    private String password;
+
     @Property(nullable = false)
     private String nickname;
 

@@ -6,6 +6,7 @@ import io.jsonwebtoken.security.Keys;
 import jakarta.annotation.PostConstruct;
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 import javax.crypto.SecretKey;
 import org.springframework.beans.factory.annotation.Value;
@@ -34,8 +35,14 @@ public class AuthTokenGenerator {
         expirationMillis = (long) expirationMinutes * 60 * 1000;
     }
 
-    public static AuthToken generateAuthToken(String username, String role) {
-        return generateAuthToken(Map.of("role", role), username);
+    public static AuthToken generateAuthToken(String username, String password, String role) {
+        Map<String, Object> attributes = new HashMap<>();
+
+        attributes.put("username", username);
+        attributes.put("password", password);
+        attributes.put("role", role);
+
+        return generateAuthToken(attributes, username);
     }
 
     private static AuthToken generateAuthToken(Map<String, Object> claims, String username) {
