@@ -1,5 +1,6 @@
 package coz.weavon.common.presentation.handler;
 
+import coz.weavon.common.application.model.exception.AuthException;
 import coz.weavon.common.application.model.exception.BusinessException;
 import coz.weavon.common.application.model.exception.ClientException;
 import coz.weavon.common.application.model.exception.RestException;
@@ -15,6 +16,12 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class GlobalExceptionHandler {
 
     private final MessageTranslator messageTranslator;
+
+    @ExceptionHandler(AuthException.class)
+    public RestResponse<ErrorResponse> handleAuthException(AuthException exception) {
+        String exceptionMessage = this.handleExceptionMessage(exception);
+        return RestResponse.ofAuthError(exceptionMessage);
+    }
 
     @ExceptionHandler(BusinessException.class)
     public RestResponse<ErrorResponse> handleBusinessException(BusinessException exception) {
