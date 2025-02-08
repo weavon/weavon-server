@@ -21,6 +21,10 @@ public class AuthToken {
         return AuthTokenExtractor.extractAuthUser(this);
     }
 
+    public boolean isValid() {
+        return !isExpired();
+    }
+
     public boolean isExpired() {
         Date expiredDate = AuthTokenExtractor.extractExpiration(this);
         return expiredDate.before(new Date());

@@ -20,8 +20,8 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.oauth2.client.web.OAuth2LoginAuthenticationFilter;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 
 @Configuration
@@ -56,8 +56,8 @@ public class SecurityConfig {
                 .oauth2Login(oauth -> oauth.userInfoEndpoint(config -> config.userService(authUserService))
                         .successHandler(oAuthSuccessHandler)
                         .failureHandler(oAuthFailureHandler))
+                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .addFilter(new UsernameAuthenticationFilter(this.authenticationManager(), messageTranslator))
-                .addFilterAfter(jwtAuthenticationFilter, OAuth2LoginAuthenticationFilter.class)
                 .build();
     }
 

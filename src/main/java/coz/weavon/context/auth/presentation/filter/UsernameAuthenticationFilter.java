@@ -7,13 +7,10 @@ import coz.weavon.common.presentation.model.response.RestResponse;
 import coz.weavon.context.auth.domain.model.AuthToken;
 import coz.weavon.context.auth.domain.model.AuthUser;
 import jakarta.servlet.FilterChain;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -24,15 +21,6 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component
 public class UsernameAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
-
-    @Value("${client.base-url}")
-    private String clientBaseUrl;
-
-    @Value("${auth.cookie.secure}")
-    private boolean cookieSecure;
-
-    @Value("${auth.cookie.max-age}")
-    private int cookieMaxAge;
 
     private static final String MSG_AUTH_USER_LOGGED_IN = "message.authentication.user.loggedIn";
 
@@ -62,15 +50,10 @@ public class UsernameAuthenticationFilter extends UsernamePasswordAuthentication
 
     @Override
     protected void successfulAuthentication(
-            HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult)
-            throws IOException {
+            HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) {
         AuthUser authUser = (AuthUser) authResult.getPrincipal();
         AuthToken authToken = authUser.toAuthToken();
-
-        response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
-        response.addCookie(this.generateAuthCookie(authToken));
-        response.sendRedirect(clientBaseUrl);
+        response.setHeader("Authorization", "Bearer " + authToken.getValue());
 
         log.info(messageTranslator.translate(MSG_AUTH_USER_LOGGED_IN, authUser.getUsername()));
     }
@@ -88,16 +71,5 @@ public class UsernameAuthenticationFilter extends UsernamePasswordAuthentication
         response.getWriter().write(new ObjectMapper().writeValueAsString(errorResponse));
 
         log.error(messageTranslator.translate(MSG_AUTH_FAILED));
-    }
-
-    private Cookie generateAuthCookie(AuthToken authToken) {
-        Cookie cookie = new Cookie("Authorization", authToken.getValue());
-
-        cookie.setPath("/");
-        cookie.setHttpOnly(true);
-        cookie.setSecure(cookieSecure);
-        cookie.setMaxAge(cookieMaxAge);
-
-        return cookie;
     }
 }

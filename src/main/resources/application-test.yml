@@ -60,9 +60,6 @@ auth:
   jwt:
     secret: WEAVON_TEST_AUTH_JSON_WEB_TOKEN_SECRET
     expiration-minutes: 60
-  cookie:
-    secure: false
-    max-age: 3600
 
 client:
   base-url: http://localhost:3000

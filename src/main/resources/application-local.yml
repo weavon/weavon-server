@@ -60,9 +60,6 @@ auth:
   jwt:
     secret: ${AUTH_JWT_SECRET}
     expiration-minutes: 60
-  cookie:
-    secure: false
-    max-age: 3600
 
 client:
   base-url: http://localhost:3000
