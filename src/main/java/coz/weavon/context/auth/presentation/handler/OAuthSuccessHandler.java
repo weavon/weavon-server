@@ -1,0 +1,32 @@
+package coz.weavon.context.auth.presentation.handler;
+
+import coz.weavon.common.application.service.MessageTranslator;
+import coz.weavon.context.auth.domain.model.AuthToken;
+import coz.weavon.context.auth.domain.model.AuthUser;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
+import org.springframework.stereotype.Component;
+
+@Slf4j
+@Component
+@RequiredArgsConstructor
+public class OAuthSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
+
+    private static final String MSG_AUTH_USER_LOGGED_IN = "message.authentication.user.loggedIn";
+
+    private final MessageTranslator messageTranslator;
+
+    @Override
+    public void onAuthenticationSuccess(
+            HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
+        AuthUser authUser = (AuthUser) authentication.getPrincipal();
+        AuthToken authToken = authUser.toAuthToken();
+        response.setHeader("Authorization", "Bearer " + authToken.getValue());
+
+        log.info(messageTranslator.translate(MSG_AUTH_USER_LOGGED_IN, authUser.getUsername()));
+    }
+}

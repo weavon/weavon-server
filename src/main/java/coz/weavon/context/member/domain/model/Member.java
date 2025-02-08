@@ -14,17 +14,28 @@ public class Member {
     @Property(unique = true, nullable = false, updatable = false)
     private String username;
 
-    @Property(unique = true, nullable = false)
+    @Property
+    private String password;
+
+    @Property(nullable = false)
     private String nickname;
 
-    @Property(unique = true, nullable = false)
+    @Property(unique = true)
     private String email;
 
-    public static Member of(String username, String nickname, String email) {
+    @Property(nullable = false)
+    private Role role;
+
+    public static Member ofUser(String username, String nickname, String email) {
         return Member.builder()
                 .username(username)
                 .nickname(nickname)
                 .email(email)
+                .role(Role.USER)
                 .build();
+    }
+
+    public String getRoleName() {
+        return role.name();
     }
 }

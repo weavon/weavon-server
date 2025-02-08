@@ -8,53 +8,49 @@
 
 ```
 └─ context
-   └─ organization
+   ├─ organization
+   ├─ summary
+   └─ status
       ├─ application
       │  ├─ model
       │  │  ├─ command
-      │  │  │  ├─ TeamSearchCommand.java
-      │  │  │  └─ MemberSearchCommand.java
+      │  │  │  ├─ StatusSearchCommand.java
+      │  │  │  └─ StatusOperateCommand.java
       │  │  └─ result
-      │  │     ├─ TeamResult.java
-      │  │     └─ MemberResult.java
+      │  │     ├─ EmployeeStatusResult.java
+      │  │     ├─ DepartmentStatusResult.java
+      │  │     └─ CollaboratorStatusResult.java
       │  ├─ service
-      │  │  ├─ TeamService.java
-      │  │  ├─ TeamRestService.java
-      │  │  ├─ MemberService.java
-      │  │  └─ MemberRestService.java
+      │  │  ├─ StatusService.java
+      │  │  └─ StatusRestService.java implements StatusService
+      │  ├─ adapter
+      │  │  └─ StatusSummaryAdapter.java (external context access interface)
       │  └─ repository
-      │     ├─ TeamRepository.java
-      │     └─ MemberRepository.java  
+      │     └─ StatusRepository.java (database access interface)
       ├─ domain
       │  ├─ model
-      │  │  ├─ Team.java
-      │  │  ├─ Member.java
-      │  │  └─ Members.java
+      │  │  ├─ DailyStatus.java
+      │  │  └─ PeriodStatus.java
       │  └─ service
-      │     ├─ MemberJoinTeamService.java
-      │     ├─ MemberLeaveTeamService.java
-      │     └─ TeamMergeService.java
+      │     ├─ StatusGenerator.java
+      │     └─ StatusCalculator.java
       ├─ infrastructure
       │  ├─ model
-      │  │  ├─ TeamEntity.java
-      │  │  └─ MemberEntity.java
-      │  ├─ persistence
-      │  │  ├─ TeamQueryRepository.java
-      │  │  ├─ TeamJpaRepository.java
-      │  │  ├─ MemberQueryRepository.java
-      │  │  └─ MemberJpaRepository.java
+      │  │  └─ StatusEntity.java
+      │  ├─ adapter
+      │  │  └─ StatusSummaryRestAdapter.java implements StatusSummaryAdapter
       │  └─ repository
-      │     ├─ TeamRestRepository.java
-      │     └─ MemberRestRepository.java
-      └─ presentation
+      │     └─ StatusRestRepository.java implements StatusRepository
+      └─ presentattion
          ├─ model
          │  ├─ request
-         │  │  ├─ TeamRequest.java
-         │  │  └─ MemberRequest.java
+         │  │  ├─ SearchMonthlyStatusRequest.java
+         │  │  └─ SearchDailyStatusRequest.java
          │  └─ response
-         │     ├─ TeamResponse.java
-         │     └─ MemberResponse.java
+         │     ├─ MonthlyStatusResponse.java
+         │     └─ DailyStatusResponse.java 
          └─ controller
-            ├─ TeamController.java
-            └─ MemberController.java
+            ├─ EmployeeStatusController.java
+            ├─ DepartmentStatusController.java
+            └─ CollaboratorStatusController.java
 ```

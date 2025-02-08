@@ -11,6 +11,7 @@ import coz.weavon.context.member.domain.model.Members;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -23,6 +24,7 @@ class MemberRestService implements MemberService {
     private final MemberRepository repository;
 
     @Override
+    @Transactional(readOnly = true)
     public Members searchMembers(MemberSearchCommand command) {
         command.validate();
 
@@ -30,6 +32,7 @@ class MemberRestService implements MemberService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Member searchMember(MemberSearchCommand command) {
         command.validate();
 
@@ -43,6 +46,7 @@ class MemberRestService implements MemberService {
     }
 
     @Override
+    @Transactional
     public MemberOperateResult operateMembers(MemberOperateCommand command) {
         command.validate();
 

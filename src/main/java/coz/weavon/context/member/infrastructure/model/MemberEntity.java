@@ -4,12 +4,14 @@ import coz.weavon.context.member.domain.model.Member;
 import coz.weavon.context.member.domain.model.Members;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import java.util.List;
-import java.util.Objects;
+import java.util.Optional;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -31,18 +33,27 @@ public class MemberEntity {
     @Column(name = "USERNAME", unique = true, nullable = false, updatable = false)
     private String username;
 
+    @Column(name = "PASSWORD")
+    private String password;
+
     @Column(name = "NICKNAME", nullable = false)
     private String nickname;
 
-    @Column(name = "EMAIL", unique = true, nullable = false)
+    @Column(name = "EMAIL", unique = true)
     private String email;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "ROLE", nullable = false)
+    private RoleColumn role;
 
     public static MemberEntity fromDomain(Member member) {
         return MemberEntity.builder()
                 .memberId(member.getMemberId())
                 .username(member.getUsername())
+                .password(member.getPassword())
                 .nickname(member.getNickname())
                 .email(member.getEmail())
+                .role(RoleColumn.USER)
                 .build();
     }
 
@@ -54,13 +65,17 @@ public class MemberEntity {
         return Member.builder()
                 .memberId(memberId)
                 .username(username)
+                .password(password)
                 .nickname(nickname)
                 .email(email)
+                .role(role.toDomain())
                 .build();
     }
 
     public void update(MemberEntity member) {
-        this.nickname = Objects.requireNonNullElse(member.getNickname(), this.nickname);
-        this.email = Objects.requireNonNullElse(member.getEmail(), this.email);
+        password = Optional.ofNullable(member.getPassword()).orElse(password);
+        nickname = Optional.ofNullable(member.getNickname()).orElse(nickname);
+        email = Optional.ofNullable(member.getEmail()).orElse(email);
+        role = Optional.of(member.getRole()).orElse(role);
     }
 }

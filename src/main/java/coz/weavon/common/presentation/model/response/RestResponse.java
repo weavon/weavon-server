@@ -10,10 +10,18 @@ import lombok.Setter;
 public class RestResponse<T> {
 
     private ResponseType type;
+
     private T value;
 
     public static <T> RestResponse<T> of(T value) {
         return RestResponse.<T>builder().type(ResponseType.SUCCESS).value(value).build();
+    }
+
+    public static RestResponse<ErrorResponse> ofAuthError(String message) {
+        return RestResponse.<ErrorResponse>builder()
+                .type(ResponseType.AUTH_ERROR)
+                .value(ErrorResponse.of(message))
+                .build();
     }
 
     public static RestResponse<ErrorResponse> ofBusinessError(String message) {

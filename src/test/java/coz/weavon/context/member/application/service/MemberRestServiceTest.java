@@ -28,6 +28,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
 
 class MemberRestServiceTest {
@@ -73,6 +74,7 @@ class MemberRestServiceTest {
 
     @Nested
     @SpringBootTest
+    @ActiveProfiles("test")
     class MemberRestServiceSpringBootTest {
 
         @Autowired
@@ -105,7 +107,7 @@ class MemberRestServiceTest {
         @Transactional
         public void operateMembers_updateMembers_successTest() {
             // given
-            Members members = Members.of(List.of(Member.of("user1", "nickname1", "user1@email.com")));
+            Members members = Members.of(List.of(Member.ofUser("user1", "nickname1", "user1@email.com")));
             MemberOperateCommand createOperateCommand = MemberOperateCommand.ofCreateTargets(members);
             MemberOperateResult createOperateResult = memberService.operateMembers(createOperateCommand);
             Optional<Member> foundCreatedUser1 =
@@ -130,7 +132,7 @@ class MemberRestServiceTest {
         @Test
         public void operateMembers_deleteMembers_successTest() {
             // given
-            Members members = Members.of(List.of(Member.of("user1", "nickname1", "user1@email.com")));
+            Members members = Members.of(List.of(Member.ofUser("user1", "nickname1", "user1@email.com")));
             MemberOperateCommand createOperateCommand = MemberOperateCommand.ofCreateTargets(members);
             MemberOperateResult createOperateResult = memberService.operateMembers(createOperateCommand);
 

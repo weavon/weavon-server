@@ -23,14 +23,14 @@ public class MemberSearchCondition extends RestCondition {
 
     private String nickname;
 
-    private String email;
+    private List<String> emails;
 
     public static MemberSearchCondition fromCommand(MemberSearchCommand command) {
         return MemberSearchCondition.builder()
                 .memberIds(command.getMemberIds())
                 .usernames(command.getUsernames())
                 .nickname(command.getNickname())
-                .email(command.getEmail())
+                .emails(command.getEmails())
                 .build();
     }
 
@@ -39,7 +39,7 @@ public class MemberSearchCondition extends RestCondition {
         if (super.isInvalidInCondition(memberIds)
                 && super.isInvalidInCondition(usernames)
                 && super.isInvalidLikeCondition(nickname)
-                && super.isInvalidEqualCondition(email)) {
+                && super.isInvalidInCondition(emails)) {
             throw new BusinessException(MSG_VLD_INVLD_SEARCH_CONDITION);
         }
     }
@@ -68,11 +68,11 @@ public class MemberSearchCondition extends RestCondition {
         return member.nickname.like("%" + nickname + "%");
     }
 
-    public BooleanExpression equalEmail() {
-        if (super.isInvalidEqualCondition(email)) {
+    public BooleanExpression inEmails() {
+        if (super.isInvalidInCondition(emails)) {
             return null;
         }
 
-        return member.email.like(email);
+        return member.email.in(emails);
     }
 }

@@ -18,11 +18,7 @@ public class MemberQueryRepository {
 
     public List<MemberEntity> findAllByCondition(MemberSearchCondition condition) {
         return query.selectFrom(member)
-                .where(
-                        condition.inMemberIds(),
-                        condition.inUsernames(),
-                        condition.likeNickname(),
-                        condition.equalEmail())
+                .where(condition.inMemberIds(), condition.inUsernames(), condition.likeNickname(), condition.inEmails())
                 .fetch();
     }
 }
