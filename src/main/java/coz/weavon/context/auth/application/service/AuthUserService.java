@@ -1,7 +1,7 @@
 package coz.weavon.context.auth.application.service;
 
 import coz.weavon.common.application.service.MessageTranslator;
-import coz.weavon.context.auth.application.adapter.AuthMemberAdapter;
+import coz.weavon.context.auth.application.adapter.AuthUserAdapter;
 import coz.weavon.context.auth.domain.model.AuthUser;
 import coz.weavon.context.auth.domain.model.OAuthUser;
 import java.util.Optional;
@@ -24,12 +24,12 @@ public class AuthUserService extends DefaultOAuth2UserService implements UserDet
 
     private final MessageTranslator messageTranslator;
 
-    private final AuthMemberAdapter memberAdapter;
+    private final AuthUserAdapter userAdapter;
 
     @Override
     @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<AuthUser> optionalAuthUser = memberAdapter.findAuthUserByUsername(username);
+        Optional<AuthUser> optionalAuthUser = userAdapter.findAuthUserByUsername(username);
         if (optionalAuthUser.isPresent()) {
             return optionalAuthUser.get();
         }
@@ -44,6 +44,6 @@ public class AuthUserService extends DefaultOAuth2UserService implements UserDet
         OAuth2User oAuth2User = super.loadUser(request);
         OAuthUser oAuthUser = OAuthUser.ofAttributes(registrationId, oAuth2User.getAttributes());
 
-        return memberAdapter.findAuthUserAndSaveOAuthUserIfAbsent(oAuthUser);
+        return userAdapter.findAuthUserAndSaveOAuthUserIfAbsent(oAuthUser);
     }
 }
