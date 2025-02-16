@@ -27,23 +27,23 @@ public class UserEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "USER_ID", unique = true, nullable = false, updatable = false)
+    @Column(name = "user_id", unique = true, nullable = false, updatable = false)
     private Long userId;
 
-    @Column(name = "USERNAME", unique = true, nullable = false, updatable = false)
+    @Column(name = "username", unique = true, nullable = false, updatable = false)
     private String username;
 
-    @Column(name = "PASSWORD")
+    @Column(name = "password")
     private String password;
 
-    @Column(name = "NICKNAME", nullable = false)
+    @Column(name = "nickname", nullable = false)
     private String nickname;
 
-    @Column(name = "EMAIL", unique = true)
+    @Column(name = "email", unique = true)
     private String email;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "ROLE", nullable = false)
+    @Column(name = "role", nullable = false)
     private RoleColumn role;
 
     public static UserEntity fromDomain(User user) {

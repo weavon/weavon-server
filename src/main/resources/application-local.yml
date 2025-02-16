@@ -21,6 +21,9 @@ spring:
       port: 6379
       database: 0
 
+  flyway:
+    locations: classpath:flyway/migration
+
   security:
     oauth2:
       client:

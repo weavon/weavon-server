@@ -44,12 +44,16 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        UsernameAuthenticationFilter usernameAuthenticationFilter =
+                new UsernameAuthenticationFilter(this.authenticationManager(), messageTranslator);
+        usernameAuthenticationFilter.setFilterProcessesUrl("/auth/login");
+
         return http.httpBasic(AbstractHttpConfigurer::disable)
                 .formLogin(AbstractHttpConfigurer::disable)
                 .csrf(AbstractHttpConfigurer::disable)
                 .cors(customizer -> customizer.configurationSource(request -> corConfiguration()))
                 .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authorizeHttpRequests(request -> request.requestMatchers("/login", "/oauth2/**")
+                .authorizeHttpRequests(request -> request.requestMatchers("/auth/login", "/oauth2/**", "/join")
                         .permitAll()
                         .anyRequest()
                         .authenticated())
@@ -57,7 +61,7 @@ public class SecurityConfig {
                         .successHandler(oAuthSuccessHandler)
                         .failureHandler(oAuthFailureHandler))
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
-                .addFilter(new UsernameAuthenticationFilter(this.authenticationManager(), messageTranslator))
+                .addFilter(usernameAuthenticationFilter)
                 .build();
     }
 
