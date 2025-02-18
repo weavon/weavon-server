@@ -22,11 +22,15 @@ public class AuthToken {
     }
 
     public boolean isValid() {
-        return !isExpired();
+        return isNotExpired();
     }
 
     public boolean isExpired() {
         Date expiredDate = AuthTokenExtractor.extractExpiration(this);
         return expiredDate.before(new Date());
+    }
+
+    public boolean isNotExpired() {
+        return !isExpired();
     }
 }
