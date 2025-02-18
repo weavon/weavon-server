@@ -57,9 +57,9 @@ public class SecurityConfig {
                         .permitAll()
                         .anyRequest()
                         .authenticated())
-                .oauth2Login(oauth -> oauth.userInfoEndpoint(config -> config.userService(authUserService))
-                        .successHandler(oAuthSuccessHandler)
-                        .failureHandler(oAuthFailureHandler))
+                // .oauth2Login(oauth -> oauth.userInfoEndpoint(config -> config.userService(authUserService))
+                //         .successHandler(oAuthSuccessHandler)
+                //         .failureHandler(oAuthFailureHandler))
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .addFilter(usernameAuthenticationFilter)
                 .build();
