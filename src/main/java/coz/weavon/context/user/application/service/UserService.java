@@ -5,7 +5,6 @@ import coz.weavon.context.user.application.model.command.UserSearchCommand;
 import coz.weavon.context.user.application.model.result.UserOperateResult;
 import coz.weavon.context.user.domain.model.User;
 import coz.weavon.context.user.domain.model.Users;
-
 import java.util.Optional;
 
 public interface UserService {
