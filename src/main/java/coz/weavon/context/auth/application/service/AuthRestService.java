@@ -2,11 +2,10 @@ package coz.weavon.context.auth.application.service;
 
 import coz.weavon.context.auth.application.adapter.AuthUserAdapter;
 import coz.weavon.context.auth.domain.model.AuthUser;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
