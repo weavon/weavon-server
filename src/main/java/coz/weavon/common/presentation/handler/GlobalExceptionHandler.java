@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -18,6 +19,8 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 @RequiredArgsConstructor
 public class GlobalExceptionHandler {
+
+    private static final String MSG_VLD_BAD_CLIENT_REQUEST = "message.validation.badUserRequest";
 
     private final MessageTranslator messageTranslator;
 
@@ -32,7 +35,8 @@ public class GlobalExceptionHandler {
     public ResponseEntity<RestResponse<ErrorResponse>> handleBusinessException(BusinessException exception) {
         String exceptionMessage = this.handleExceptionMessage(exception);
         log.error("Business error occurred : {}", exceptionMessage);
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(RestResponse.ofBusinessError(exceptionMessage));
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body(RestResponse.ofBusinessError(exceptionMessage));
     }
 
     @ExceptionHandler(ClientException.class)
@@ -42,9 +46,17 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(RestResponse.ofClientError(exceptionMessage));
     }
 
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<RestResponse<ErrorResponse>> handleMethodArgumentNotValidException(
+            MethodArgumentNotValidException exception) {
+        log.error("Validation error occurred : {}", exception.getMessage());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(RestResponse.ofClientError(messageTranslator.translate(MSG_VLD_BAD_CLIENT_REQUEST)));
+    }
+
     @ExceptionHandler(Exception.class)
     public ResponseEntity<RestResponse<ErrorResponse>> handleException(Exception exception) {
-        log.error("Unexpected server error occurred : {}", exception.getMessage());
+        log.error("Unexpected server error occurred : {}", exception.toString());
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body(RestResponse.ofServerError(exception.getMessage()));
     }
