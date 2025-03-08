@@ -46,6 +46,16 @@ class UserRestService implements UserService {
     }
 
     @Override
+    @Transactional(readOnly = true)
+    public Optional<User> searchOptionalUser(UserSearchCommand command) {
+        command.validate();
+
+        Users foundUsers = repository.findUsers(UserSearchCondition.fromCommand(command));
+
+        return foundUsers.getSingleUser();
+    }
+
+    @Override
     @Transactional
     public UserOperateResult operateUsers(UserOperateCommand command) {
         command.validate();

@@ -4,8 +4,6 @@ import coz.weavon.common.application.service.MessageTranslator;
 import coz.weavon.context.auth.application.service.AuthUserService;
 import coz.weavon.context.auth.presentation.filter.JwtAuthenticationFilter;
 import coz.weavon.context.auth.presentation.filter.UsernameAuthenticationFilter;
-import coz.weavon.context.auth.presentation.handler.OAuthFailureHandler;
-import coz.weavon.context.auth.presentation.handler.OAuthSuccessHandler;
 import java.util.Collections;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -34,10 +32,6 @@ public class SecurityConfig {
 
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
-    private final OAuthSuccessHandler oAuthSuccessHandler;
-
-    private final OAuthFailureHandler oAuthFailureHandler;
-
     private final AuthUserService authUserService;
 
     private final MessageTranslator messageTranslator;
@@ -45,7 +39,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         UsernameAuthenticationFilter usernameAuthenticationFilter =
-                new UsernameAuthenticationFilter(this.authenticationManager(), messageTranslator);
+                new UsernameAuthenticationFilter(authenticationManager(), messageTranslator);
         usernameAuthenticationFilter.setFilterProcessesUrl("/auth/login");
 
         return http.httpBasic(AbstractHttpConfigurer::disable)
@@ -53,13 +47,10 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .cors(customizer -> customizer.configurationSource(request -> corConfiguration()))
                 .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authorizeHttpRequests(request -> request.requestMatchers("/auth/login", "/oauth2/**", "/join")
+                .authorizeHttpRequests(request -> request.requestMatchers("/auth/login", "/auth/join")
                         .permitAll()
                         .anyRequest()
                         .authenticated())
-                .oauth2Login(oauth -> oauth.userInfoEndpoint(config -> config.userService(authUserService))
-                        .successHandler(oAuthSuccessHandler)
-                        .failureHandler(oAuthFailureHandler))
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .addFilter(usernameAuthenticationFilter)
                 .build();
