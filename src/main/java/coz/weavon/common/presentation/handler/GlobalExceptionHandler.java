@@ -9,6 +9,8 @@ import coz.weavon.common.presentation.model.response.ErrorResponse;
 import coz.weavon.common.presentation.model.response.RestResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -27,23 +29,24 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(BusinessException.class)
-    public RestResponse<ErrorResponse> handleBusinessException(BusinessException exception) {
+    public ResponseEntity<RestResponse<ErrorResponse>> handleBusinessException(BusinessException exception) {
         String exceptionMessage = this.handleExceptionMessage(exception);
         log.error("Business error occurred : {}", exceptionMessage);
-        return RestResponse.ofBusinessError(exceptionMessage);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(RestResponse.ofBusinessError(exceptionMessage));
     }
 
     @ExceptionHandler(ClientException.class)
-    public RestResponse<ErrorResponse> handleClientException(ClientException exception) {
+    public ResponseEntity<RestResponse<ErrorResponse>> handleClientException(ClientException exception) {
         String exceptionMessage = this.handleExceptionMessage(exception);
         log.error("Client error occurred : {}", exceptionMessage);
-        return RestResponse.ofClientError(exceptionMessage);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(RestResponse.ofClientError(exceptionMessage));
     }
 
     @ExceptionHandler(Exception.class)
-    public RestResponse<ErrorResponse> handleException(Exception exception) {
+    public ResponseEntity<RestResponse<ErrorResponse>> handleException(Exception exception) {
         log.error("Unexpected server error occurred : {}", exception.getMessage());
-        return RestResponse.ofServerError(exception.getMessage());
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body(RestResponse.ofServerError(exception.getMessage()));
     }
 
     private String handleExceptionMessage(RestException exception) {
