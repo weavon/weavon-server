@@ -9,6 +9,7 @@ import coz.weavon.context.user.application.model.command.UserOperateCommand;
 import coz.weavon.context.user.application.model.command.UserSearchCommand;
 import coz.weavon.context.user.application.model.result.UserOperateResult;
 import coz.weavon.context.user.application.service.UserService;
+import coz.weavon.context.user.domain.model.Role;
 import coz.weavon.context.user.domain.model.User;
 import coz.weavon.context.user.domain.model.Users;
 import java.util.Optional;
@@ -49,5 +50,18 @@ class AuthUserRestAdapter implements AuthUserAdapter {
                 .getUserByEmail(oAuthUser.getEmail())
                 .orElseThrow(() -> new BusinessException(MSG_AUTH_FAIL_SIGN_UP));
         return AuthUser.of(createdUser.getUsername(), createdUser.getPassword(), createdUser.getRoleName());
+    }
+
+    @Override
+    public void saveAuthUser(AuthUser authUser) {
+        User user = User.builder()
+                .username(authUser.getUsername())
+                .password(authUser.getPassword())
+                .role(Role.USER)
+                .nickname(authUser.getUsername())
+                .build();
+
+        UserOperateCommand operateCommand = UserOperateCommand.ofCreateTargets(Users.of(user));
+        userService.operateUsers(operateCommand);
     }
 }

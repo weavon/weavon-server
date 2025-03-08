@@ -9,4 +9,6 @@ public interface AuthUserAdapter {
     Optional<AuthUser> findAuthUserByUsername(String username);
 
     AuthUser findAuthUserAndSaveOAuthUserIfAbsent(OAuthUser oAuthUser);
+
+    void saveAuthUser(AuthUser authUser);
 }
