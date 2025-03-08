@@ -23,7 +23,7 @@ class AuthRestService implements AuthService {
     public void saveAuthUser(String username, String password) {
         Optional<AuthUser> optionalAuthUser = userAdapter.findAuthUserByUsername(username);
         if (optionalAuthUser.isPresent()) {
-            throw new BusinessException(MSG_AUTH_USERNAME_EXISTS);
+            throw new BusinessException(MSG_AUTH_USERNAME_EXISTS, username);
         }
 
         AuthUser authUser = AuthUser.builder()
