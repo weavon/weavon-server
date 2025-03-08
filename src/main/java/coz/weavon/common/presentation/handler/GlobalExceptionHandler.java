@@ -54,13 +54,6 @@ public class GlobalExceptionHandler {
                 .body(RestResponse.ofClientError(messageTranslator.translate(MSG_VLD_BAD_CLIENT_REQUEST)));
     }
 
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity<RestResponse<ErrorResponse>> handleException(Exception exception) {
-        log.error("Unexpected server error occurred : {}", exception.toString());
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .body(RestResponse.ofServerError(exception.getMessage()));
-    }
-
     private String handleExceptionMessage(RestException exception) {
         String errorMessage = exception.getMessage();
 
