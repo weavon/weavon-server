@@ -1,8 +1,7 @@
 package coz.weavon.context.auth.presentation.model;
 
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,13 +9,11 @@ import lombok.Setter;
 @Setter
 public class AuthJoinRequest {
 
-    @Min(5)
-    @Max(20)
     @NotBlank
+    @Size(min = 5, max = 20)
     private String username;
 
-    @Min(5)
-    @Max(20)
     @NotBlank
+    @Size(min = 5, max = 20)
     private String password;
 }
