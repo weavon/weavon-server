@@ -1,7 +1,7 @@
 package coz.weavon.common.application.util;
 
 import coz.weavon.common.application.model.exception.AuthException;
-import coz.weavon.context.auth.domain.model.AuthUser;
+import coz.weavon.core.auth.domain.model.AuthUser;
 import java.util.Objects;
 import lombok.experimental.UtilityClass;
 import org.springframework.security.core.Authentication;
