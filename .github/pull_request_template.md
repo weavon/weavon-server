@@ -1,14 +1,10 @@
 # Pull Request
 
-### Issue Ticket
+### Content
 
 ### Changes
 
-# Merge Criteria
-
-### To Do
-- [ ] Check Acceptance Criteria
-- [ ] Apply Spotless
-- [ ] Testing
-
-### Test Case
+### Merge Criteria
+- [ ] Code Review
+- [ ] Acceptance Criteria
+- [ ] Local Testing
