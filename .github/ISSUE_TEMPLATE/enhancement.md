@@ -15,8 +15,6 @@ assignees: codesver
 #### I want TASK
 #### So that ACHIEVEMENT
 
-### Content
-
 # Acceptance Criteria
 
 # Out of Scope
