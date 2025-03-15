@@ -1,4 +1,4 @@
-package coz.weavon.common.application.util;
+package coz.weavon.utils;
 
 import coz.weavon.exception.model.AuthException;
 import coz.weavon.core.auth.domain.model.AuthUser;
