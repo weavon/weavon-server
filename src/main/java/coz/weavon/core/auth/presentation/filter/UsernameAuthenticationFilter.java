@@ -1,7 +1,7 @@
 package coz.weavon.core.auth.presentation.filter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import coz.weavon.common.application.service.MessageTranslator;
+import coz.weavon.helper.MessageTranslator;
 import coz.weavon.common.presentation.model.response.ErrorResponse;
 import coz.weavon.common.presentation.model.response.RestResponse;
 import coz.weavon.core.auth.domain.model.AuthToken;

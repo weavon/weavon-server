@@ -1,6 +1,6 @@
 package coz.weavon.core.auth.presentation.handler;
 
-import coz.weavon.common.application.service.MessageTranslator;
+import coz.weavon.helper.MessageTranslator;
 import coz.weavon.core.auth.domain.model.AuthToken;
 import coz.weavon.core.auth.domain.model.AuthUser;
 import jakarta.servlet.http.HttpServletRequest;
