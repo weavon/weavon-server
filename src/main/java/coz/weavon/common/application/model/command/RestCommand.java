@@ -1,6 +1,6 @@
 package coz.weavon.common.application.model.command;
 
-import coz.weavon.common.application.model.exception.BusinessException;
+import coz.weavon.exception.model.BusinessException;
 import coz.weavon.common.application.util.DateTimeUtils;
 import java.time.LocalDate;
 import java.util.HashMap;

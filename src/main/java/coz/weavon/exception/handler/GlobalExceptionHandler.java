@@ -1,9 +1,9 @@
-package coz.weavon.common.presentation.handler;
+package coz.weavon.exception.handler;
 
-import coz.weavon.common.application.model.exception.AuthException;
-import coz.weavon.common.application.model.exception.BusinessException;
-import coz.weavon.common.application.model.exception.ClientException;
-import coz.weavon.common.application.model.exception.RestException;
+import coz.weavon.exception.model.AuthException;
+import coz.weavon.exception.model.BusinessException;
+import coz.weavon.exception.model.ClientException;
+import coz.weavon.exception.model.RestException;
 import coz.weavon.common.application.service.MessageTranslator;
 import coz.weavon.common.presentation.model.response.ErrorResponse;
 import coz.weavon.common.presentation.model.response.RestResponse;

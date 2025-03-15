@@ -1,6 +1,6 @@
 package coz.weavon.core.user.application.service;
 
-import coz.weavon.common.application.model.exception.BusinessException;
+import coz.weavon.exception.model.BusinessException;
 import coz.weavon.core.user.application.model.command.UserOperateCommand;
 import coz.weavon.core.user.application.model.command.UserSearchCommand;
 import coz.weavon.core.user.application.model.condition.UserSearchCondition;

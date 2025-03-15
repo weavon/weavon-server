@@ -1,6 +1,6 @@
 package coz.weavon.common.presentation.validator;
 
-import coz.weavon.common.application.model.exception.ClientException;
+import coz.weavon.exception.model.ClientException;
 import coz.weavon.common.application.util.DateTimeUtils;
 import coz.weavon.common.presentation.model.validation.ValidRange;
 import jakarta.validation.ConstraintValidator;

@@ -1,6 +1,6 @@
 package coz.weavon.core.auth.application.service;
 
-import coz.weavon.common.application.model.exception.BusinessException;
+import coz.weavon.exception.model.BusinessException;
 import coz.weavon.core.auth.application.adapter.AuthUserAdapter;
 import coz.weavon.core.auth.domain.model.AuthUser;
 import java.util.Optional;

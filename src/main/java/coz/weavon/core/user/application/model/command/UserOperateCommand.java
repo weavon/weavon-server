@@ -1,7 +1,7 @@
 package coz.weavon.core.user.application.model.command;
 
 import coz.weavon.common.application.model.command.RestCommand;
-import coz.weavon.common.application.model.exception.BusinessException;
+import coz.weavon.exception.model.BusinessException;
 import coz.weavon.core.user.domain.model.Users;
 import java.util.List;
 import java.util.Objects;
