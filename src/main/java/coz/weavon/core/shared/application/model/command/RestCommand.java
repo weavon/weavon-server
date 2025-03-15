@@ -1,4 +1,4 @@
-package coz.weavon.common.application.model.command;
+package coz.weavon.core.shared.application.model.command;
 
 import coz.weavon.exception.model.BusinessException;
 import coz.weavon.utils.DateTimeUtils;
