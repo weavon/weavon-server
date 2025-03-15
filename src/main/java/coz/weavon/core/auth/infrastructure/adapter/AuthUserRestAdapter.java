@@ -1,10 +1,9 @@
 package coz.weavon.core.auth.infrastructure.adapter;
 
-import coz.weavon.exception.model.BusinessException;
-import coz.weavon.core.shared.model.Adapter;
 import coz.weavon.core.auth.application.adapter.AuthUserAdapter;
 import coz.weavon.core.auth.domain.model.AuthUser;
 import coz.weavon.core.auth.domain.model.OAuthUser;
+import coz.weavon.core.shared.model.Adapter;
 import coz.weavon.core.user.application.model.command.UserOperateCommand;
 import coz.weavon.core.user.application.model.command.UserSearchCommand;
 import coz.weavon.core.user.application.model.result.UserOperateResult;
@@ -12,6 +11,7 @@ import coz.weavon.core.user.application.service.UserService;
 import coz.weavon.core.user.domain.model.Role;
 import coz.weavon.core.user.domain.model.User;
 import coz.weavon.core.user.domain.model.Users;
+import coz.weavon.exception.model.BusinessException;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 

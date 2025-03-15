@@ -1,7 +1,7 @@
 package coz.weavon.validation.validator;
 
-import coz.weavon.exception.model.ClientException;
 import coz.weavon.core.shared.presentation.model.reqeuest.PageRequest;
+import coz.weavon.exception.model.ClientException;
 import coz.weavon.validation.model.ValidPagination;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;

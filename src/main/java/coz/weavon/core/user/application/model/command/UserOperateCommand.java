@@ -1,8 +1,8 @@
 package coz.weavon.core.user.application.model.command;
 
 import coz.weavon.core.shared.application.model.command.RestCommand;
-import coz.weavon.exception.model.BusinessException;
 import coz.weavon.core.user.domain.model.Users;
+import coz.weavon.exception.model.BusinessException;
 import java.util.List;
 import java.util.Objects;
 import lombok.Builder;

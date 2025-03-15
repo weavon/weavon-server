@@ -1,12 +1,12 @@
 package coz.weavon.exception.handler;
 
+import coz.weavon.core.shared.presentation.model.response.ErrorResponse;
+import coz.weavon.core.shared.presentation.model.response.RestResponse;
 import coz.weavon.exception.model.AuthException;
 import coz.weavon.exception.model.BusinessException;
 import coz.weavon.exception.model.ClientException;
 import coz.weavon.exception.model.RestException;
 import coz.weavon.helper.MessageTranslator;
-import coz.weavon.core.shared.presentation.model.response.ErrorResponse;
-import coz.weavon.core.shared.presentation.model.response.RestResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
