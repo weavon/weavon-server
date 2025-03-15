@@ -1,7 +1,7 @@
 package coz.weavon.validation.validator;
 
 import coz.weavon.exception.model.ClientException;
-import coz.weavon.utils.DateTimeUtils;
+import coz.weavon.util.DateTimeUtils;
 import coz.weavon.validation.model.ValidRange;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
