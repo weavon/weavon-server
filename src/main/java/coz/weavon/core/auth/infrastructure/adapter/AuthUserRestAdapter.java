@@ -1,7 +1,7 @@
 package coz.weavon.core.auth.infrastructure.adapter;
 
 import coz.weavon.exception.model.BusinessException;
-import coz.weavon.common.infrastructure.model.Adapter;
+import coz.weavon.core.shared.model.Adapter;
 import coz.weavon.core.auth.application.adapter.AuthUserAdapter;
 import coz.weavon.core.auth.domain.model.AuthUser;
 import coz.weavon.core.auth.domain.model.OAuthUser;

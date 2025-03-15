@@ -1,4 +1,4 @@
-package coz.weavon.common.infrastructure.model;
+package coz.weavon.core.shared.model;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;

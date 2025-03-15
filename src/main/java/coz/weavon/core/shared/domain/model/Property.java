@@ -1,4 +1,4 @@
-package coz.weavon.common.domain.model;
+package coz.weavon.core.shared.domain.model;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

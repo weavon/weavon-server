@@ -1,6 +1,6 @@
 package coz.weavon.core.auth.domain.model;
 
-import coz.weavon.common.domain.model.Property;
+import coz.weavon.core.shared.domain.model.Property;
 import coz.weavon.core.auth.domain.service.AuthTokenExtractor;
 import java.util.Date;
 import lombok.Builder;
