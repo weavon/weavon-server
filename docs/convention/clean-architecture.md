@@ -1,56 +1,62 @@
 # Clean Architecture
 
-### Architecture Diagram
-
-![clean-architecture.png](../images/clean-architecture.png)
-
-### Context Architecture
+### Package Structure of Clean Architecture
 
 ```
-└─ context
-   ├─ organization
-   ├─ summary
+├─ config
+├─ exception
+├─ helper
+├─ util
+├─ validation
+└─ core
+   ├─ shared
+   ├─ user
    └─ status
       ├─ application
       │  ├─ model
-      │  │  ├─ command
-      │  │  │  ├─ StatusSearchCommand.java
-      │  │  │  └─ StatusOperateCommand.java
-      │  │  └─ result
+      │  │  ├─ command : method parameter object of service
+      │  │  │  ├─ SearchStatusCommand.java
+      │  │  │  └─ OperateStatusCommand.java
+      │  │  └─ result : return object of service
       │  │     ├─ EmployeeStatusResult.java
       │  │     ├─ DepartmentStatusResult.java
       │  │     └─ CollaboratorStatusResult.java
-      │  ├─ service
-      │  │  ├─ StatusService.java
+      │  ├─ service : business logic services of application
+      │  │  ├─ StatusService.java : service interface
       │  │  └─ StatusRestService.java implements StatusService
-      │  ├─ adapter
-      │  │  └─ StatusSummaryAdapter.java (external context access interface)
-      │  └─ repository
-      │     └─ StatusRepository.java (database access interface)
+      │  ├─ repository : database access interface
+      │  │  └─ StatusRepository.java : interface of repository
+      │  └─ adapter : extenal context access interface
+      │     └─ StatusEmployeeAdapter.java : interface for adapter
       ├─ domain
-      │  ├─ model
+      │  ├─ model : core domain models
       │  │  ├─ DailyStatus.java
-      │  │  └─ PeriodStatus.java
-      │  └─ service
+      │  │  └─ MonthlyStatus.java
+      │  └─ logic : business logic utilities of domain
       │     ├─ StatusGenerator.java
       │     └─ StatusCalculator.java
       ├─ infrastructure
       │  ├─ model
       │  │  └─ StatusEntity.java
-      │  ├─ adapter
-      │  │  └─ StatusSummaryRestAdapter.java implements StatusSummaryAdapter
-      │  └─ repository
-      │     └─ StatusRestRepository.java implements StatusRepository
-      └─ presentattion
+      │  ├─ repository
+      │  │  └─ StatusRestRepository.java implements StatusRepository
+      │  ├─ client
+      │  └─ adapter 
+      │     └─ StatusEmployeeRestAdapter.java implements StatusEmployeeAdapter
+      └─ presentation
          ├─ model
          │  ├─ request
          │  │  ├─ SearchMonthlyStatusRequest.java
          │  │  └─ SearchDailyStatusRequest.java
          │  └─ response
          │     ├─ MonthlyStatusResponse.java
-         │     └─ DailyStatusResponse.java 
+         │     └─ DailyStatusResponse.java
          └─ controller
             ├─ EmployeeStatusController.java
             ├─ DepartmentStatusController.java
             └─ CollaboratorStatusController.java
 ```
+
+### Diagram of Clean Architecture
+
+![architecture.png](../images/architecture.png)
