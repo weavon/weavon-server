@@ -14,35 +14,38 @@
    └─ status
       ├─ application
       │  ├─ model
-      │  │  ├─ command : method parameter object of service
-      │  │  │  ├─ SearchStatusCommand.java
-      │  │  │  └─ OperateStatusCommand.java
-      │  │  └─ result : return object of service
+      │  │  ├─ command
+      │  │  │  ├─ StatusSearchCommand.java
+      │  │  │  └─ StatusOperateCommand.java
+      │  │  └─ result
       │  │     ├─ EmployeeStatusResult.java
       │  │     ├─ DepartmentStatusResult.java
       │  │     └─ CollaboratorStatusResult.java
-      │  ├─ service : business logic services of application
-      │  │  ├─ StatusService.java : service interface
-      │  │  └─ StatusRestService.java implements StatusService
-      │  ├─ repository : database access interface
-      │  │  └─ StatusRepository.java : interface of repository
-      │  └─ adapter : extenal context access interface
-      │     └─ StatusEmployeeAdapter.java : interface for adapter
+      │  ├─ service
+      │  │  ├─ StatusService.java
+      │  │  └─ StatusRestService.java
+      │  ├─ repository
+      │  │  └─ StatusRepository.java
+      │  ├─ adapter
+      │  │  └─ StatusEmployeeAdapter.java
+      │  └─ client
+      │     └─ EmployeeClient.java 
       ├─ domain
-      │  ├─ model : core domain models
+      │  ├─ model
       │  │  ├─ DailyStatus.java
       │  │  └─ MonthlyStatus.java
-      │  └─ logic : business logic utilities of domain
+      │  └─ service
       │     ├─ StatusGenerator.java
       │     └─ StatusCalculator.java
       ├─ infrastructure
       │  ├─ model
       │  │  └─ StatusEntity.java
       │  ├─ repository
-      │  │  └─ StatusRestRepository.java implements StatusRepository
-      │  ├─ client
-      │  └─ adapter 
-      │     └─ StatusEmployeeRestAdapter.java implements StatusEmployeeAdapter
+      │  │  └─ StatusRestRepository.java
+      │  ├─ adapter
+      │  │  └─ StatusEmployeeAdapter.java
+      │  └─ client
+      │     └─ EmployeeClient.java
       └─ presentation
          ├─ model
          │  ├─ request
@@ -56,6 +59,8 @@
             ├─ DepartmentStatusController.java
             └─ CollaboratorStatusController.java
 ```
+
+
 
 ### Diagram of Clean Architecture
 
