@@ -1,4 +1,4 @@
-package coz.weavon.core.auth.presentation.handler;
+package coz.weavon.security.handler;
 
 import coz.weavon.core.auth.domain.model.AuthToken;
 import coz.weavon.core.auth.domain.model.AuthUser;

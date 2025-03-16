@@ -1,4 +1,4 @@
-package coz.weavon.core.auth.presentation.filter;
+package coz.weavon.security.filter;
 
 import coz.weavon.core.auth.domain.model.AuthToken;
 import coz.weavon.core.auth.domain.model.AuthUser;

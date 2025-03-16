@@ -1,4 +1,4 @@
-package coz.weavon.core.auth.presentation.handler;
+package coz.weavon.security.handler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import coz.weavon.core.shared.presentation.model.response.ErrorResponse;
