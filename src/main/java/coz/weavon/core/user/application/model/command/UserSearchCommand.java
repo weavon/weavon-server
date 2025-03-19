@@ -1,6 +1,6 @@
 package coz.weavon.core.user.application.model.command;
 
-import coz.weavon.common.application.model.command.RestCommand;
+import coz.weavon.core.shared.application.model.command.RestCommand;
 import java.util.List;
 import lombok.Builder;
 import lombok.Getter;

@@ -1,11 +1,11 @@
 package coz.weavon.core.auth.presentation.controller;
 
-import coz.weavon.common.application.service.MessageTranslator;
-import coz.weavon.common.presentation.model.response.RestResponse;
 import coz.weavon.core.auth.application.service.AuthService;
 import coz.weavon.core.auth.domain.model.AuthUser;
 import coz.weavon.core.auth.presentation.model.AuthJoinRequest;
 import coz.weavon.core.auth.presentation.model.AuthValidResponse;
+import coz.weavon.core.shared.presentation.model.response.RestResponse;
+import coz.weavon.helper.MessageTranslator;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;

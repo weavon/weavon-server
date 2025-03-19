@@ -1,9 +1,9 @@
 package coz.weavon.core.auth.application.service;
 
-import coz.weavon.common.application.service.MessageTranslator;
 import coz.weavon.core.auth.application.adapter.AuthUserAdapter;
 import coz.weavon.core.auth.domain.model.AuthUser;
 import coz.weavon.core.auth.domain.model.OAuthUser;
+import coz.weavon.helper.MessageTranslator;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;

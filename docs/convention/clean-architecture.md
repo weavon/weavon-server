@@ -1,15 +1,16 @@
 # Clean Architecture
 
-### Architecture Diagram
-
-![clean-architecture.png](../images/clean-architecture.png)
-
-### Context Architecture
+### Package Structure of Clean Architecture
 
 ```
-└─ context
-   ├─ organization
-   ├─ summary
+├─ config
+├─ exception
+├─ helper
+├─ util
+├─ validation
+└─ core
+   ├─ shared
+   ├─ user
    └─ status
       ├─ application
       │  ├─ model
@@ -22,35 +23,45 @@
       │  │     └─ CollaboratorStatusResult.java
       │  ├─ service
       │  │  ├─ StatusService.java
-      │  │  └─ StatusRestService.java implements StatusService
+      │  │  └─ StatusRestService.java
+      │  ├─ repository
+      │  │  └─ StatusRepository.java
       │  ├─ adapter
-      │  │  └─ StatusSummaryAdapter.java (external context access interface)
-      │  └─ repository
-      │     └─ StatusRepository.java (database access interface)
+      │  │  └─ StatusEmployeeAdapter.java
+      │  └─ client
+      │     └─ EmployeeClient.java 
       ├─ domain
       │  ├─ model
       │  │  ├─ DailyStatus.java
-      │  │  └─ PeriodStatus.java
+      │  │  └─ MonthlyStatus.java
       │  └─ service
       │     ├─ StatusGenerator.java
       │     └─ StatusCalculator.java
       ├─ infrastructure
       │  ├─ model
       │  │  └─ StatusEntity.java
+      │  ├─ repository
+      │  │  └─ StatusRestRepository.java
       │  ├─ adapter
-      │  │  └─ StatusSummaryRestAdapter.java implements StatusSummaryAdapter
-      │  └─ repository
-      │     └─ StatusRestRepository.java implements StatusRepository
-      └─ presentattion
+      │  │  └─ StatusEmployeeAdapter.java
+      │  └─ client
+      │     └─ EmployeeClient.java
+      └─ presentation
          ├─ model
          │  ├─ request
          │  │  ├─ SearchMonthlyStatusRequest.java
          │  │  └─ SearchDailyStatusRequest.java
          │  └─ response
          │     ├─ MonthlyStatusResponse.java
-         │     └─ DailyStatusResponse.java 
+         │     └─ DailyStatusResponse.java
          └─ controller
             ├─ EmployeeStatusController.java
             ├─ DepartmentStatusController.java
             └─ CollaboratorStatusController.java
 ```
+
+
+
+### Diagram of Clean Architecture
+
+![architecture.png](../images/architecture.png)
