@@ -7,20 +7,7 @@ on:
     branches: [ "main", "develop" ]
 
 jobs:
-  cache:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Cache Gradle dependencies
-        uses: actions/cache@v3
-        with:
-          path: ~/.gradle/caches
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
-          restore-keys: |
-            ${{ runner.os }}-gradle-
-
   spotless-check:
-    needs: cache
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -37,7 +24,6 @@ jobs:
         run: ./gradlew spotlessCheck
 
   build:
-    needs: cache
     runs-on: ubuntu-latest
     permissions:
       contents: read
