@@ -1,6 +1,5 @@
 package coz.weavon.core.auth.presentation.model;
 
-import coz.weavon.core.auth.domain.model.AuthUser;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -10,7 +9,7 @@ public class AuthValidResponse {
 
     private String username;
 
-    public static AuthValidResponse of(AuthUser authUser) {
-        return AuthValidResponse.builder().username(authUser.getUsername()).build();
+    public static AuthValidResponse of(String username) {
+        return AuthValidResponse.builder().username(username).build();
     }
 }
