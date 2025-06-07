@@ -1,7 +1,6 @@
 package coz.weavon.core.auth.domain.model;
 
 import coz.weavon.core.auth.domain.service.AuthTokenGenerator;
-import coz.weavon.core.shared.domain.model.Property;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Map;
@@ -19,13 +18,10 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 @AllArgsConstructor
 public class AuthUser implements UserDetails, OAuth2User {
 
-    @Property(unique = true, nullable = false, updatable = false)
     private String username;
 
-    @Property
     private String password;
 
-    @Property(nullable = false)
     private String role;
 
     public static AuthUser of(String username, String password, String role) {

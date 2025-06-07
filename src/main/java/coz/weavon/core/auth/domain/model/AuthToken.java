@@ -1,7 +1,6 @@
 package coz.weavon.core.auth.domain.model;
 
 import coz.weavon.core.auth.domain.service.AuthTokenExtractor;
-import coz.weavon.core.shared.domain.model.Property;
 import java.util.Date;
 import lombok.Builder;
 import lombok.Data;
@@ -10,7 +9,6 @@ import lombok.Data;
 @Builder
 public class AuthToken {
 
-    @Property(unique = true, nullable = false)
     private String value;
 
     public static AuthToken of(String value) {
