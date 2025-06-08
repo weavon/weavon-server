@@ -1,4 +1,4 @@
-package coz.weavon.core.auth.presentation.model;
+package coz.weavon.core.auth.presentation.model.response;
 
 import lombok.Builder;
 import lombok.Getter;

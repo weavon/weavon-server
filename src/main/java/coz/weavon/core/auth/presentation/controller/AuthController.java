@@ -2,8 +2,8 @@ package coz.weavon.core.auth.presentation.controller;
 
 import coz.weavon.core.auth.application.service.AuthService;
 import coz.weavon.core.auth.domain.model.AuthUser;
-import coz.weavon.core.auth.presentation.model.AuthJoinRequest;
-import coz.weavon.core.auth.presentation.model.AuthValidResponse;
+import coz.weavon.core.auth.presentation.model.request.AuthJoinRequest;
+import coz.weavon.core.auth.presentation.model.response.AuthValidResponse;
 import coz.weavon.core.shared.presentation.model.response.RestResponse;
 import coz.weavon.helper.MessageTranslator;
 import coz.weavon.util.AuthUtils;
