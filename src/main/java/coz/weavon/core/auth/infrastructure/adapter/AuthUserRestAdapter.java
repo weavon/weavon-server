@@ -3,7 +3,7 @@ package coz.weavon.core.auth.infrastructure.adapter;
 import coz.weavon.core.auth.application.adapter.AuthUserAdapter;
 import coz.weavon.core.auth.domain.model.AuthUser;
 import coz.weavon.core.auth.domain.model.OAuthUser;
-import coz.weavon.core.shared.model.Adapter;
+import coz.weavon.core.shared.infrastructure.model.Adapter;
 import coz.weavon.core.user.application.model.command.UserOperateCommand;
 import coz.weavon.core.user.application.model.command.UserSearchCommand;
 import coz.weavon.core.user.application.model.result.UserOperateResult;
