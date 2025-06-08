@@ -38,7 +38,7 @@ class UserRestRepository implements UserRepository {
 
     @Override
     public void updateUsers(Users users) {
-        Map<Long, UserEntity> updateUserEntityMap = users.getValue().stream()
+        Map<Long, UserEntity> updateUserEntityMap = users.value().stream()
                 .map(UserEntity::fromDomain)
                 .collect(Collectors.toMap(UserEntity::getUserId, Function.identity()));
 

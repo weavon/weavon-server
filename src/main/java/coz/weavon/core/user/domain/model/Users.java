@@ -2,29 +2,21 @@ package coz.weavon.core.user.domain.model;
 
 import java.util.List;
 import java.util.Optional;
-import lombok.Builder;
-import lombok.Data;
 import org.springframework.util.CollectionUtils;
 
-@Data
-@Builder
-public class Users {
-
-    private List<User> value;
-
+public record Users(List<User> value) {
     public static Users of(List<User> users) {
-        return Users.builder().value(users).build();
+        return new Users(users);
     }
 
     public static Users of(User user) {
-        return Users.builder().value(List.of(user)).build();
+        return new Users(List.of(user));
     }
 
     public Optional<User> getSingleUser() {
         if (value.size() == 1) {
             return value.stream().findFirst();
         }
-
         return Optional.empty();
     }
 

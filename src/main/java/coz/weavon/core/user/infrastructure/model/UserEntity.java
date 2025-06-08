@@ -58,7 +58,7 @@ public class UserEntity {
     }
 
     public static List<UserEntity> fromDomains(Users users) {
-        return users.getValue().stream().map(UserEntity::fromDomain).toList();
+        return users.value().stream().map(UserEntity::fromDomain).toList();
     }
 
     public User toDomain() {
