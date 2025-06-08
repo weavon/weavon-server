@@ -2,7 +2,6 @@ package coz.weavon.core.user.application.service;
 
 import coz.weavon.core.user.application.model.command.UserOperateCommand;
 import coz.weavon.core.user.application.model.command.UserSearchCommand;
-import coz.weavon.core.user.application.model.condition.UserSearchCondition;
 import coz.weavon.core.user.application.model.result.UserOperateResult;
 import coz.weavon.core.user.application.repository.UserRepository;
 import coz.weavon.core.user.domain.model.User;
@@ -28,7 +27,7 @@ class UserRestService implements UserService {
     public Users searchUsers(UserSearchCommand command) {
         command.validate();
 
-        return repository.findUsers(UserSearchCondition.fromCommand(command));
+        return repository.findUsers(command);
     }
 
     @Override
@@ -36,7 +35,7 @@ class UserRestService implements UserService {
     public User searchUser(UserSearchCommand command) {
         command.validate();
 
-        Users users = repository.findUsers(UserSearchCondition.fromCommand(command));
+        Users users = repository.findUsers(command);
         Optional<User> optionalUser = users.getSingleUser();
         if (optionalUser.isPresent()) {
             return optionalUser.get();
@@ -50,7 +49,7 @@ class UserRestService implements UserService {
     public Optional<User> searchOptionalUser(UserSearchCommand command) {
         command.validate();
 
-        Users foundUsers = repository.findUsers(UserSearchCondition.fromCommand(command));
+        Users foundUsers = repository.findUsers(command);
 
         return foundUsers.getSingleUser();
     }

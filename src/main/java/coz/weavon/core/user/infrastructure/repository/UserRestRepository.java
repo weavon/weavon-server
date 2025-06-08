@@ -1,6 +1,6 @@
 package coz.weavon.core.user.infrastructure.repository;
 
-import coz.weavon.core.user.application.model.condition.UserSearchCondition;
+import coz.weavon.core.user.application.model.command.UserSearchCommand;
 import coz.weavon.core.user.application.repository.UserRepository;
 import coz.weavon.core.user.domain.model.User;
 import coz.weavon.core.user.domain.model.Users;
@@ -21,12 +21,10 @@ class UserRestRepository implements UserRepository {
     private final UserJpaRepository jpaRepository;
 
     @Override
-    public Users findUsers(UserSearchCondition condition) {
-        condition.validate();
-        List<UserEntity> foundUserEntities = queryRepository.findAllByCondition(condition);
-        List<User> foundUsers =
-                foundUserEntities.stream().map(UserEntity::toDomain).toList();
-        return Users.of(foundUsers);
+    public Users findUsers(UserSearchCommand command) {
+        List<UserEntity> foundUserEntities = queryRepository.findUsersByCondition(
+                command.getUserIds(), command.getUsernames(), command.getNickname(), command.getEmails());
+        return Users.of(foundUserEntities.stream().map(UserEntity::toDomain).toList());
     }
 
     @Override

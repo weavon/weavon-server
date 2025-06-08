@@ -1,12 +1,12 @@
 package coz.weavon.core.user.application.repository;
 
-import coz.weavon.core.user.application.model.condition.UserSearchCondition;
+import coz.weavon.core.user.application.model.command.UserSearchCommand;
 import coz.weavon.core.user.domain.model.Users;
 import java.util.List;
 
 public interface UserRepository {
 
-    Users findUsers(UserSearchCondition condition);
+    Users findUsers(UserSearchCommand command);
 
     Users saveUsers(Users users);
 

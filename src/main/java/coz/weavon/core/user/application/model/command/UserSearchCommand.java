@@ -17,6 +17,10 @@ public class UserSearchCommand extends RestCommand {
 
     private List<String> emails;
 
+    public static UserSearchCommand ofUserIds(List<Long> userIds) {
+        return UserSearchCommand.builder().userIds(userIds).build();
+    }
+
     public static UserSearchCommand ofUsername(String username) {
         return UserSearchCommand.builder().usernames(List.of(username)).build();
     }

@@ -1,7 +1,8 @@
 package coz.weavon.core.user.infrastructure.repository;
 
+import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import coz.weavon.core.user.application.model.condition.UserSearchCondition;
+import coz.weavon.core.shared.infrastructure.repository.RestQueryRepository;
 import coz.weavon.core.user.infrastructure.model.QUserEntity;
 import coz.weavon.core.user.infrastructure.model.UserEntity;
 import java.util.List;
@@ -10,15 +11,22 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 @RequiredArgsConstructor
-public class UserQueryRepository {
+public class UserQueryRepository implements RestQueryRepository {
 
-    private final JPAQueryFactory query;
+    private static final QUserEntity user = QUserEntity.userEntity;
 
-    private final QUserEntity user = QUserEntity.userEntity;
+    private final JPAQueryFactory queryFactory;
 
-    public List<UserEntity> findAllByCondition(UserSearchCondition condition) {
-        return query.selectFrom(user)
-                .where(condition.inUserIds(), condition.inUsernames(), condition.likeNickname(), condition.inEmails())
-                .fetch();
+    public List<UserEntity> findUsersByCondition(
+            List<Long> userIds, List<String> usernames, String nickname, List<String> emails) {
+        JPAQuery<UserEntity> query = queryFactory
+                .selectFrom(user)
+                .where(
+                        in(user.userId, userIds),
+                        in(user.username, usernames),
+                        like(user.nickname, nickname),
+                        in(user.email, emails));
+
+        return query.fetch();
     }
 }
