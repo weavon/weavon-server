@@ -1,6 +1,5 @@
 package coz.weavon.core.user.domain.model;
 
-import coz.weavon.core.shared.domain.model.Property;
 import lombok.Builder;
 import lombok.Data;
 
@@ -8,22 +7,16 @@ import lombok.Data;
 @Builder
 public class User {
 
-    @Property(unique = true, nullable = false, updatable = false)
     private Long userId;
 
-    @Property(unique = true, nullable = false, updatable = false)
     private String username;
 
-    @Property
     private String password;
 
-    @Property(nullable = false)
     private String nickname;
 
-    @Property(unique = true)
     private String email;
 
-    @Property(nullable = false)
     private Role role;
 
     public static User ofUser(String username, String nickname, String email) {

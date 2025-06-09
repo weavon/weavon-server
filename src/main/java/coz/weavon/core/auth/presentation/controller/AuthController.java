@@ -2,13 +2,13 @@ package coz.weavon.core.auth.presentation.controller;
 
 import coz.weavon.core.auth.application.service.AuthService;
 import coz.weavon.core.auth.domain.model.AuthUser;
-import coz.weavon.core.auth.presentation.model.AuthJoinRequest;
-import coz.weavon.core.auth.presentation.model.AuthValidResponse;
+import coz.weavon.core.auth.presentation.model.request.AuthJoinRequest;
+import coz.weavon.core.auth.presentation.model.response.AuthValidResponse;
 import coz.weavon.core.shared.presentation.model.response.RestResponse;
 import coz.weavon.helper.MessageTranslator;
+import coz.weavon.util.AuthUtils;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,9 +27,8 @@ public class AuthController {
 
     @GetMapping("/valid")
     public RestResponse<AuthValidResponse> getAuthValid() {
-        AuthUser authUser = (AuthUser)
-                SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        return RestResponse.of(AuthValidResponse.of(authUser));
+        AuthUser authUser = AuthUtils.getAuthUser();
+        return RestResponse.of(AuthValidResponse.of(authUser.getUsername()));
     }
 
     @PostMapping("/join")

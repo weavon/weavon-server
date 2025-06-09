@@ -1,4 +1,4 @@
-package coz.weavon.core.auth.presentation.model;
+package coz.weavon.core.auth.presentation.model.request;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;

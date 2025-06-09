@@ -12,12 +12,18 @@ public class AuthUtils {
 
     private static final String MSG_AUTH_NONE = "message.authentication.none";
 
-    public static String getUsername() {
+    public static AuthUser getAuthUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (Objects.nonNull(authentication) && authentication.getPrincipal() instanceof AuthUser authUser) {
-            return authUser.getUsername();
+
+        if (Objects.isNull(authentication) || !(authentication.getPrincipal() instanceof AuthUser)) {
+            throw new AuthException(MSG_AUTH_NONE);
         }
 
-        throw new AuthException(MSG_AUTH_NONE);
+        return (AuthUser) authentication.getPrincipal();
+    }
+
+    public static String getUsername() {
+        AuthUser authUser = getAuthUser();
+        return authUser.getUsername();
     }
 }

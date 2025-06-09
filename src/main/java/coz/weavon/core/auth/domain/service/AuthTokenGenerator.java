@@ -35,9 +35,10 @@ public class AuthTokenGenerator {
         expirationMillis = (long) expirationMinutes * 60 * 1000;
     }
 
-    public static AuthToken generateAuthToken(String username, String password, String role) {
+    public static AuthToken generateAuthToken(Long userId, String username, String password, String role) {
         Map<String, Object> attributes = new HashMap<>();
 
+        attributes.put("userId", userId);
         attributes.put("username", username);
         attributes.put("password", password);
         attributes.put("role", role);
