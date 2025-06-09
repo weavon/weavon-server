@@ -1,9 +1,9 @@
 package coz.weavon.core.project.infrastructure.model;
 
+import coz.weavon.core.project.domain.model.Project;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -34,4 +34,16 @@ public class ProjectEntity {
 
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
+
+    public Project toDomain() {
+        return Project.builder()
+                .projectId(projectId)
+                .projectName(name)
+                .projectMembers(projectMembers.stream()
+                        .map(ProjectMemberEntity::toDomain)
+                        .toList())
+                .createdAt(createdAt)
+                .updatedAt(updatedAt)
+                .build();
+    }
 }

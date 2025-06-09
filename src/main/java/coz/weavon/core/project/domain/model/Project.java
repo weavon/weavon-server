@@ -1,6 +1,7 @@
 package coz.weavon.core.project.domain.model;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import lombok.Builder;
 import lombok.Data;
 
@@ -12,9 +13,7 @@ public class Project {
 
     private String projectName;
 
-    private Long memberId;
-
-    private ProjectMemberRole memberRole;
+    private List<ProjectMember> projectMembers;
 
     private LocalDateTime createdAt;
 

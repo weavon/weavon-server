@@ -3,7 +3,9 @@ package coz.weavon.core.project.infrastructure.model;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import java.io.Serializable;
+import lombok.Getter;
 
+@Getter
 @Embeddable
 public class ProjectMemberId implements Serializable {
 

@@ -1,5 +1,6 @@
 package coz.weavon.core.project.infrastructure.model;
 
+import coz.weavon.core.project.domain.model.ProjectMember;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,4 +22,12 @@ public class ProjectMemberEntity {
     @Enumerated(EnumType.STRING)
     @Column(name = "role", nullable = false)
     private ProjectMemberRoleColumn role = ProjectMemberRoleColumn.MEMBER;
+
+    public ProjectMember toDomain() {
+        return ProjectMember.builder()
+                .projectId(id.getProjectId())
+                .memberId(id.getMemberId())
+                .memberRole(role.toDomain())
+                .build();
+    }
 }
