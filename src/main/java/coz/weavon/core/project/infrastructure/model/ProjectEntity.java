@@ -25,7 +25,7 @@ public class ProjectEntity {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @OneToMany(mappedBy = "id.memberId")
+    @OneToMany(mappedBy = "id.projectId")
     private List<ProjectMemberEntity> projectMembers;
 
     @Builder.Default

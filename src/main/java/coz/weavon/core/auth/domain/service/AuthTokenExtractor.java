@@ -26,6 +26,7 @@ public class AuthTokenExtractor {
 
     public static AuthUser extractAuthUser(AuthToken authToken) {
         return AuthUser.builder()
+                .userId(extractUserId(authToken))
                 .username(extractUsername(authToken))
                 .password(extractPassword(authToken))
                 .role(extractRole(authToken))
@@ -34,6 +35,10 @@ public class AuthTokenExtractor {
 
     public static String extractUsername(AuthToken authToken) {
         return extractClaim(authToken, Claims::getSubject);
+    }
+
+    public static Long extractUserId(AuthToken authToken) {
+        return extractClaim(authToken, claims -> claims.get("userId", Long.class));
     }
 
     public static String extractPassword(AuthToken authToken) {

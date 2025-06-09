@@ -16,6 +16,6 @@ public class ProjectRestService implements ProjectService {
     public Projects searchProjects(ProjectSearchCommand command) {
         command.validate();
 
-        return null;
+        return projectRepository.findProjects(command);
     }
 }

@@ -29,7 +29,7 @@ class AuthUserRestAdapter implements AuthUserAdapter {
         Users foundUsers = userService.searchUsers(searchCommand);
         return foundUsers
                 .getUserByUsername(username)
-                .map(user -> AuthUser.of(user.getUsername(), user.getPassword(), user.getRoleName()));
+                .map(user -> AuthUser.of(user.getUserId(), user.getUsername(), user.getPassword(), user.getRoleName()));
     }
 
     @Override
@@ -38,8 +38,9 @@ class AuthUserRestAdapter implements AuthUserAdapter {
         Users foundUsers = userService.searchUsers(searchCommand);
         Optional<User> optionalFoundUser = foundUsers.getUserByEmail(oAuthUser.getEmail());
         if (optionalFoundUser.isPresent()) {
-            User foundUSer = optionalFoundUser.get();
-            return AuthUser.of(foundUSer.getUsername(), foundUSer.getPassword(), foundUSer.getRoleName());
+            User foundUser = optionalFoundUser.get();
+            return AuthUser.of(
+                    foundUser.getUserId(), foundUser.getUsername(), foundUser.getPassword(), foundUser.getRoleName());
         }
 
         User createTargetUser = User.ofUser(oAuthUser.getEmail(), oAuthUser.getNickname(), oAuthUser.getEmail());
@@ -49,7 +50,11 @@ class AuthUserRestAdapter implements AuthUserAdapter {
                 .getCreatedUsers()
                 .getUserByEmail(oAuthUser.getEmail())
                 .orElseThrow(() -> new BusinessException(MSG_AUTH_FAIL_SIGN_UP));
-        return AuthUser.of(createdUser.getUsername(), createdUser.getPassword(), createdUser.getRoleName());
+        return AuthUser.of(
+                createdUser.getUserId(),
+                createdUser.getUsername(),
+                createdUser.getPassword(),
+                createdUser.getRoleName());
     }
 
     @Override

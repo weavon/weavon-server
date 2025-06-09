@@ -21,7 +21,7 @@ public class ProjectRestRepository implements ProjectRepository {
                 command.getProjectIds(),
                 command.getProjectName(),
                 command.getMemberIds(),
-                command.getMemberRoles().stream()
+                command.getMemberRolesList().stream()
                         .map(ProjectMemberRoleColumn::fromDomain)
                         .toList());
 

@@ -18,14 +18,17 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 @AllArgsConstructor
 public class AuthUser implements UserDetails, OAuth2User {
 
+    private Long userId;
+
     private String username;
 
     private String password;
 
     private String role;
 
-    public static AuthUser of(String username, String password, String role) {
+    public static AuthUser of(Long userId, String username, String password, String role) {
         return AuthUser.builder()
+                .userId(userId)
                 .username(username)
                 .password(password)
                 .role(role)
@@ -33,7 +36,7 @@ public class AuthUser implements UserDetails, OAuth2User {
     }
 
     public AuthToken toAuthToken() {
-        return AuthTokenGenerator.generateAuthToken(username, password, role);
+        return AuthTokenGenerator.generateAuthToken(userId, username, password, role);
     }
 
     @Override
