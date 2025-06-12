@@ -9,26 +9,33 @@ import lombok.Data;
 @Builder
 public class AuthToken {
 
-    private String value;
+    private String accessToken;
 
-    public static AuthToken of(String value) {
-        return AuthToken.builder().value(value).build();
+    private String refreshToken;
+
+    public static AuthToken of(String accessToken, String refreshToken) {
+        return AuthToken.builder()
+                .accessToken(accessToken)
+                .refreshToken(refreshToken)
+                .build();
     }
 
     public AuthUser toAuthUser() {
-        return AuthTokenExtractor.extractAuthUser(this);
+        return AuthTokenExtractor.extractAuthUser(accessToken);
     }
 
-    public boolean isValid() {
-        return isNotExpired();
-    }
-
-    public boolean isExpired() {
-        Date expiredDate = AuthTokenExtractor.extractExpiration(this);
+    public boolean isAccessTokenExpired() {
+        Date expiredDate = AuthTokenExtractor.extractExpiration(accessToken);
         return expiredDate.before(new Date());
     }
 
-    public boolean isNotExpired() {
-        return !isExpired();
+    public boolean isAccessTokenAlive() {
+        Date expiredDate = AuthTokenExtractor.extractExpiration(accessToken);
+        return expiredDate.after(new Date());
+    }
+
+    public boolean isRefreshTokenAlive() {
+        Date expiredDate = AuthTokenExtractor.extractExpiration(refreshToken);
+        return expiredDate.after(new Date());
     }
 }

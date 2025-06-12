@@ -62,7 +62,10 @@ spring:
 auth:
   jwt:
     secret: ${AUTH_JWT_SECRET}
-    expiration-minutes: 60
+    access-token-expiration-minutes: 5
+    refresh-token-expiration-minutes: 60
+  cookie:
+    secure: false
 
 client:
   base-url: http://localhost:3000

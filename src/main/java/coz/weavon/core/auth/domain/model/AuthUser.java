@@ -36,7 +36,7 @@ public class AuthUser implements UserDetails, OAuth2User {
     }
 
     public AuthToken toAuthToken() {
-        return AuthTokenGenerator.generateAuthToken(userId, username, password, role);
+        return AuthTokenGenerator.generateAuthToken(this);
     }
 
     @Override

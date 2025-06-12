@@ -1,7 +1,5 @@
 package coz.weavon.config;
 
-import coz.weavon.core.auth.application.service.AuthUserService;
-import coz.weavon.helper.MessageTranslator;
 import coz.weavon.security.filter.JwtAuthenticationFilter;
 import coz.weavon.security.filter.UsernameAuthenticationFilter;
 import java.util.Collections;
@@ -9,15 +7,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.ProviderManager;
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
@@ -32,14 +25,10 @@ public class SecurityConfig {
 
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
-    private final AuthUserService authUserService;
-
-    private final MessageTranslator messageTranslator;
+    private final UsernameAuthenticationFilter usernameAuthenticationFilter;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        UsernameAuthenticationFilter usernameAuthenticationFilter =
-                new UsernameAuthenticationFilter(authenticationManager(), messageTranslator);
         usernameAuthenticationFilter.setFilterProcessesUrl("/auth/login");
 
         return http.httpBasic(AbstractHttpConfigurer::disable)
@@ -54,19 +43,6 @@ public class SecurityConfig {
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .addFilter(usernameAuthenticationFilter)
                 .build();
-    }
-
-    @Bean
-    public AuthenticationManager authenticationManager() {
-        DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
-        daoAuthenticationProvider.setUserDetailsService(authUserService);
-        daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
-        return new ProviderManager(daoAuthenticationProvider);
-    }
-
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
     }
 
     private CorsConfiguration corConfiguration() {

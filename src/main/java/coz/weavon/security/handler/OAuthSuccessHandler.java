@@ -31,7 +31,7 @@ public class OAuthSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
             throws IOException {
         AuthUser authUser = (AuthUser) authentication.getPrincipal();
         AuthToken authToken = authUser.toAuthToken();
-        response.setHeader("Authorization", "Bearer " + authToken.getValue());
+        response.setHeader("Authorization", "Bearer " + authToken.getRefreshToken());
         response.sendRedirect(clientBaseUrl);
 
         log.info(messageTranslator.translate(MSG_AUTH_USER_LOGGED_IN, authUser.getUsername()));
