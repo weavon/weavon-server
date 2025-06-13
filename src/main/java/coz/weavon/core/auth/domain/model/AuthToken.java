@@ -1,6 +1,7 @@
 package coz.weavon.core.auth.domain.model;
 
 import coz.weavon.core.auth.domain.service.AuthTokenExtractor;
+import io.jsonwebtoken.ExpiredJwtException;
 import java.util.Date;
 import lombok.Builder;
 import lombok.Data;
@@ -21,21 +22,28 @@ public class AuthToken {
     }
 
     public AuthUser toAuthUser() {
-        return AuthTokenExtractor.extractAuthUser(accessToken);
-    }
-
-    public boolean isAccessTokenExpired() {
-        Date expiredDate = AuthTokenExtractor.extractExpiration(accessToken);
-        return expiredDate.before(new Date());
+        return AuthTokenExtractor.extractAuthUser(refreshToken);
     }
 
     public boolean isAccessTokenAlive() {
-        Date expiredDate = AuthTokenExtractor.extractExpiration(accessToken);
-        return expiredDate.after(new Date());
+        try {
+            Date expiredDate = AuthTokenExtractor.extractExpiration(accessToken);
+            return expiredDate.after(new Date());
+        } catch (ExpiredJwtException e) {
+            return false;
+        }
+    }
+
+    public boolean isAccessTokenExpired() {
+        return !isAccessTokenAlive();
     }
 
     public boolean isRefreshTokenAlive() {
-        Date expiredDate = AuthTokenExtractor.extractExpiration(refreshToken);
-        return expiredDate.after(new Date());
+        try {
+            Date expiredDate = AuthTokenExtractor.extractExpiration(refreshToken);
+            return expiredDate.after(new Date());
+        } catch (ExpiredJwtException e) {
+            return false;
+        }
     }
 }
