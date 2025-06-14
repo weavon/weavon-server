@@ -27,13 +27,14 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         String refreshToken = extractRefreshToken(request.getCookies());
 
         if (StringUtils.hasText(accessToken)) {
-            processTokenAuthentication(accessToken, refreshToken);
+            AuthToken authToken = processTokenAuthentication(accessToken, refreshToken);
+            response.setHeader("Authorization", "Bearer " + authToken.getAccessToken());
         }
 
         filterChain.doFilter(request, response);
     }
 
-    private void processTokenAuthentication(String accessToken, String refreshToken) {
+    private AuthToken processTokenAuthentication(String accessToken, String refreshToken) {
         AuthToken authToken = AuthToken.of(accessToken, refreshToken);
 
         if (authToken.isAccessTokenExpired() && authToken.isRefreshTokenAlive()) {
@@ -47,6 +48,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                     new UsernamePasswordAuthenticationToken(authUser, null, authUser.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(authentication);
         }
+
+        return authToken;
     }
 
     private String extractAccessToken(String authorizationHeader) {
