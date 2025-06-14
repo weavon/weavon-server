@@ -66,7 +66,7 @@ public class UsernameAuthenticationFilter extends UsernamePasswordAuthentication
         Cookie refreshTokenCookie = new Cookie("REFRESH_TOKEN", authToken.getRefreshToken());
         refreshTokenCookie.setHttpOnly(true);
         refreshTokenCookie.setPath("/");
-        refreshTokenCookie.setMaxAge(refreshTokenExpirationMinutes * 60 * 1000);
+        refreshTokenCookie.setMaxAge(refreshTokenExpirationMinutes * 60);
         refreshTokenCookie.setSecure(secureCookie);
 
         response.addCookie(refreshTokenCookie);

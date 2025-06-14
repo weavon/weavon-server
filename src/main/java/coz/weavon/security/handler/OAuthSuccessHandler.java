@@ -44,7 +44,7 @@ public class OAuthSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
         Cookie refreshTokenCookie = new Cookie("REFRESH_TOKEN", authToken.getRefreshToken());
         refreshTokenCookie.setHttpOnly(true);
         refreshTokenCookie.setPath("/");
-        refreshTokenCookie.setMaxAge(refreshTokenExpirationMinutes * 60 * 1000);
+        refreshTokenCookie.setMaxAge(refreshTokenExpirationMinutes * 60);
         refreshTokenCookie.setSecure(secureCookie);
 
         log.info(messageTranslator.translate(MSG_AUTH_USER_LOGGED_IN, authUser.getUsername()));
