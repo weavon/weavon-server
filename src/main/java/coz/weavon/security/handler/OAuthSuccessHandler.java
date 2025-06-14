@@ -3,6 +3,7 @@ package coz.weavon.security.handler;
 import coz.weavon.core.auth.domain.model.AuthToken;
 import coz.weavon.core.auth.domain.model.AuthUser;
 import coz.weavon.helper.MessageTranslator;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -21,6 +22,12 @@ public class OAuthSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
     @Value(("${client.base-url}"))
     private String clientBaseUrl;
 
+    @Value("${auth.cookie.secure}")
+    private boolean secureCookie;
+
+    @Value("${auth.jwt.refresh-token-expiration-minutes}")
+    private int refreshTokenExpirationMinutes;
+
     private static final String MSG_AUTH_USER_LOGGED_IN = "message.authentication.user.loggedIn";
 
     private final MessageTranslator messageTranslator;
@@ -31,8 +38,14 @@ public class OAuthSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
             throws IOException {
         AuthUser authUser = (AuthUser) authentication.getPrincipal();
         AuthToken authToken = authUser.toAuthToken();
-        response.setHeader("Authorization", "Bearer " + authToken.getRefreshToken());
+        response.setHeader("Authorization", "Bearer " + authToken.getAccessToken());
         response.sendRedirect(clientBaseUrl);
+
+        Cookie refreshTokenCookie = new Cookie("REFRESH_TOKEN", authToken.getRefreshToken());
+        refreshTokenCookie.setHttpOnly(true);
+        refreshTokenCookie.setPath("/");
+        refreshTokenCookie.setMaxAge(refreshTokenExpirationMinutes * 60 * 1000);
+        refreshTokenCookie.setSecure(secureCookie);
 
         log.info(messageTranslator.translate(MSG_AUTH_USER_LOGGED_IN, authUser.getUsername()));
     }
