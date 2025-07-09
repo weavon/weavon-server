@@ -2,6 +2,7 @@ package coz.weavon.common.validator;
 
 import coz.weavon.common.exception.ClientException;
 import coz.weavon.common.io.PageRequest;
+import coz.weavon.constant.Label;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 import java.util.Objects;
@@ -11,10 +12,6 @@ public class PaginationValidator implements ConstraintValidator<ValidPagination,
     private static final String MSG_VLD_REQ_REQ = "message.validation.required";
 
     private static final String MSG_VLD_REQ_MIN = "message.validation.min";
-
-    private static final String LBL_PGN_PAGE_NO = "label.pagination.pageNo";
-
-    private static final String LBL_PGN_PAGE_SIZE = "label.pagination.pageSize";
 
     private boolean required;
 
@@ -29,19 +26,19 @@ public class PaginationValidator implements ConstraintValidator<ValidPagination,
         Integer pageSize = request.getPageSize();
 
         if (required && Objects.isNull(pageNo)) {
-            throw new ClientException(MSG_VLD_REQ_REQ, LBL_PGN_PAGE_NO);
+            throw new ClientException(MSG_VLD_REQ_REQ, Label.Common.PAGE_NO);
         }
 
         if (required && Objects.isNull(pageSize)) {
-            throw new ClientException(MSG_VLD_REQ_REQ, LBL_PGN_PAGE_SIZE);
+            throw new ClientException(MSG_VLD_REQ_REQ, Label.Common.PAGE_SIZE);
         }
 
         if (Objects.nonNull(pageNo) && pageNo < 1) {
-            throw new ClientException(MSG_VLD_REQ_MIN, LBL_PGN_PAGE_NO, "1");
+            throw new ClientException(MSG_VLD_REQ_MIN, Label.Common.PAGE_NO, "1");
         }
 
         if (Objects.nonNull(pageSize) && pageSize < 1) {
-            throw new ClientException(MSG_VLD_REQ_MIN, LBL_PGN_PAGE_SIZE, "1");
+            throw new ClientException(MSG_VLD_REQ_MIN, Label.Common.PAGE_SIZE, "1");
         }
 
         if (Objects.isNull(pageNo)) {
