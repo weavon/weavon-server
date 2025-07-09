@@ -1,4 +1,4 @@
-package coz.weavon.core.shared.presentation.model.reqeuest;
+package coz.weavon.common.io;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

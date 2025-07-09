@@ -1,8 +1,8 @@
 package coz.weavon.core.user.application.model.command;
 
-import coz.weavon.core.shared.application.model.command.RestCommand;
+import coz.weavon.common.exception.BusinessException;
+import coz.weavon.common.shared.Command;
 import coz.weavon.core.user.domain.model.Users;
-import coz.weavon.exception.model.BusinessException;
 import java.util.List;
 import java.util.Objects;
 import lombok.Builder;
@@ -11,7 +11,7 @@ import org.springframework.util.CollectionUtils;
 
 @Getter
 @Builder
-public class UserOperateCommand extends RestCommand {
+public class UserOperateCommand extends Command {
 
     private static final String MSG_USER_OPERATE_EMPTY = "message.user.operate.empty";
 

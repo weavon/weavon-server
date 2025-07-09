@@ -1,6 +1,5 @@
-package coz.weavon.validation.model;
+package coz.weavon.common.validator;
 
-import coz.weavon.validation.validator.PaginationValidator;
 import jakarta.validation.Constraint;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

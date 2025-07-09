@@ -1,8 +1,8 @@
 package coz.weavon.security.handler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import coz.weavon.core.shared.presentation.model.response.ErrorResponse;
-import coz.weavon.core.shared.presentation.model.response.RestResponse;
+import coz.weavon.common.io.ErrorResponse;
+import coz.weavon.common.io.RestResponse;
 import coz.weavon.helper.MessageTranslator;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

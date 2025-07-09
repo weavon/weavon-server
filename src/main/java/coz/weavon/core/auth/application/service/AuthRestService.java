@@ -1,8 +1,8 @@
 package coz.weavon.core.auth.application.service;
 
+import coz.weavon.common.exception.BusinessException;
 import coz.weavon.core.auth.application.adapter.AuthUserAdapter;
 import coz.weavon.core.auth.domain.model.AuthUser;
-import coz.weavon.exception.model.BusinessException;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

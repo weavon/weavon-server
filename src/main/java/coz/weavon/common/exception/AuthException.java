@@ -1,4 +1,4 @@
-package coz.weavon.exception.model;
+package coz.weavon.common.exception;
 
 public class AuthException extends RestException {
 

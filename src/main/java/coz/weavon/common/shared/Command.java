@@ -1,6 +1,6 @@
-package coz.weavon.core.shared.application.model.command;
+package coz.weavon.common.shared;
 
-import coz.weavon.exception.model.BusinessException;
+import coz.weavon.common.exception.BusinessException;
 import coz.weavon.util.DateTimeUtils;
 import java.time.LocalDate;
 import java.util.HashMap;
@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.Objects;
 import org.springframework.util.ObjectUtils;
 
-public abstract class RestCommand {
+public abstract class Command {
 
     private static final String MSG_VLD_REQ = "message.validation.required";
 

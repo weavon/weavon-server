@@ -1,4 +1,4 @@
-package coz.weavon.core.shared.infrastructure.repository;
+package coz.weavon.common.shared;
 
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.core.types.dsl.SimpleExpression;
@@ -6,7 +6,7 @@ import com.querydsl.core.types.dsl.StringExpression;
 import java.util.List;
 import java.util.Objects;
 
-public interface RestQueryRepository {
+public interface QueryRepository {
 
     default <T> BooleanExpression in(SimpleExpression<T> expression, List<T> inValues) {
         if (Objects.isNull(inValues) || inValues.isEmpty()) {
