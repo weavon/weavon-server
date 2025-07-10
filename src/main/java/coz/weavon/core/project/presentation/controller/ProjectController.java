@@ -1,12 +1,12 @@
 package coz.weavon.core.project.presentation.controller;
 
 import coz.weavon.common.io.RestResponse;
-import coz.weavon.core.auth.domain.model.AuthUser;
 import coz.weavon.core.project.application.model.command.ProjectSearchCommand;
 import coz.weavon.core.project.application.service.ProjectService;
 import coz.weavon.core.project.domain.model.Projects;
 import coz.weavon.core.project.presentation.model.request.GetProjectNamesRequest;
 import coz.weavon.core.project.presentation.model.response.GetProjectNamesResponse;
+import coz.weavon.security.model.AuthUser;
 import coz.weavon.util.AuthUtils;
 import java.util.List;
 import lombok.RequiredArgsConstructor;

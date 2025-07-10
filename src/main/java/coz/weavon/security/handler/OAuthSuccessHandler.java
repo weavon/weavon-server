@@ -1,9 +1,9 @@
 package coz.weavon.security.handler;
 
 import coz.weavon.constant.Message;
-import coz.weavon.core.auth.domain.model.AuthToken;
-import coz.weavon.core.auth.domain.model.AuthUser;
 import coz.weavon.helper.MessageTranslator;
+import coz.weavon.security.model.AuthToken;
+import coz.weavon.security.model.AuthUser;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

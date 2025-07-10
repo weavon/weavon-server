@@ -1,8 +1,8 @@
-package coz.weavon.core.auth.domain.service;
+package coz.weavon.security.helper;
 
 import coz.weavon.common.exception.BusinessException;
 import coz.weavon.constant.Message;
-import coz.weavon.core.auth.domain.model.OAuthUser;
+import coz.weavon.security.model.OAuthUser;
 import java.util.Map;
 import lombok.experimental.UtilityClass;
 

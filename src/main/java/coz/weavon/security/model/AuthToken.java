@@ -1,7 +1,7 @@
-package coz.weavon.core.auth.domain.model;
+package coz.weavon.security.model;
 
-import coz.weavon.core.auth.domain.service.AuthTokenExtractor;
-import coz.weavon.core.auth.domain.service.AuthTokenGenerator;
+import coz.weavon.security.helper.AuthTokenExtractor;
+import coz.weavon.security.helper.AuthTokenGenerator;
 import io.jsonwebtoken.ExpiredJwtException;
 import java.util.Date;
 import java.util.Objects;

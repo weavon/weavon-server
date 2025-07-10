@@ -1,7 +1,7 @@
 package coz.weavon.security.filter;
 
-import coz.weavon.core.auth.domain.model.AuthToken;
-import coz.weavon.core.auth.domain.model.AuthUser;
+import coz.weavon.security.model.AuthToken;
+import coz.weavon.security.model.AuthUser;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.Cookie;

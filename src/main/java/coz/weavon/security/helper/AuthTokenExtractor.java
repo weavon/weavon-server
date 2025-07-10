@@ -1,6 +1,6 @@
-package coz.weavon.core.auth.domain.service;
+package coz.weavon.security.helper;
 
-import coz.weavon.core.auth.domain.model.AuthUser;
+import coz.weavon.security.model.AuthUser;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import java.util.Date;

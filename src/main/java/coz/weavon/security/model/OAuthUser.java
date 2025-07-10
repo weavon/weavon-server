@@ -1,6 +1,6 @@
-package coz.weavon.core.auth.domain.model;
+package coz.weavon.security.model;
 
-import coz.weavon.core.auth.domain.service.OAuthUserProvider;
+import coz.weavon.security.helper.OAuthUserProvider;
 import java.util.Map;
 import lombok.Builder;
 import lombok.Data;

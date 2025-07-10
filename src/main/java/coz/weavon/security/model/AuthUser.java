@@ -1,6 +1,7 @@
-package coz.weavon.core.auth.domain.model;
+package coz.weavon.security.model;
 
-import coz.weavon.core.auth.domain.service.AuthTokenGenerator;
+import coz.weavon.core.user.domain.model.User;
+import coz.weavon.security.helper.AuthTokenGenerator;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Map;
@@ -32,6 +33,15 @@ public class AuthUser implements UserDetails, OAuth2User {
                 .username(username)
                 .password(password)
                 .role(role)
+                .build();
+    }
+
+    public static AuthUser ofUser(User user) {
+        return AuthUser.builder()
+                .userId(user.getUserId())
+                .username(user.getUsername())
+                .password(user.getPassword())
+                .role(user.getRoleName())
                 .build();
     }
 
