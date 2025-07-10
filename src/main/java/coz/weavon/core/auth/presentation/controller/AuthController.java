@@ -30,6 +30,11 @@ public class AuthController {
         return RestResponse.of(AuthValidResponse.of(authUser.getUsername()));
     }
 
+    @GetMapping("/refresh")
+    public RestResponse<Boolean> refreshAccessToken() {
+        return RestResponse.of(true);
+    }
+
     @PostMapping("/join")
     public RestResponse<String> postAuthJoin(@Valid @RequestBody AuthJoinRequest request) {
         String username = request.getUsername();
