@@ -1,5 +1,6 @@
 package coz.weavon.core.auth.application.service;
 
+import coz.weavon.constant.Message;
 import coz.weavon.core.auth.application.adapter.AuthUserAdapter;
 import coz.weavon.core.auth.domain.model.AuthUser;
 import coz.weavon.core.auth.domain.model.OAuthUser;
@@ -20,8 +21,6 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class AuthUserService extends DefaultOAuth2UserService implements UserDetailsService {
 
-    private static final String MSG_AUTH_USER_NOT_FOUND = "message.authentication.user.notFound";
-
     private final MessageTranslator messageTranslator;
 
     private final AuthUserAdapter userAdapter;
@@ -34,7 +33,7 @@ public class AuthUserService extends DefaultOAuth2UserService implements UserDet
             return optionalAuthUser.get();
         }
 
-        throw new UsernameNotFoundException(messageTranslator.translate(MSG_AUTH_USER_NOT_FOUND));
+        throw new UsernameNotFoundException(messageTranslator.translate(Message.Authentication.USER_NOT_FOUND));
     }
 
     @Override

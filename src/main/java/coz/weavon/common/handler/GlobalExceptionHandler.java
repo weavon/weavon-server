@@ -6,6 +6,7 @@ import coz.weavon.common.exception.ClientException;
 import coz.weavon.common.exception.RestException;
 import coz.weavon.common.io.ErrorResponse;
 import coz.weavon.common.io.RestResponse;
+import coz.weavon.constant.Message;
 import coz.weavon.helper.MessageTranslator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,8 +20,6 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 @RequiredArgsConstructor
 public class GlobalExceptionHandler {
-
-    private static final String MSG_VLD_BAD_CLIENT_REQUEST = "message.validation.badUserRequest";
 
     private final MessageTranslator messageTranslator;
 
@@ -51,7 +50,7 @@ public class GlobalExceptionHandler {
             MethodArgumentNotValidException exception) {
         log.error("Validation error occurred : {}", exception.getMessage());
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                .body(RestResponse.ofClientError(messageTranslator.translate(MSG_VLD_BAD_CLIENT_REQUEST)));
+                .body(RestResponse.ofClientError(messageTranslator.translate(Message.Common.BAD_USER_REQUEST)));
     }
 
     private String handleExceptionMessage(RestException exception) {

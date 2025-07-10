@@ -2,6 +2,7 @@ package coz.weavon.core.user.application.model.command;
 
 import coz.weavon.common.exception.BusinessException;
 import coz.weavon.common.shared.Command;
+import coz.weavon.constant.Message;
 import coz.weavon.core.user.domain.model.Users;
 import java.util.List;
 import java.util.Objects;
@@ -12,8 +13,6 @@ import org.springframework.util.CollectionUtils;
 @Getter
 @Builder
 public class UserOperateCommand extends Command {
-
-    private static final String MSG_USER_OPERATE_EMPTY = "message.user.operate.empty";
 
     private Users createTargetUsers;
 
@@ -38,7 +37,7 @@ public class UserOperateCommand extends Command {
     @Override
     public void validate() {
         if (!(this.hasUsersToCreate() || this.hasUsersToUpdate() || this.hasUsersToDelete())) {
-            throw new BusinessException(MSG_USER_OPERATE_EMPTY);
+            throw new BusinessException(Message.User.NO_OPERATION_USER_TARGET);
         }
     }
 

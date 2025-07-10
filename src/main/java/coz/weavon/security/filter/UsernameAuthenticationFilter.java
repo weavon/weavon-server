@@ -3,6 +3,7 @@ package coz.weavon.security.filter;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import coz.weavon.common.io.ErrorResponse;
 import coz.weavon.common.io.RestResponse;
+import coz.weavon.constant.Message;
 import coz.weavon.core.auth.domain.model.AuthToken;
 import coz.weavon.core.auth.domain.model.AuthUser;
 import coz.weavon.helper.MessageTranslator;
@@ -29,10 +30,6 @@ public class UsernameAuthenticationFilter extends UsernamePasswordAuthentication
 
     @Value("${auth.jwt.refresh-token-expiration-minutes}")
     private int refreshTokenExpirationMinutes;
-
-    private static final String MSG_AUTH_USER_LOGGED_IN = "message.authentication.user.loggedIn";
-
-    private static final String MSG_AUTH_FAILED = "message.authentication.failed";
 
     private final MessageTranslator messageTranslator;
 
@@ -71,7 +68,7 @@ public class UsernameAuthenticationFilter extends UsernamePasswordAuthentication
 
         response.addCookie(refreshTokenCookie);
 
-        log.info(messageTranslator.translate(MSG_AUTH_USER_LOGGED_IN, authUser.getUsername()));
+        log.info(messageTranslator.translate(Message.Authentication.USER_LOGGED_IN, authUser.getUsername()));
     }
 
     @Override
@@ -83,9 +80,9 @@ public class UsernameAuthenticationFilter extends UsernamePasswordAuthentication
         response.setCharacterEncoding("UTF-8");
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         RestResponse<ErrorResponse> errorResponse =
-                RestResponse.ofAuthError(messageTranslator.translate(MSG_AUTH_FAILED));
+                RestResponse.ofAuthError(messageTranslator.translate(Message.Authentication.AUTHENTICATION_FAILED));
         response.getWriter().write(new ObjectMapper().writeValueAsString(errorResponse));
 
-        log.error(messageTranslator.translate(MSG_AUTH_FAILED));
+        log.error(messageTranslator.translate(Message.Authentication.AUTHENTICATION_FAILED));
     }
 }

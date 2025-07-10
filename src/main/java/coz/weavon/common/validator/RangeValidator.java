@@ -2,6 +2,7 @@ package coz.weavon.common.validator;
 
 import coz.weavon.common.exception.ClientException;
 import coz.weavon.constant.Label;
+import coz.weavon.constant.Message;
 import coz.weavon.util.DateTimeUtils;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
@@ -10,12 +11,6 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 public class RangeValidator implements ConstraintValidator<ValidRange, Object> {
-
-    private static final String MSG_VLD_REQ_REQ = "message.validation.required";
-
-    private static final String MSG_VLD_REQ_RANGE_OMIT = "message.validation.rangeOmit";
-
-    private static final String MSG_VLD_REQ_INVALID_RANGE = "message.validation.invalid.range";
 
     private String startFieldName;
 
@@ -46,19 +41,19 @@ public class RangeValidator implements ConstraintValidator<ValidRange, Object> {
         }
 
         if (required && Objects.isNull(startDate)) {
-            throw new ClientException(MSG_VLD_REQ_REQ, Label.Common.START_DATE);
+            throw new ClientException(Message.Validation.IS_REQUIRED, Label.Common.START_DATE);
         }
 
         if (required && Objects.isNull(endDate)) {
-            throw new ClientException(MSG_VLD_REQ_REQ, Label.Common.END_DATE);
+            throw new ClientException(Message.Validation.IS_REQUIRED, Label.Common.END_DATE);
         }
 
         if (Objects.isNull(startDate) ^ Objects.isNull(endDate)) {
-            throw new ClientException(MSG_VLD_REQ_RANGE_OMIT);
+            throw new ClientException(Message.Validation.RANGE_MISS_START_END_DATE);
         }
 
         if (!DateTimeUtils.isValidDateRange(startDate, endDate)) {
-            throw new ClientException(MSG_VLD_REQ_INVALID_RANGE);
+            throw new ClientException(Message.Validation.INVALID_RANGE);
         }
 
         return true;

@@ -1,6 +1,7 @@
 package coz.weavon.core.auth.domain.service;
 
 import coz.weavon.common.exception.BusinessException;
+import coz.weavon.constant.Message;
 import coz.weavon.core.auth.domain.model.OAuthUser;
 import java.util.Map;
 import lombok.experimental.UtilityClass;
@@ -12,14 +13,12 @@ public class OAuthUserProvider {
 
     private static final String NAVER_REGISTRATION_ID = "naver";
 
-    private static final String MSG_AUTH_OAUTH_UNSUPPORTED_REGISTRATION_PROVIDER =
-            "message.authentication.oauth.unsupportedRegistrationProvider";
-
     public static OAuthUser provideOAuthUser(String registrationId, Map<String, Object> attributes) {
         return switch (registrationId) {
             case GOOGLE_REGISTRATION_ID -> provideGoogleUser(attributes);
             case NAVER_REGISTRATION_ID -> provideNaverUser(attributes);
-            default -> throw new BusinessException(MSG_AUTH_OAUTH_UNSUPPORTED_REGISTRATION_PROVIDER, registrationId);
+            default -> throw new BusinessException(
+                    Message.Authentication.UNSUPPORTED_REGISTRATION_PROVIDER, registrationId);
         };
     }
 

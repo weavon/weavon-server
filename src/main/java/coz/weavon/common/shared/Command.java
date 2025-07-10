@@ -2,6 +2,7 @@ package coz.weavon.common.shared;
 
 import coz.weavon.common.exception.BusinessException;
 import coz.weavon.constant.Label;
+import coz.weavon.constant.Message;
 import coz.weavon.util.DateTimeUtils;
 import java.time.LocalDate;
 import java.util.HashMap;
@@ -11,10 +12,6 @@ import org.springframework.util.ObjectUtils;
 
 public abstract class Command {
 
-    private static final String MSG_VLD_REQ = "message.validation.required";
-
-    private static final String MSG_VLD_INVALID_RANGE = "message.validation.invalid.range";
-
     public abstract void validate();
 
     protected void validateNonNull(Map<String, Object> labelPropertyMap) {
@@ -23,7 +20,7 @@ public abstract class Command {
             Object property = labelProperty.getValue();
 
             if (ObjectUtils.isEmpty(property)) {
-                throw new BusinessException(MSG_VLD_REQ, propertyLabelCode);
+                throw new BusinessException(Message.Validation.IS_REQUIRED, propertyLabelCode);
             }
         }
     }
@@ -40,7 +37,7 @@ public abstract class Command {
         if (Objects.isNull(startDate) || Objects.isNull(endDate)) return;
 
         if (DateTimeUtils.isValidDateRange(startDate, endDate)) {
-            throw new BusinessException(MSG_VLD_INVALID_RANGE);
+            throw new BusinessException(Message.Validation.INVALID_RANGE);
         }
     }
 }

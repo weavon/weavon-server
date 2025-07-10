@@ -1,6 +1,7 @@
 package coz.weavon.core.auth.presentation.controller;
 
 import coz.weavon.common.io.RestResponse;
+import coz.weavon.constant.Message;
 import coz.weavon.core.auth.application.service.AuthService;
 import coz.weavon.core.auth.domain.model.AuthUser;
 import coz.weavon.core.auth.presentation.model.request.AuthJoinRequest;
@@ -16,8 +17,6 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @RequestMapping("/auth")
 public class AuthController {
-
-    private static final String MSG_AUTH_JOIN_SUCCESS = "message.authentication.join.success";
 
     private final MessageTranslator translator;
 
@@ -38,6 +37,6 @@ public class AuthController {
 
         authService.saveAuthUser(username, password);
 
-        return RestResponse.of(translator.translate(MSG_AUTH_JOIN_SUCCESS, username));
+        return RestResponse.of(translator.translate(Message.Authentication.JOIN_SUCCESS, username));
     }
 }

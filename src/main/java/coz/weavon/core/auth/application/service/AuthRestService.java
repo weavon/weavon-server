@@ -1,6 +1,7 @@
 package coz.weavon.core.auth.application.service;
 
 import coz.weavon.common.exception.BusinessException;
+import coz.weavon.constant.Message;
 import coz.weavon.core.auth.application.adapter.AuthUserAdapter;
 import coz.weavon.core.auth.domain.model.AuthUser;
 import java.util.Optional;
@@ -12,8 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 class AuthRestService implements AuthService {
 
-    private static final String MSG_AUTH_USERNAME_EXISTS = "message.authentication.join.usernameExist";
-
     private static final String ROLE_USER = "USER";
 
     private final AuthUserAdapter userAdapter;
@@ -23,7 +22,7 @@ class AuthRestService implements AuthService {
     public void saveAuthUser(String username, String password) {
         Optional<AuthUser> optionalAuthUser = userAdapter.findAuthUserByUsername(username);
         if (optionalAuthUser.isPresent()) {
-            throw new BusinessException(MSG_AUTH_USERNAME_EXISTS, username);
+            throw new BusinessException(Message.Authentication.USERNAME_DUPLICATE, username);
         }
 
         AuthUser authUser = AuthUser.builder()

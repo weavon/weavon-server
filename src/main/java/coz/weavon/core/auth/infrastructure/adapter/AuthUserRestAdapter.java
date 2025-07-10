@@ -2,6 +2,7 @@ package coz.weavon.core.auth.infrastructure.adapter;
 
 import coz.weavon.common.exception.BusinessException;
 import coz.weavon.common.shared.Adapter;
+import coz.weavon.constant.Message;
 import coz.weavon.core.auth.application.adapter.AuthUserAdapter;
 import coz.weavon.core.auth.domain.model.AuthUser;
 import coz.weavon.core.auth.domain.model.OAuthUser;
@@ -18,8 +19,6 @@ import lombok.RequiredArgsConstructor;
 @Adapter
 @RequiredArgsConstructor
 class AuthUserRestAdapter implements AuthUserAdapter {
-
-    private static final String MSG_AUTH_FAIL_SIGN_UP = "message.authentication.failed.signUp";
 
     private final UserService userService;
 
@@ -49,7 +48,7 @@ class AuthUserRestAdapter implements AuthUserAdapter {
         User createdUser = operateResult
                 .getCreatedUsers()
                 .getUserByEmail(oAuthUser.getEmail())
-                .orElseThrow(() -> new BusinessException(MSG_AUTH_FAIL_SIGN_UP));
+                .orElseThrow(() -> new BusinessException(Message.Authentication.SIGN_UP_FAILED));
         return AuthUser.of(
                 createdUser.getUserId(),
                 createdUser.getUsername(),
