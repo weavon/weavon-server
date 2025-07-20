@@ -7,6 +7,7 @@ import io.jsonwebtoken.security.Keys;
 import jakarta.annotation.PostConstruct;
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 import javax.crypto.SecretKey;
 import org.springframework.beans.factory.annotation.Value;
@@ -79,11 +80,12 @@ public class AuthTokenGenerator {
     }
 
     public static Map<String, Object> generateClaims(AuthUser authUser, String tokenType) {
-        return Map.of(
-                "userId", authUser.getUserId(),
-                "username", authUser.getUsername(),
-                "password", authUser.getPassword(),
-                "role", authUser.getRole(),
-                "tokenType", tokenType);
+        Map<String, Object> claims = new HashMap<>();
+        claims.put("userId", authUser.getUserId());
+        claims.put("username", authUser.getUsername());
+        claims.put("role", authUser.getRole());
+        claims.put("tokenType", tokenType);
+
+        return claims;
     }
 }
