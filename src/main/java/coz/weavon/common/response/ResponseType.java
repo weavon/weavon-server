@@ -1,4 +1,4 @@
-package coz.weavon.common.io;
+package coz.weavon.common.response;
 
 public enum ResponseType {
     SUCCESS,

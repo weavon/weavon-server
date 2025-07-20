@@ -2,7 +2,7 @@ package coz.weavon.core.project.infrastructure.repository;
 
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import coz.weavon.common.shared.QueryRepository;
+import coz.weavon.common.repository.QueryRepository;
 import coz.weavon.core.project.infrastructure.model.ProjectEntity;
 import coz.weavon.core.project.infrastructure.model.ProjectMemberRoleColumn;
 import coz.weavon.core.project.infrastructure.model.QProjectEntity;

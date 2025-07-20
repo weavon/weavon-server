@@ -1,15 +1,17 @@
-package coz.weavon.common.shared;
+package coz.weavon.common.command;
 
-import coz.weavon.common.exception.BusinessException;
 import coz.weavon.constant.Label;
 import coz.weavon.constant.Message;
+import coz.weavon.exception.BusinessException;
 import coz.weavon.util.DateTimeUtils;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import lombok.experimental.SuperBuilder;
 import org.springframework.util.ObjectUtils;
 
+@SuperBuilder
 public abstract class Command {
 
     public abstract void validate();

@@ -1,7 +1,7 @@
 package coz.weavon.security.helper;
 
-import coz.weavon.common.exception.BusinessException;
 import coz.weavon.constant.Message;
+import coz.weavon.exception.BusinessException;
 import coz.weavon.security.model.OAuthUser;
 import java.util.Map;
 import lombok.experimental.UtilityClass;

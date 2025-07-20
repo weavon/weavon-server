@@ -1,6 +1,6 @@
 package coz.weavon.core.project.presentation.controller;
 
-import coz.weavon.common.io.RestResponse;
+import coz.weavon.common.response.RestResponse;
 import coz.weavon.core.project.application.model.command.ProjectSearchCommand;
 import coz.weavon.core.project.application.service.ProjectService;
 import coz.weavon.core.project.domain.model.Projects;

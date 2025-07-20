@@ -1,17 +1,17 @@
 package coz.weavon.core.user.application.model.command;
 
-import coz.weavon.common.exception.BusinessException;
-import coz.weavon.common.shared.Command;
+import coz.weavon.common.command.Command;
 import coz.weavon.constant.Message;
 import coz.weavon.core.user.domain.model.Users;
+import coz.weavon.exception.BusinessException;
 import java.util.List;
 import java.util.Objects;
-import lombok.Builder;
 import lombok.Getter;
+import lombok.experimental.SuperBuilder;
 import org.springframework.util.CollectionUtils;
 
 @Getter
-@Builder
+@SuperBuilder
 public class UserOperateCommand extends Command {
 
     private Users createTargetUsers;

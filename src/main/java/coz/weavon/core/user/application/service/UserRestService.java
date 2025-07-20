@@ -1,6 +1,5 @@
 package coz.weavon.core.user.application.service;
 
-import coz.weavon.common.exception.BusinessException;
 import coz.weavon.constant.Label;
 import coz.weavon.constant.Message;
 import coz.weavon.core.user.application.model.command.UserOperateCommand;
@@ -9,6 +8,7 @@ import coz.weavon.core.user.application.model.result.UserOperateResult;
 import coz.weavon.core.user.application.repository.UserRepository;
 import coz.weavon.core.user.domain.model.User;
 import coz.weavon.core.user.domain.model.Users;
+import coz.weavon.exception.BusinessException;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

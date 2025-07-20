@@ -1,4 +1,4 @@
-package coz.weavon.common.exception;
+package coz.weavon.exception;
 
 import java.util.Collections;
 import java.util.List;

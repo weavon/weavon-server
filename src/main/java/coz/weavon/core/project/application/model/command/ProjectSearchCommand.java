@@ -1,15 +1,15 @@
 package coz.weavon.core.project.application.model.command;
 
-import coz.weavon.common.shared.Command;
+import coz.weavon.common.command.Command;
 import coz.weavon.core.project.domain.model.ProjectMemberRole;
 import java.util.Collections;
 import java.util.List;
-import lombok.Builder;
 import lombok.Getter;
+import lombok.experimental.SuperBuilder;
 import org.springframework.util.CollectionUtils;
 
 @Getter
-@Builder
+@SuperBuilder
 public class ProjectSearchCommand extends Command {
 
     private List<Long> projectIds;

@@ -1,4 +1,4 @@
-package coz.weavon.common.shared;
+package coz.weavon.common.repository;
 
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.core.types.dsl.SimpleExpression;

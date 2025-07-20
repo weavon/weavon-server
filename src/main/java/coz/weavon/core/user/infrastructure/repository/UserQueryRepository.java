@@ -2,7 +2,7 @@ package coz.weavon.core.user.infrastructure.repository;
 
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import coz.weavon.common.shared.QueryRepository;
+import coz.weavon.common.repository.QueryRepository;
 import coz.weavon.core.user.infrastructure.model.QUserEntity;
 import coz.weavon.core.user.infrastructure.model.UserEntity;
 import java.util.List;

@@ -1,7 +1,7 @@
 package coz.weavon.util;
 
-import coz.weavon.common.exception.AuthException;
 import coz.weavon.constant.Message;
+import coz.weavon.exception.AuthException;
 import coz.weavon.security.model.AuthUser;
 import java.util.Objects;
 import lombok.experimental.UtilityClass;

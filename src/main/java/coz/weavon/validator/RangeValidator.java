@@ -1,8 +1,8 @@
-package coz.weavon.common.validator;
+package coz.weavon.validator;
 
-import coz.weavon.common.exception.ClientException;
 import coz.weavon.constant.Label;
 import coz.weavon.constant.Message;
+import coz.weavon.exception.ClientException;
 import coz.weavon.util.DateTimeUtils;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;

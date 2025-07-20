@@ -1,11 +1,7 @@
-package coz.weavon.common.handler;
+package coz.weavon.exception;
 
-import coz.weavon.common.exception.AuthException;
-import coz.weavon.common.exception.BusinessException;
-import coz.weavon.common.exception.ClientException;
-import coz.weavon.common.exception.RestException;
-import coz.weavon.common.io.ErrorResponse;
-import coz.weavon.common.io.RestResponse;
+import coz.weavon.common.response.ErrorResponse;
+import coz.weavon.common.response.RestResponse;
 import coz.weavon.constant.Message;
 import coz.weavon.helper.MessageTranslator;
 import lombok.RequiredArgsConstructor;

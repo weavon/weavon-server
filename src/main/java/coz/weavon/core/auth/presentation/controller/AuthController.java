@@ -1,6 +1,6 @@
 package coz.weavon.core.auth.presentation.controller;
 
-import coz.weavon.common.io.RestResponse;
+import coz.weavon.common.response.RestResponse;
 import coz.weavon.core.auth.presentation.model.response.AuthValidResponse;
 import coz.weavon.security.model.AuthUser;
 import coz.weavon.util.AuthUtils;
