@@ -1,19 +1,18 @@
 package coz.weavon.core.user.application.model.command;
 
-import coz.weavon.core.shared.application.model.command.RestCommand;
+import coz.weavon.common.command.Command;
+import coz.weavon.constant.Message;
 import coz.weavon.core.user.domain.model.Users;
-import coz.weavon.exception.model.BusinessException;
+import coz.weavon.exception.BusinessException;
 import java.util.List;
 import java.util.Objects;
-import lombok.Builder;
 import lombok.Getter;
+import lombok.experimental.SuperBuilder;
 import org.springframework.util.CollectionUtils;
 
 @Getter
-@Builder
-public class UserOperateCommand extends RestCommand {
-
-    private static final String MSG_USER_OPERATE_EMPTY = "message.user.operate.empty";
+@SuperBuilder
+public class UserOperateCommand extends Command {
 
     private Users createTargetUsers;
 
@@ -38,7 +37,7 @@ public class UserOperateCommand extends RestCommand {
     @Override
     public void validate() {
         if (!(this.hasUsersToCreate() || this.hasUsersToUpdate() || this.hasUsersToDelete())) {
-            throw new BusinessException(MSG_USER_OPERATE_EMPTY);
+            throw new BusinessException(Message.User.NO_OPERATION_USER_TARGET);
         }
     }
 

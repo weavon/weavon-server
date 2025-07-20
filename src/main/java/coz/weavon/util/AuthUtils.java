@@ -1,7 +1,8 @@
 package coz.weavon.util;
 
-import coz.weavon.core.auth.domain.model.AuthUser;
-import coz.weavon.exception.model.AuthException;
+import coz.weavon.constant.Message;
+import coz.weavon.exception.AuthException;
+import coz.weavon.security.model.AuthUser;
 import java.util.Objects;
 import lombok.experimental.UtilityClass;
 import org.springframework.security.core.Authentication;
@@ -10,13 +11,11 @@ import org.springframework.security.core.context.SecurityContextHolder;
 @UtilityClass
 public class AuthUtils {
 
-    private static final String MSG_AUTH_NONE = "message.authentication.none";
-
     public static AuthUser getAuthUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         if (Objects.isNull(authentication) || !(authentication.getPrincipal() instanceof AuthUser)) {
-            throw new AuthException(MSG_AUTH_NONE);
+            throw new AuthException(Message.Authentication.NOT_AUTHENTICATED);
         }
 
         return (AuthUser) authentication.getPrincipal();

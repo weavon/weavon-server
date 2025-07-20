@@ -2,18 +2,18 @@ package coz.weavon.core.project.infrastructure.repository;
 
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import coz.weavon.common.repository.QueryRepository;
 import coz.weavon.core.project.infrastructure.model.ProjectEntity;
 import coz.weavon.core.project.infrastructure.model.ProjectMemberRoleColumn;
 import coz.weavon.core.project.infrastructure.model.QProjectEntity;
 import coz.weavon.core.project.infrastructure.model.QProjectMemberEntity;
-import coz.weavon.core.shared.infrastructure.repository.RestQueryRepository;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 @Repository
 @RequiredArgsConstructor
-public class ProjectQueryRepository implements RestQueryRepository {
+public class ProjectQueryRepository implements QueryRepository {
 
     private static final QProjectEntity project = QProjectEntity.projectEntity;
 

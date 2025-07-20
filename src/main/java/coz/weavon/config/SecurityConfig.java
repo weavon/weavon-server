@@ -29,14 +29,14 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        usernameAuthenticationFilter.setFilterProcessesUrl("/auth/login");
+        usernameAuthenticationFilter.setFilterProcessesUrl("/login");
 
         return http.httpBasic(AbstractHttpConfigurer::disable)
                 .formLogin(AbstractHttpConfigurer::disable)
                 .csrf(AbstractHttpConfigurer::disable)
                 .cors(customizer -> customizer.configurationSource(request -> corConfiguration()))
                 .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authorizeHttpRequests(request -> request.requestMatchers("/auth/login", "/auth/join")
+                .authorizeHttpRequests(request -> request.requestMatchers("/login", "/auth/join")
                         .permitAll()
                         .anyRequest()
                         .authenticated())

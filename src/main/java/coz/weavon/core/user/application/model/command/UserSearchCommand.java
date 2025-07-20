@@ -1,13 +1,13 @@
 package coz.weavon.core.user.application.model.command;
 
-import coz.weavon.core.shared.application.model.command.RestCommand;
+import coz.weavon.common.command.Command;
 import java.util.List;
-import lombok.Builder;
 import lombok.Getter;
+import lombok.experimental.SuperBuilder;
 
 @Getter
-@Builder
-public class UserSearchCommand extends RestCommand {
+@SuperBuilder
+public class UserSearchCommand extends Command {
 
     private List<Long> userIds;
 

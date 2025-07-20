@@ -1,8 +1,9 @@
 package coz.weavon.security.handler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import coz.weavon.core.shared.presentation.model.response.ErrorResponse;
-import coz.weavon.core.shared.presentation.model.response.RestResponse;
+import coz.weavon.common.response.ErrorResponse;
+import coz.weavon.common.response.RestResponse;
+import coz.weavon.constant.Message;
 import coz.weavon.helper.MessageTranslator;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -18,8 +19,6 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class OAuthFailureHandler extends SimpleUrlAuthenticationFailureHandler {
 
-    private static final String MSG_AUTH_FAILED = "message.authentication.failed";
-
     private final MessageTranslator messageTranslator;
 
     @Override
@@ -30,9 +29,9 @@ public class OAuthFailureHandler extends SimpleUrlAuthenticationFailureHandler {
         response.setCharacterEncoding("UTF-8");
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         RestResponse<ErrorResponse> errorResponse =
-                RestResponse.ofAuthError(messageTranslator.translate(MSG_AUTH_FAILED));
+                RestResponse.ofAuthError(messageTranslator.translate(Message.Authentication.AUTHENTICATION_FAILED));
         response.getWriter().write(new ObjectMapper().writeValueAsString(errorResponse));
 
-        log.error(messageTranslator.translate(MSG_AUTH_FAILED));
+        log.error(messageTranslator.translate(Message.Authentication.AUTHENTICATION_FAILED));
     }
 }

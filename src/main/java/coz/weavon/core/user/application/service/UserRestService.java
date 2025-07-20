@@ -1,12 +1,14 @@
 package coz.weavon.core.user.application.service;
 
+import coz.weavon.constant.Label;
+import coz.weavon.constant.Message;
 import coz.weavon.core.user.application.model.command.UserOperateCommand;
 import coz.weavon.core.user.application.model.command.UserSearchCommand;
 import coz.weavon.core.user.application.model.result.UserOperateResult;
 import coz.weavon.core.user.application.repository.UserRepository;
 import coz.weavon.core.user.domain.model.User;
 import coz.weavon.core.user.domain.model.Users;
-import coz.weavon.exception.model.BusinessException;
+import coz.weavon.exception.BusinessException;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,10 +17,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @RequiredArgsConstructor
 class UserRestService implements UserService {
-
-    private static final String MSG_VLD_INVLD_SINGLE_RESULT = "message.validation.invalid.singleResult";
-
-    private static final String LBL_USER = "label.user";
 
     private final UserRepository repository;
 
@@ -41,7 +39,7 @@ class UserRestService implements UserService {
             return optionalUser.get();
         }
 
-        throw new BusinessException(MSG_VLD_INVLD_SINGLE_RESULT, LBL_USER);
+        throw new BusinessException(Message.Validation.IS_NOT_SINGLE_RESULT, Label.User.USER);
     }
 
     @Override

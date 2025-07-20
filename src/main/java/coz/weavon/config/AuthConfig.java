@@ -1,6 +1,6 @@
 package coz.weavon.config;
 
-import coz.weavon.core.auth.application.service.AuthUserService;
+import coz.weavon.security.service.AuthUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

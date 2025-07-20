@@ -1,8 +1,9 @@
 package coz.weavon.security.handler;
 
-import coz.weavon.core.auth.domain.model.AuthToken;
-import coz.weavon.core.auth.domain.model.AuthUser;
+import coz.weavon.constant.Message;
 import coz.weavon.helper.MessageTranslator;
+import coz.weavon.security.model.AuthToken;
+import coz.weavon.security.model.AuthUser;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -28,8 +29,6 @@ public class OAuthSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
     @Value("${auth.jwt.refresh-token-expiration-minutes}")
     private int refreshTokenExpirationMinutes;
 
-    private static final String MSG_AUTH_USER_LOGGED_IN = "message.authentication.user.loggedIn";
-
     private final MessageTranslator messageTranslator;
 
     @Override
@@ -47,6 +46,6 @@ public class OAuthSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
         refreshTokenCookie.setMaxAge(refreshTokenExpirationMinutes * 60);
         refreshTokenCookie.setSecure(secureCookie);
 
-        log.info(messageTranslator.translate(MSG_AUTH_USER_LOGGED_IN, authUser.getUsername()));
+        log.info(messageTranslator.translate(Message.Authentication.USER_LOGGED_IN, authUser.getUsername()));
     }
 }

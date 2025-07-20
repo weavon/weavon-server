@@ -1,8 +1,7 @@
 package coz.weavon.security.filter;
 
-import coz.weavon.core.auth.domain.model.AuthToken;
-import coz.weavon.core.auth.domain.model.AuthUser;
-import coz.weavon.core.auth.domain.service.AuthTokenGenerator;
+import coz.weavon.security.model.AuthToken;
+import coz.weavon.security.model.AuthUser;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.Cookie;
@@ -14,7 +13,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
-import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 @Component
@@ -23,23 +21,10 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
-        String accessToken = extractAccessToken(request.getHeader("Authorization"));
-        String refreshToken = extractRefreshToken(request.getCookies());
+        AuthToken authToken = extractAuthToken(request);
 
-        if (StringUtils.hasText(accessToken)) {
-            AuthToken authToken = processTokenAuthentication(accessToken, refreshToken);
-            response.setHeader("Authorization", "Bearer " + authToken.getAccessToken());
-        }
-
-        filterChain.doFilter(request, response);
-    }
-
-    private AuthToken processTokenAuthentication(String accessToken, String refreshToken) {
-        AuthToken authToken = AuthToken.of(accessToken, refreshToken);
-
-        if (authToken.isAccessTokenExpired() && authToken.isRefreshTokenAlive()) {
-            String refreshedAccessToken = AuthTokenGenerator.generateAccessToken(authToken.toAuthUser());
-            authToken.setAccessToken(refreshedAccessToken);
+        if (authToken.shouldRefreshAccessToken()) {
+            authToken.refreshAccessToken();
         }
 
         if (authToken.isAccessTokenAlive()) {
@@ -49,10 +34,19 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             SecurityContextHolder.getContext().setAuthentication(authentication);
         }
 
-        return authToken;
+        filterChain.doFilter(request, response);
     }
 
-    private String extractAccessToken(String authorizationHeader) {
+    private AuthToken extractAuthToken(HttpServletRequest request) {
+        String accessToken = extractAccessToken(request);
+        String refreshToken = extractRefreshToken(request);
+
+        return AuthToken.of(accessToken, refreshToken);
+    }
+
+    private String extractAccessToken(HttpServletRequest request) {
+        String authorizationHeader = request.getHeader("Authorization");
+
         if (Objects.isNull(authorizationHeader) || authorizationHeader.isEmpty()) {
             return null;
         }
@@ -64,7 +58,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         return null;
     }
 
-    private String extractRefreshToken(Cookie[] cookies) {
+    private String extractRefreshToken(HttpServletRequest request) {
+        Cookie[] cookies = request.getCookies();
+
         if (Objects.isNull(cookies)) {
             return null;
         }
