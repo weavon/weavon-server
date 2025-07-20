@@ -2,6 +2,10 @@ package coz.weavon.config;
 
 import coz.weavon.security.filter.JwtAuthenticationFilter;
 import coz.weavon.security.filter.UsernameAuthenticationFilter;
+import coz.weavon.security.handler.AuthenticationEntryPointHandler;
+import coz.weavon.security.handler.OAuthFailureHandler;
+import coz.weavon.security.handler.OAuthSuccessHandler;
+import coz.weavon.security.service.AuthUserService;
 import java.util.Collections;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -27,10 +31,16 @@ public class SecurityConfig {
 
     private final UsernameAuthenticationFilter usernameAuthenticationFilter;
 
+    private final AuthUserService authUserService;
+
+    private final OAuthSuccessHandler oAuthSuccessHandler;
+
+    private final OAuthFailureHandler oAuthFailureHandler;
+
+    private final AuthenticationEntryPointHandler authenticationEntryPointHandler;
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        usernameAuthenticationFilter.setFilterProcessesUrl("/login");
-
         return http.httpBasic(AbstractHttpConfigurer::disable)
                 .formLogin(AbstractHttpConfigurer::disable)
                 .csrf(AbstractHttpConfigurer::disable)
@@ -40,6 +50,10 @@ public class SecurityConfig {
                         .permitAll()
                         .anyRequest()
                         .authenticated())
+                .oauth2Login(oauth2 -> oauth2.userInfoEndpoint(config -> config.userService(authUserService))
+                        .successHandler(oAuthSuccessHandler)
+                        .failureHandler(oAuthFailureHandler))
+                .exceptionHandling(e -> e.authenticationEntryPoint(authenticationEntryPointHandler))
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .addFilter(usernameAuthenticationFilter)
                 .build();

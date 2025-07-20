@@ -37,12 +37,11 @@ public class OAuthSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
             throws IOException {
         AuthUser authUser = (AuthUser) authentication.getPrincipal();
         AuthToken authToken = authUser.toAuthToken();
-        response.setHeader("Authorization", "Bearer " + authToken.getAccessToken());
-        response.sendRedirect(clientBaseUrl);
+        response.sendRedirect(clientBaseUrl + "/login/success" + "?accessToken=" + authToken.getAccessToken());
 
         Cookie refreshTokenCookie = new Cookie("REFRESH_TOKEN", authToken.getRefreshToken());
         refreshTokenCookie.setHttpOnly(true);
-        refreshTokenCookie.setPath("/");
+        refreshTokenCookie.setPath("/refresh");
         refreshTokenCookie.setMaxAge(refreshTokenExpirationMinutes * 60);
         refreshTokenCookie.setSecure(secureCookie);
 
